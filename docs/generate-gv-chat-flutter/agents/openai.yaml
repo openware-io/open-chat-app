@@ -1,0 +1,4 @@
+interface:
+  display_name: "GV Chat Flutter Generator"
+  short_description: "Generate Flutter code that follows GV Chat conventions"
+  default_prompt: "Use $generate-gv-chat-flutter to implement a GV Chat Flutter change with the existing architecture, localization, responsive UI, and performance rules."

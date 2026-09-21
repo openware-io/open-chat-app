@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- 信任系统 CA + 内置 Sectigo Public Server Authentication Root R46（部分旧 Android 未收录该新根） -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system"/>
+            <certificates src="@raw/sectigo_r46"/>
+        </trust-anchors>
+    </base-config>
+</network-security-config>

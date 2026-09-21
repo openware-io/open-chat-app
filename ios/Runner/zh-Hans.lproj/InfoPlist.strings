@@ -1,0 +1,5 @@
+"NSCameraUsageDescription" = "WV Chat 仅在您扫描二维码、拍摄聊天视频或进行视频通话时使用相机。";
+"NSLocationWhenInUseUsageDescription" = "WV Chat 仅在您主动发送当前位置，或使用中的小程序请求定位时获取您的位置。";
+"NSLocalNetworkUsageDescription" = "当聊天服务器与您的设备位于同一 Wi-Fi 网络时，WV Chat 使用本地网络完成登录和消息同步。";
+"NSMicrophoneUsageDescription" = "WV Chat 仅在您录制语音消息或视频，以及进行语音、视频通话时使用麦克风。";
+"NSPhotoLibraryUsageDescription" = "WV Chat 使用您选取的照片或视频发送聊天消息、设置头像或自定义表情，以及识别图片中的二维码。";

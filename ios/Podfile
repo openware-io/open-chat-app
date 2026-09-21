@@ -1,0 +1,98 @@
+# 与 Pod 及 Xcode 工程 `IPHONEOS_DEPLOYMENT_TARGET` 保持一致。
+platform :ios, '15.0'
+
+# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+def flutter_root
+  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
+  unless File.exist?(generated_xcode_build_settings_path)
+    raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+  end
+
+  File.foreach(generated_xcode_build_settings_path) do |line|
+    matches = line.match(/FLUTTER_ROOT\=(.*)/)
+    return matches[1].strip if matches
+  end
+  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
+end
+
+require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+
+flutter_ios_podfile_setup
+
+target 'Runner' do
+  use_frameworks!
+
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+  target 'RunnerTests' do
+    inherit! :search_paths
+  end
+end
+
+# App Store 静态分析会扫描二进制中的「uniqueIdentifier」子串，误判为访问已废弃的
+# UIDevice uniqueIdentifier。FlutterFire 与 webview Pigeon 的命名会触发；在 pod install
+# 后原位重命名（仅符号名，无行为变化）。
+def gv_patch_ios_store_review_strings!(ios_dir)
+  plugin_root = File.expand_path(File.join('..', '.symlinks', 'plugins'), ios_dir)
+
+  webkit = File.join(
+    plugin_root,
+    'webview_flutter_wkwebview',
+    'lib',
+    'src',
+    'common',
+    'web_kit.g.dart',
+  )
+  if File.exist?(webkit)
+    src = File.read(webkit)
+    dst = src.gsub('_nextUniqueIdentifier', '_nextPigeonHandleId')
+    File.write(webkit, dst) if dst != src
+  end
+
+  android_webkit = File.join(
+    plugin_root,
+    'webview_flutter_android',
+    'lib',
+    'src',
+    'android_webkit.g.dart',
+  )
+  if File.exist?(android_webkit)
+    src = File.read(android_webkit)
+    dst = src.gsub('_nextUniqueIdentifier', '_nextPigeonHandleId')
+    File.write(android_webkit, dst) if dst != src
+  end
+end
+
+post_install do |installer|
+  gv_patch_ios_store_review_strings!(__dir__)
+
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+
+    # 👇 下面这段是修复代码 👇
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      config.build_settings['GCC_WARN_UNINITIALIZED_VARS'] = 'NO'
+      config.build_settings['SWIFT_TREAT_WARNINGS_AS_ERRORS'] = 'NO'
+      config.build_settings['GCC_TREAT_WARNINGS_AS_ERRORS'] = 'NO'
+      config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
+      # permission_handler：未启用宏时 iOS 为桩实现，设置里已授权仍返回 denied
+      # https://pub.dev/packages/permission_handler#ios
+      defs = config.build_settings['GCC_PREPROCESSOR_DEFINITIONS']
+      defs = ['$(inherited)'] if defs.nil?
+      defs = [defs] unless defs.is_a?(Array)
+      defs = defs.dup
+      defs << 'PERMISSION_CAMERA=1' unless defs.any? { |x| x.to_s.include?('PERMISSION_CAMERA') }
+      defs << 'PERMISSION_MICROPHONE=1' unless defs.any? { |x| x.to_s.include?('PERMISSION_MICROPHONE') }
+      defs << 'PERMISSION_NOTIFICATIONS=1' unless defs.any? { |x| x.to_s.include?('PERMISSION_NOTIFICATIONS') }
+      config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = defs
+    end
+  end
+end

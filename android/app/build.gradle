@@ -1,0 +1,119 @@
+plugins {
+    id "com.android.application"
+    id "com.google.gms.google-services"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader ->
+        localProperties.load(reader)
+    }
+}
+
+// JPush：`local.properties` 中设置 `jpush.appKey=`（极光控制台应用 AppKey）；
+// 缺省回退到正式环境 AppKey（极光 AppKey 为公开标识，非 Secret），确保任何
+// 构建（CI/本地）都能初始化极光并注册设备令牌，离线推送才能到达。
+def jpushAppKey = localProperties.getProperty("jpush.appKey") ?: "YOUR_JPUSH_APPKEY"
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader("UTF-8") { reader ->
+        keystoreProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
+if (flutterVersionCode == null) {
+    flutterVersionCode = "1"
+}
+
+def flutterVersionName = localProperties.getProperty("flutter.versionName")
+if (flutterVersionName == null) {
+    flutterVersionName = "1.0"
+}
+
+android {
+    namespace = "com.csmimtbshop.com"
+    compileSdk = 36
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        // flutter_local_notifications 等依赖需要 desugar（java.time 等 API）
+        coreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.csmimtbshop.com"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        // record_android (and typical camera/mic stacks) require API 23+.
+        minSdkVersion = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutterVersionCode.toInteger()
+        versionName = flutterVersionName
+
+        // 只构建 ARM 架构，避免 x86_64 触发 extractReleaseNativeSymbolTables 的 AGP bug
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
+
+        manifestPlaceholders += [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : jpushAppKey,
+                JPUSH_CHANNEL: "developer-default",
+        ]
+    }
+
+    signingConfigs {
+        release {
+            if (keystorePropertiesFile.exists()) {
+                keyAlias = keystoreProperties["keyAlias"]
+                keyPassword = keystoreProperties["keyPassword"]
+                storeFile = rootProject.file(keystoreProperties["storeFile"])
+                storePassword = keystoreProperties["storePassword"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig = keystorePropertiesFile.exists()
+                    ? signingConfigs.release
+                    : signingConfigs.debug
+        }
+    }
+
+    // 不应打入 APK 的 Vulkan 校验层；在部分 Windows 环境会在 packageDebug 阶段因文件锁失败
+    packaging {
+        jniLibs {
+            excludes += ['**/libVkLayer_khronos_validation.so']
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    // 极光 FCM 厂商通道；5.9.0+ 会自动拉取匹配的 Firebase Messaging SDK。
+    implementation("cn.jiguang.sdk.plugin:fcm:6.1.2")
+    // flutter_webrtc keeps its WebRTC dependency implementation-only. The app
+    // needs the matching public frame types to attach the local blur processor.
+    implementation("io.github.webrtc-sdk:android:144.7559.09")
+    implementation("com.google.mlkit:segmentation-selfie:16.0.0-beta6")
+}
+

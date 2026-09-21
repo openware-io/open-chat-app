@@ -1,0 +1,5 @@
+"NSCameraUsageDescription" = "WV Chat uses the camera when you scan a QR code, record a video to send in chat, or join a video call.";
+"NSLocationWhenInUseUsageDescription" = "WV Chat uses your location when you choose to share your current position in a chat or with a mini program you are using.";
+"NSLocalNetworkUsageDescription" = "WV Chat uses the local network when the configured chat server is on the same Wi-Fi network, so you can sign in and sync messages.";
+"NSMicrophoneUsageDescription" = "WV Chat uses the microphone when you record a voice message or video, or join a voice or video call.";
+"NSPhotoLibraryUsageDescription" = "WV Chat uses photos you select to send images or videos in chat, set your profile photo or custom stickers, and scan a QR code from an image.";

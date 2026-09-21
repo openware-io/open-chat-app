@@ -1,0 +1,5 @@
+# 常规 `flutter test` 默认排除依赖生产环境的集成探针；
+# 需要跑时显式指定：flutter test --tags integration
+tags:
+  integration:
+    skip: "Requires production API access; run explicitly with --tags integration"

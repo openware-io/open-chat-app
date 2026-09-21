@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="call_notification_channel_name">Ongoing calls</string>
+    <string name="call_notification_channel_description">Keeps voice and video calls connected in the background</string>
+    <string name="call_notification_title">WV Chat call</string>
+    <string name="call_notification_voice">Voice call with %1$s is ongoing</string>
+    <string name="call_notification_video">Video call with %1$s is ongoing</string>
+    <string name="call_notification_unknown_peer">contact</string>
+    <string name="call_notification_hang_up">Hang up</string>
+    <string name="call_overlay_return_to_call">Return to call</string>
+    <string name="message_keep_alive_channel_name">Message connection</string>
+    <string name="message_keep_alive_channel_description">Keeps the message connection available while the app is in the background</string>
+    <string name="message_keep_alive_notification_title">WV Chat is running</string>
+    <string name="message_keep_alive_notification_body">Keeping the message connection active</string>
+</resources>

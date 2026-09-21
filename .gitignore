@@ -1,0 +1,69 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+/android/build/
+**/.gradle/
+
+# Windows installer: 微软 VC++ 可再发行安装包（本地放入后打 Inno 包，勿入库）
+/windows/installer_deps/VC_redist.x64.exe
+
+# Android release signing — never commit
+/android/key.properties
+/android/*.jks
+
+# iOS push notification certificates — never commit
+/ios/*.p12
+.apkcheck/
+packages/**/android/build/
+packages/**/build/
+.qodo/
+.workbuddy/
+# 发版说明临时输入（tools/release.ps1 -ReleaseNotes 用；正式说明写入发版记录）
+.release-notes.txt
+
+# open-source release additions
+.outputs/
+*.mobileprovision

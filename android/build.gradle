@@ -1,0 +1,58 @@
+allprojects {
+    repositories {
+        // 国内网络：优先阿里云 Maven 镜像，避免 repo.maven.apache.org / dl.google.com TLS 握手失败。
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+        // Flutter 引擎（io.flutter:arm64_v8a_debug 等）：国内网络访问 storage.googleapis.com 常 TLS 失败，
+        // 优先从社区镜像拉取；镜像与官方路径一致，海外也可用。
+        maven {
+            url "https://storage.flutter-io.cn/download.flutter.io"
+            content {
+                includeGroup("io.flutter")
+            }
+        }
+        maven {
+            url "https://storage.googleapis.com/download.flutter.io"
+            content {
+                includeGroup("io.flutter")
+            }
+        }
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+/**
+ * Flutter 插件模块（典型是 dev 依赖 integration_test）自带早已停服的 jcenter；
+ * 它用动态版本 `androidx.test:runner:1.2+`，解析时需要列举 maven-metadata.xml，
+ * Gradle 会在 jcenter 上硬失败（TLS 握手被终止），于是 `flutter build apk --release` 直接失败。
+ * 这里为所有子工程补齐可用镜像（与 allprojects 同源），并把动态版本固定为镜像中已有的具体版本，
+ * 避免动态版本列举，让正式包构建可复现。
+ */
+subprojects {
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+        google()
+        mavenCentral()
+    }
+    configurations.all {
+        resolutionStrategy {
+            force 'androidx.test:runner:1.6.2'
+        }
+    }
+}
+
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

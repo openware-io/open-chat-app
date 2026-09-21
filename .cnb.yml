@@ -1,0 +1,31 @@
+$:
+  push:
+    - docker:
+        image: ghcr.io/cirruslabs/flutter:3.44.0
+        volumes:
+          - /root/.pub-cache:copy-on-write
+          - /root/.gradle:copy-on-write
+      stages:
+        - name: Flutter 版本
+          script: flutter --version
+
+        - name: 安装依赖
+          script: flutter pub get
+
+        - name: 静态分析
+          script: flutter analyze lib test integration_test packages/gv_core/lib packages/gv_ui/lib
+
+        - name: 自动化测试（单元 + 契约，排除生产集成）
+          script: flutter test --exclude-tags integration --coverage
+
+        - name: 集成回归（真实生产链路：私密聊天/E2EE/定时销毁）
+          script: flutter test test/integration --tags integration --run-skipped
+
+        - name: 编译 Android 测试包
+          script: flutter build apk --debug --dart-define=APP_ENV=test --dart-define=GV_JPUSH_APPKEY=YOUR_JPUSH_APPKEY
+
+        - name: 保存 Android 测试包
+          image: cnbcool/attachments:latest
+          settings:
+            attachments:
+              - build/app/outputs/flutter-apk/app-debug.apk

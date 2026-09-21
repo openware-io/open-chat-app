@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TURN 自环测试（本页两个 PeerConnection）</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { padding: 12px; font-family: system-ui, sans-serif; max-width: 520px; }
+    video { width: 100%; max-width: 400px; height: auto; background: #000; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; max-width: 400px; padding: 12px; background: #007bff; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .log { width: 100%; max-width: 400px; height: 220px; overflow-y: auto; background: #f8f9fa; padding: 10px; font-size: 11px; margin-top: 10px; border-radius: 4px; white-space: pre-wrap; word-break: break-all; }
+    .hint { font-size: 12px; color: #555; margin: 8px 0; line-height: 1.5; }
+    code { background: #eee; padding: 0 4px; border-radius: 2px; }
+  </style>
+</head>
+<body>
+  <h3>TURN 自环测试</h3>
+  <p class="hint">
+    同一浏览器里建两个 <code>RTCPeerConnection</code>，只走 <code>iceTransportPolicy: relay</code>。
+    若远端画面能持续显示，说明 TURN 上 UDP/TCP 媒体通道基本正常（与 Vue 通话页无关）。
+  </p>
+
+  <h4>本地</h4>
+  <video id="localVideo" autoplay playsinline muted></video>
+
+  <h4>远端（自环，经 TURN）</h4>
+  <video id="remoteVideo" autoplay playsinline muted></video>
+
+  <button id="btn" type="button">开始测试</button>
+  <div class="log" id="log"></div>
+
+<script>
+(function () {
+  // ========= 按你环境修改（与后端 RtcIceService / coturn 一致）=========
+  const TURN_HOST = "192.168.1.39";
+  const TURN_UDP_PORT = 3478;
+  const TURN_TLS_PORT = 5349; // 无 TLS 可改成 null
+
+  /** 静态账号：对应服务端 TURN_USERNAME + TURN_CREDENTIAL */
+  const STATIC_USER = "turnuser";
+  const STATIC_PASS = "CHANGE_ME_STRONG_PASSWORD";
+
+  /**
+   * 若使用 TURN_AUTH_SECRET（限时用户名），在浏览器里可临时写死一组（与 coturn 一致）：
+   * username = expiry:userid，credential = base64(hmac-sha1(secret, username))
+   * 测试时更简单的是给 coturn 配静态 long-term 与下面 STATIC_* 一致。
+   */
+  const iceServers = [{
+    urls: [
+      `turn:${TURN_HOST}:${TURN_UDP_PORT}?transport=udp`,
+      `turn:${TURN_HOST}:${TURN_UDP_PORT}?transport=tcp`,
+      ...(TURN_TLS_PORT ? [`turns:${TURN_HOST}:${TURN_TLS_PORT}?transport=tcp`] : []),
+    ],
+    username: STATIC_USER,
+    credential: STATIC_PASS,
+  }];
+
+  const pcConfig = {
+    iceServers,
+    iceTransportPolicy: "relay",
+    bundlePolicy: "balanced",
+    rtcpMuxPolicy: "require",
+  };
+
+  const logEl = document.getElementById("log");
+  const btn = document.getElementById("btn");
+
+  function log(msg) {
+    const t = new Date().toLocaleTimeString();
+    logEl.textContent += `[${t}] ${msg}\n`;
+    logEl.scrollTop = logEl.scrollHeight;
+    console.log(msg);
+  }
+
+  function iceTypPreview(cand) {
+    if (!cand || !cand.candidate) return "(end)";
+    const m = /\btyp\s+(\S+)/i.exec(cand.candidate);
+    return m ? m[1] : cand.candidate.slice(0, 72);
+  }
+
+  /**
+   * 关键：候选经常在 setLocal 之后才到；对方若尚未 setRemote，addIceCandidate 会失败。
+   * 对向队列 + setRemote 后 flush。
+   */
+  function wireIce(pcFrom, pcTo, labelFrom, labelTo) {
+    const queue = [];
+    let remoteReady = false;
+
+    pcFrom.onicecandidate = (e) => {
+      if (!e.candidate) {
+        log(`${labelFrom} ICE gathering 结束`);
+        return;
+      }
+      log(`${labelFrom} → ${labelTo}: typ=${iceTypPreview(e.candidate)}`);
+      if (remoteReady) {
+        pcTo.addIceCandidate(e.candidate).catch((err) => {
+          log(`${labelTo} addIceCandidate 失败: ${err.message}`);
+        });
+      } else {
+        queue.push(e.candidate);
+      }
+    };
+
+    return {
+      markRemoteSet() {
+        remoteReady = true;
+        while (queue.length) {
+          const c = queue.shift();
+          pcTo.addIceCandidate(c).catch((err) => {
+            log(`${labelTo} addIceCandidate(flush) 失败: ${err.message}`);
+          });
+        }
+      },
+    };
+  }
+
+  let pc1 = null;
+  let pc2 = null;
+  let localStream = null;
+  let statsPollTimer = null;
+
+  async function cleanup() {
+    if (statsPollTimer != null) {
+      clearInterval(statsPollTimer);
+      statsPollTimer = null;
+    }
+    if (pc1) {
+      pc1.ontrack = null;
+      pc1.onicecandidate = null;
+      pc1.close();
+      pc1 = null;
+    }
+    if (pc2) {
+      pc2.ontrack = null;
+      pc2.onicecandidate = null;
+      pc2.close();
+      pc2 = null;
+    }
+    if (localStream) {
+      localStream.getTracks().forEach((t) => t.stop());
+      localStream = null;
+    }
+    document.getElementById("localVideo").srcObject = null;
+    document.getElementById("remoteVideo").srcObject = null;
+  }
+
+  document.getElementById("btn").addEventListener("click", async () => {
+    logEl.textContent = "";
+    btn.disabled = true;
+    await cleanup();
+
+    try {
+      log("获取摄像头/麦克风…");
+      localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      const lv = document.getElementById("localVideo");
+      lv.srcObject = localStream;
+      await lv.play().catch(() => {});
+
+      pc1 = new RTCPeerConnection(pcConfig);
+      pc2 = new RTCPeerConnection(pcConfig);
+
+      const w12 = wireIce(pc1, pc2, "PC1", "PC2");
+      const w21 = wireIce(pc2, pc1, "PC2", "PC1");
+
+      pc1.oniceconnectionstatechange = () => log(`PC1 iceConnectionState=${pc1.iceConnectionState}`);
+      pc2.oniceconnectionstatechange = () => log(`PC2 iceConnectionState=${pc2.iceConnectionState}`);
+      pc1.onconnectionstatechange = () => log(`PC1 connectionState=${pc1.connectionState}`);
+      pc2.onconnectionstatechange = () => log(`PC2 connectionState=${pc2.connectionState}`);
+
+      pc2.ontrack = (e) => {
+        log(`PC2 ontrack kind=${e.track.kind} id=${e.track.id} muted=${e.track.muted}`);
+        const rv = document.getElementById("remoteVideo");
+        if (e.streams[0]) {
+          rv.srcObject = e.streams[0];
+          rv.play().catch((err) => log(`远端 video.play: ${err.message}`));
+        }
+      };
+
+      localStream.getTracks().forEach((t) => pc1.addTrack(t, localStream));
+      log("PC1 已 addTrack");
+
+      const offer = await pc1.createOffer();
+      await pc1.setLocalDescription(offer);
+      log("PC1 setLocal(offer)");
+
+      await pc2.setRemoteDescription(pc1.localDescription);
+      w12.markRemoteSet();
+      log("PC2 setRemote(offer)，已 flush PC1→PC2 候选队列");
+
+      const answer = await pc2.createAnswer();
+      await pc2.setLocalDescription(answer);
+      log("PC2 setLocal(answer)");
+
+      await pc1.setRemoteDescription(pc2.localDescription);
+      w21.markRemoteSet();
+      log("PC1 setRemote(answer)，已 flush PC2→PC1 候选队列");
+
+      log("等待 iceConnectionState=connected / completed…");
+      await new Promise((resolve, reject) => {
+        const t0 = Date.now();
+        const timer = setInterval(() => {
+          const a = pc1.iceConnectionState;
+          const b = pc2.iceConnectionState;
+          if (a === "connected" || a === "completed") {
+            clearInterval(timer);
+            resolve();
+            return;
+          }
+          if (a === "failed" || b === "failed") {
+            clearInterval(timer);
+            reject(new Error(`ICE failed (pc1=${a} pc2=${b})`));
+          }
+          if (Date.now() - t0 > 25000) {
+            clearInterval(timer);
+            reject(new Error(`ICE 超时 (pc1=${a} pc2=${b})`));
+          }
+        }, 200);
+      });
+
+      log("✅ ICE 已连通。若上面出现 typ=relay 且远端有画面，则 TURN 工作正常。");
+      log("—— 下面每 3 秒打印一次 PC2 收端视频统计（累计值 + 与上次差值 Δ）——");
+
+      let prevBytes = null;
+      let prevFrames = null;
+      let tick = 0;
+      statsPollTimer = setInterval(async () => {
+        if (!pc2) return;
+        tick += 1;
+        try {
+          const stats = await pc2.getStats();
+          let vIn = null;
+          stats.forEach((r) => {
+            if (r.type === "inbound-rtp" && r.kind === "video") vIn = r;
+          });
+          if (!vIn) {
+            log(`[#${tick}] 未找到 inbound-rtp(video)`);
+            return;
+          }
+          const br = vIn.bytesReceived;
+          const fd =
+            typeof vIn.framesDecoded === "number" ? vIn.framesDecoded : null;
+          const dBytes = prevBytes == null ? null : br - prevBytes;
+          const dFrames =
+            prevFrames == null || fd == null ? null : fd - prevFrames;
+          prevBytes = br;
+          if (fd != null) prevFrames = fd;
+          log(
+            `[#${tick}] inbound-rtp(video) bytesReceived=${br}` +
+              (dBytes != null ? ` (Δ${dBytes} /3s)` : "") +
+              (fd != null ? ` framesDecoded=${fd}` : "") +
+              (dFrames != null ? ` (Δ${dFrames} /3s)` : ""),
+          );
+          if (tick >= 20) {
+            clearInterval(statsPollTimer);
+            statsPollTimer = null;
+            log("—— 已采样 20 次（约 60s），轮询结束；再次点「开始测试」可重来 ——");
+          }
+        } catch (e) {
+          log(`[#${tick}] getStats: ${e.message}`);
+        }
+      }, 3000);
+    } catch (err) {
+      log(`❌ ${err.message || err}`);
+      console.error(err);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="call_notification_channel_name">正在进行的通话</string>
+    <string name="call_notification_channel_description">用于在后台保持语音和视频通话连接</string>
+    <string name="call_notification_title">WV Chat 通话</string>
+    <string name="call_notification_voice">正在与%1$s进行语音通话</string>
+    <string name="call_notification_video">正在与%1$s进行视频通话</string>
+    <string name="call_notification_unknown_peer">联系人</string>
+    <string name="call_notification_hang_up">挂断</string>
+    <string name="call_overlay_return_to_call">返回通话</string>
+    <string name="message_keep_alive_channel_name">消息连接</string>
+    <string name="message_keep_alive_channel_description">用于在应用进入后台时保持消息连接</string>
+    <string name="message_keep_alive_notification_title">WV Chat 正在运行</string>
+    <string name="message_keep_alive_notification_body">正在保持消息连接</string>
+</resources>
