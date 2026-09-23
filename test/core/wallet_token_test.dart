@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/currency.dart';
+import 'package:open_chat_app/core/currency.dart';
 
 /// 规范 16 §9：储值币（代币）与积分是**数量**口径，与币种完全解耦。
 ///

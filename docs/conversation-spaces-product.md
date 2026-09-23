@@ -1,7 +1,7 @@
 # Conversation Spaces & Privacy Boundary (Product)
 
 > Product/business baseline for the four conversation spaces and the privacy
-> boundary in `gv_chat_app`. This is the product-owned document for this repo;
+> boundary in `open_chat_app`. This is the product-owned document for this repo;
 > implementation baseline lives in
 > [channel-secret-chat.md](channel-secret-chat.md). Server-side semantics are
 > documented in `gv_im_server/docs/business/CONVERSATION_TYPES_AND_PRIVACY.md`.
@@ -51,7 +51,7 @@ after send: reply / forward / edit / react / pin / delete
   history/keys (recovery flow required); timed destroy counts from peer read,
   then both devices remove the message (no sync to new devices).
 
-## 6. UI Mapping in gv_chat_app
+## 6. UI Mapping in open_chat_app
 
 - Chat list shows distinct icons per conversation type
   (`channel`/`secret`/`group`/`private`).

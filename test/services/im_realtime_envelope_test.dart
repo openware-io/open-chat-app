@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/services/im_realtime_envelope.dart';
+import 'package:open_chat_app/services/im_realtime_envelope.dart';
 
 void main() {
   test('encodes the minimal outbound envelope from the v1 contract', () {

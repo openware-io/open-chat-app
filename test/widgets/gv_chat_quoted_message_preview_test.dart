@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/chat_message.dart';
-import 'package:gv_chat_app/widgets/gv_chat_quoted_message_preview.dart';
-import 'package:gv_chat_app/widgets/gv_chat_video_thumbnail.dart';
+import 'package:open_chat_app/models/chat_message.dart';
+import 'package:open_chat_app/widgets/gv_chat_quoted_message_preview.dart';
+import 'package:open_chat_app/widgets/gv_chat_video_thumbnail.dart';
 
 void main() {
   testWidgets('quoted image uses a thumbnail', (tester) async {

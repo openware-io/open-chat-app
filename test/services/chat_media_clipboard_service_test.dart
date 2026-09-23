@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/services/chat_media_clipboard_service.dart';
+import 'package:open_chat_app/services/chat_media_clipboard_service.dart';
 
 void main() {
   group('GvChatMediaClipboardService path classification', () {

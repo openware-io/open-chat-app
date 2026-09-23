@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:gv_chat_app/models/channel_models.dart';
-import 'package:gv_chat_app/models/secret_chat_models.dart';
+import 'package:open_chat_app/models/channel_models.dart';
+import 'package:open_chat_app/models/secret_chat_models.dart';
 
 void main() {
   group('ChannelInfo.fromJson', () {

@@ -1,9 +1,9 @@
-﻿import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/conversation_preview.dart';
-import 'package:gv_chat_app/l10n/app_localizations_zh.dart';
-import 'package:gv_chat_app/models/chat_message.dart';
-import 'package:gv_chat_app/models/conversation.dart';
-import 'package:gv_chat_app/providers/chat/chat_message_lifecycle_coordinator.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:open_chat_app/core/conversation_preview.dart';
+import 'package:open_chat_app/l10n/app_localizations_zh.dart';
+import 'package:open_chat_app/models/chat_message.dart';
+import 'package:open_chat_app/models/conversation.dart';
+import 'package:open_chat_app/providers/chat/chat_message_lifecycle_coordinator.dart';
 
 void main() {
   test('localizes the peer recall marker for the conversation list', () {

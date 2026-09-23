@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/message_preview.dart';
+import 'package:open_chat_app/core/message_preview.dart';
 
 void main() {
   group('previewTextFromContent', () {

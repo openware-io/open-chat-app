@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/local_storage.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
-import 'package:gv_chat_app/providers/mini_app_services_provider.dart';
-import 'package:gv_chat_app/repositories/mini_app_services_repository.dart';
-import 'package:gv_chat_app/screens/services_screen.dart';
+import 'package:open_chat_app/core/local_storage.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/providers/mini_app_services_provider.dart';
+import 'package:open_chat_app/repositories/mini_app_services_repository.dart';
+import 'package:open_chat_app/screens/services_screen.dart';
 import 'package:gv_core/gv_core.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

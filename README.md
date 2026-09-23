@@ -1,4 +1,4 @@
-# gv_chat_app
+# open_chat_app
 
 GV Chat Flutter 客户端，与 gv_chat_server 配套。
 

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/chat_type_wire.dart';
+import 'package:open_chat_app/core/chat_type_wire.dart';
 
 void main() {
   test('maps app chat types to the backend wire values', () {

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/group_models.dart';
-import 'package:gv_chat_app/providers/group_provider.dart';
-import 'package:gv_chat_app/repositories/group_repository.dart';
+import 'package:open_chat_app/models/group_models.dart';
+import 'package:open_chat_app/providers/group_provider.dart';
+import 'package:open_chat_app/repositories/group_repository.dart';
 
 void main() {
   test('group item accepts camelCase and snake_case member counts', () {

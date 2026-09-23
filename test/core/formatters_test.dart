@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:gv_chat_app/core/formatters.dart';
+import 'package:open_chat_app/core/formatters.dart';
 
 /// 消息时间时区回归测试。
 ///

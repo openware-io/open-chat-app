@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/call_trace_display.dart';
-import 'package:gv_chat_app/l10n/app_localizations_zh.dart';
+import 'package:open_chat_app/core/call_trace_display.dart';
+import 'package:open_chat_app/l10n/app_localizations_zh.dart';
 
 void main() {
   final l10n = AppLocalizationsZh();

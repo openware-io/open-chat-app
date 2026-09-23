@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/api_failure.dart';
-import 'package:gv_chat_app/models/ktv_models.dart';
-import 'package:gv_chat_app/providers/pending_approval_provider.dart';
-import 'package:gv_chat_app/repositories/business/ktv_api_client.dart';
+import 'package:open_chat_app/core/api_failure.dart';
+import 'package:open_chat_app/models/ktv_models.dart';
+import 'package:open_chat_app/providers/pending_approval_provider.dart';
+import 'package:open_chat_app/repositories/business/ktv_api_client.dart';
 
 /// 可编程的假客户端：只覆盖待确认加项相关的三个方法，其余走父类（测试里不会被调用）。
 class _FakeKtvApi extends KtvApiClient {

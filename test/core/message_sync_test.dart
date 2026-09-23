@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gv_core/gv_core.dart';
-import 'package:gv_chat_app/models/message_sync.dart';
+import 'package:open_chat_app/models/message_sync.dart';
 
 void main() {
   test('parses a message synchronization page', () {

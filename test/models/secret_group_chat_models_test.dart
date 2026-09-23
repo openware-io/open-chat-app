@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:gv_chat_app/models/secret_group_chat_models.dart';
+import 'package:open_chat_app/models/secret_group_chat_models.dart';
 
 /// 私密群聊模型 fromJson 容错测试：字段名、long→String、null 容错。
 void main() {

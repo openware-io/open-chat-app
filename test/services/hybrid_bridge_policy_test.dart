@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/services/hybrid_bridge_policy.dart';
+import 'package:open_chat_app/services/hybrid_bridge_policy.dart';
 
 void main() {
   test('resolves only registered HTTPS page origins and paths', () {

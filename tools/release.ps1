@@ -1,4 +1,4 @@
-﻿﻿[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
   [string]$Version = '',
   [int]$BuildNumber = 0,
@@ -19,7 +19,7 @@ param(
 # One-shot Android release: bump version -> build prod APK -> upload artifact ->
 # create release record -> submit -> verify.
 # Release package is ALWAYS an APK (flutter build apk --release). AAB is Google Play only.
-# Authoritative docs: gv_chat_app/BUILD.md (packaging), gv_im_server/docs/standards/15_CLIENT_RELEASE_SKILL.md (this flow).
+# Authoritative docs: open_chat_app/BUILD.md (packaging), gv_im_server/docs/standards/15_CLIENT_RELEASE_SKILL.md (this flow).
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest

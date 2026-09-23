@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/favorite_models.dart';
+import 'package:open_chat_app/models/favorite_models.dart';
 
 /// 收藏相关模型的解析契约：原消息可用性状态必须严格按服务端字面量解析，
 /// 未知/缺失一律落到 LOOKUP_UNAVAILABLE，保证客户端「绝不盲跳」。

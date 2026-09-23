@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:gv_chat_app/core/gv_automation_keys.dart';
-import 'package:gv_chat_app/main.dart' as app;
-import 'package:gv_chat_app/screens/chat_room/chat_room_message_tile.dart';
+import 'package:open_chat_app/core/gv_automation_keys.dart';
+import 'package:open_chat_app/main.dart' as app;
+import 'package:open_chat_app/screens/chat_room/chat_room_message_tile.dart';
 import 'package:integration_test/integration_test.dart';
 
 const _config = _ReviewerFlowConfig();

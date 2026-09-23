@@ -4,25 +4,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:gv_core/gv_core.dart' show GvSocketClient;
 
-import 'package:gv_chat_app/core/local_storage.dart';
-import 'package:gv_chat_app/database/chat_database.dart';
-import 'package:gv_chat_app/models/channel_models.dart';
-import 'package:gv_chat_app/models/friend_models.dart';
-import 'package:gv_chat_app/models/group_models.dart';
-import 'package:gv_chat_app/models/im_user.dart';
-import 'package:gv_chat_app/models/message_sync.dart';
-import 'package:gv_chat_app/models/secret_chat_models.dart';
-import 'package:gv_chat_app/models/secret_group_chat_models.dart';
-import 'package:gv_chat_app/providers/chat/chat_local_store.dart';
-import 'package:gv_chat_app/providers/chat_provider.dart';
-import 'package:gv_chat_app/providers/friend_provider.dart';
-import 'package:gv_chat_app/providers/group_provider.dart';
-import 'package:gv_chat_app/repositories/chat_repository.dart';
-import 'package:gv_chat_app/repositories/friend_repository.dart';
-import 'package:gv_chat_app/repositories/group_repository.dart';
-import 'package:gv_chat_app/services/api_client.dart';
-import 'package:gv_chat_app/services/e2ee/e2ee_manager.dart';
-import 'package:gv_chat_app/services/im_api.dart';
+import 'package:open_chat_app/core/local_storage.dart';
+import 'package:open_chat_app/database/chat_database.dart';
+import 'package:open_chat_app/models/channel_models.dart';
+import 'package:open_chat_app/models/friend_models.dart';
+import 'package:open_chat_app/models/group_models.dart';
+import 'package:open_chat_app/models/im_user.dart';
+import 'package:open_chat_app/models/message_sync.dart';
+import 'package:open_chat_app/models/secret_chat_models.dart';
+import 'package:open_chat_app/models/secret_group_chat_models.dart';
+import 'package:open_chat_app/providers/chat/chat_local_store.dart';
+import 'package:open_chat_app/providers/chat_provider.dart';
+import 'package:open_chat_app/providers/friend_provider.dart';
+import 'package:open_chat_app/providers/group_provider.dart';
+import 'package:open_chat_app/repositories/chat_repository.dart';
+import 'package:open_chat_app/repositories/friend_repository.dart';
+import 'package:open_chat_app/repositories/group_repository.dart';
+import 'package:open_chat_app/services/api_client.dart';
+import 'package:open_chat_app/services/e2ee/e2ee_manager.dart';
+import 'package:open_chat_app/services/im_api.dart';
 
 /// 同步拉取去重回归测试：本地媒体占位（msgId=clientMsgId）与服务端确认消息
 /// （msgId=雪花 id、clientMsgId 相同）必须按 clientMsgId 视为同一条，

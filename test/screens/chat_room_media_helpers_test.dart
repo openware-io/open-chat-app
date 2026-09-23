@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/screens/chat_room/chat_room_media_helpers.dart';
+import 'package:open_chat_app/screens/chat_room/chat_room_media_helpers.dart';
 import 'package:image/image.dart' as img;
 
 void main() {

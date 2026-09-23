@@ -1,7 +1,7 @@
 # Channel & Secret Chat (Frontend)
 
 > Engineering baseline for the channel (single-direction broadcast) and secret
-> chat (E2EE) features in `gv_chat_app`. Follows
+> chat (E2EE) features in `open_chat_app`. Follows
 > [coding_guidelines.md](coding_guidelines.md) and
 > [project-conventions.md](generate-gv-chat-flutter/references/project-conventions.md).
 

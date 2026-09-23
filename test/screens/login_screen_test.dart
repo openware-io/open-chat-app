@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
-import 'package:gv_chat_app/screens/login_screen.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/screens/login_screen.dart';
 
 void main() {
   testWidgets('login form requires agreement and credentials', (tester) async {

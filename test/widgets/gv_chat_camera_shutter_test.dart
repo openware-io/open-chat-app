@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/gv_automation_keys.dart';
-import 'package:gv_chat_app/screens/chat_room/gv_chat_camera_screen.dart';
+import 'package:open_chat_app/core/gv_automation_keys.dart';
+import 'package:open_chat_app/screens/chat_room/gv_chat_camera_screen.dart';
 
 void main() {
   testWidgets('shutter taps for photo and holds for video', (tester) async {

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/currency.dart';
+import 'package:open_chat_app/core/currency.dart';
 
 /// 规范 16 §4/§7：`formatMoney` 单测必须覆盖
 /// CNY/USD、0、负数、大额千分位、未知币种回退。

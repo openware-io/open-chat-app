@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/gv_http_headers.dart';
+import 'package:open_chat_app/core/gv_http_headers.dart';
 
 void main() {
   const bearer = <String, String>{'Authorization': 'Bearer test-token'};

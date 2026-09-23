@@ -4,12 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:gv_chat_app/core/local_storage.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
-import 'package:gv_chat_app/models/chat_message.dart';
-import 'package:gv_chat_app/models/favorite_models.dart';
-import 'package:gv_chat_app/repositories/favorite_repository.dart';
-import 'package:gv_chat_app/screens/favorites_screen.dart';
+import 'package:open_chat_app/core/local_storage.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/models/chat_message.dart';
+import 'package:open_chat_app/models/favorite_models.dart';
+import 'package:open_chat_app/repositories/favorite_repository.dart';
+import 'package:open_chat_app/screens/favorites_screen.dart';
 
 /// 收藏列表页：类型筛选、点击进详情、长按进入多选。
 class _FakeFavoriteRepository implements FavoriteRepository {

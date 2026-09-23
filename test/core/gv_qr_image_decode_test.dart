@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/gv_qr_image_decode.dart';
+import 'package:open_chat_app/core/gv_qr_image_decode.dart';
 import 'package:image/image.dart' as img;
 import 'package:zxing2/qrcode.dart';
 

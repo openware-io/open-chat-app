@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/config.dart';
+import 'package:open_chat_app/core/config.dart';
 
 /// 发布制品守卫：只在**发布构建的 dart-define 上下文**里成立。
 ///

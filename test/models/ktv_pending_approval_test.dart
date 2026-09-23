@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/ktv_models.dart';
+import 'package:open_chat_app/models/ktv_models.dart';
 
 /// 客户「待确认加项」聚合视图的解析与派生口径。
 ///

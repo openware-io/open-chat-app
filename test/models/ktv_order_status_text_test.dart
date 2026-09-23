@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/ktv_models.dart';
+import 'package:open_chat_app/models/ktv_models.dart';
 
 /// 状态文案与术语口径（收银端 / 看板 / C 端 l10n）。
 ///

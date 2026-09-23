@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/local_storage.dart';
-import 'package:gv_chat_app/repositories/local_app_preferences_repository.dart';
+import 'package:open_chat_app/core/local_storage.dart';
+import 'package:open_chat_app/repositories/local_app_preferences_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

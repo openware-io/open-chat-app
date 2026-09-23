@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/gv_app.dart';
-import 'package:gv_chat_app/models/client_remote_settings.dart';
-import 'package:gv_chat_app/providers/app_locale_provider.dart';
-import 'package:gv_chat_app/providers/app_theme_mode_provider.dart';
-import 'package:gv_chat_app/providers/client_remote_config_provider.dart';
-import 'package:gv_chat_app/repositories/app_preferences_repository.dart';
-import 'package:gv_chat_app/repositories/client_config_repository.dart';
+import 'package:open_chat_app/gv_app.dart';
+import 'package:open_chat_app/models/client_remote_settings.dart';
+import 'package:open_chat_app/providers/app_locale_provider.dart';
+import 'package:open_chat_app/providers/app_theme_mode_provider.dart';
+import 'package:open_chat_app/providers/client_remote_config_provider.dart';
+import 'package:open_chat_app/repositories/app_preferences_repository.dart';
+import 'package:open_chat_app/repositories/client_config_repository.dart';
 
 void main() {
   testWidgets('smoke: real app root renders its initial route', (tester) async {

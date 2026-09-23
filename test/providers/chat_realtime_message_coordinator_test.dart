@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/chat_message.dart';
-import 'package:gv_chat_app/providers/chat/chat_provider_types.dart';
-import 'package:gv_chat_app/providers/chat/chat_realtime_message_coordinator.dart';
+import 'package:open_chat_app/models/chat_message.dart';
+import 'package:open_chat_app/providers/chat/chat_provider_types.dart';
+import 'package:open_chat_app/providers/chat/chat_realtime_message_coordinator.dart';
 
 void main() {
   late Map<String, List<ChatMessage>> messageMap;

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/ktv_models.dart';
+import 'package:open_chat_app/models/ktv_models.dart';
 
 /// 订单展示金额的唯一来源：服务端「可直接展示总额」`liveTotalAmount`。
 ///

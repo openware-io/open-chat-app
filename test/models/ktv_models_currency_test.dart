@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/currency.dart';
-import 'package:gv_chat_app/models/ktv_models.dart';
+import 'package:open_chat_app/core/currency.dart';
+import 'package:open_chat_app/models/ktv_models.dart';
 
 /// 记录级币种解析：既有 `currency` 与规范 16 §2 的 `currencyCode` 都要支持，
 /// 都缺失时回退当前租户币种（缺省 USD）。

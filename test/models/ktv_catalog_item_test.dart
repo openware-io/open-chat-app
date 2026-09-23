@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/ktv_models.dart';
+import 'package:open_chat_app/models/ktv_models.dart';
 
 /// 点单/加项页的「查库存防超卖」口径（App 端）：
 /// 加号只改本地购物车、点「确认加项」才提交，因此数量上限必须来自服务端可用库存。

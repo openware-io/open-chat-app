@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/websocket_protocol.dart';
+import 'package:open_chat_app/core/websocket_protocol.dart';
 
 void main() {
   test('builds the v1 WebSocket URL with an encoded ticket', () {

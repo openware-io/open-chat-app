@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:gv_chat_app/core/local_storage.dart';
-import 'package:gv_chat_app/repositories/im_auth_repository.dart';
-import 'package:gv_chat_app/services/api_client.dart';
-import 'package:gv_chat_app/services/im_api.dart';
+import 'package:open_chat_app/core/local_storage.dart';
+import 'package:open_chat_app/repositories/im_auth_repository.dart';
+import 'package:open_chat_app/services/api_client.dart';
+import 'package:open_chat_app/services/im_api.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

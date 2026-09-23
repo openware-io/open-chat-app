@@ -2,7 +2,7 @@
 
 > **发版（Android 直装 APK）不是只看这里，先读 [`gv_im_server/docs/standards/15_CLIENT_RELEASE_SKILL.md`](../gv_im_server/docs/standards/15_CLIENT_RELEASE_SKILL.md) 并运行 `tools/release.ps1`**；本文档是打包命令的权威来源，其中「发布 APK = `flutter build apk --release`」「AAB 仅用于 Google Play」。
 
-在项目根目录 `gv_chat_app/` 下执行。默认使用 [AppConfig](lib/core/config.dart) 中的接口地址；若需指定其它服务端，在所有命令中追加相同的 `--dart-define` 即可。
+在项目根目录 `open_chat_app/` 下执行。默认使用 [AppConfig](lib/core/config.dart) 中的接口地址；若需指定其它服务端，在所有命令中追加相同的 `--dart-define` 即可。
 
 ## 环境与通用参数
 

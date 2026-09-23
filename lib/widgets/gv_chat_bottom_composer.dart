@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:gv_ui/gv_ui.dart' show GvTypographyScale;
 
 import '../core/app_colors.dart';

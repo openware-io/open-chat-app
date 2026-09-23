@@ -4,12 +4,12 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/currency.dart';
-import 'package:gv_chat_app/models/ktv_models.dart';
-import 'package:gv_chat_app/providers/currency_provider.dart';
-import 'package:gv_chat_app/repositories/business/ktv_api_client.dart';
-import 'package:gv_chat_app/screens/business/ktv_cashier_screen.dart';
-import 'package:gv_chat_app/screens/business/ktv_shift_screen.dart';
+import 'package:open_chat_app/core/currency.dart';
+import 'package:open_chat_app/models/ktv_models.dart';
+import 'package:open_chat_app/providers/currency_provider.dart';
+import 'package:open_chat_app/repositories/business/ktv_api_client.dart';
+import 'package:open_chat_app/screens/business/ktv_cashier_screen.dart';
+import 'package:open_chat_app/screens/business/ktv_shift_screen.dart';
 import 'package:provider/provider.dart';
 
 /// 业务屏金额换算/展示必须跟随币种（规范 §3.4/§4/§7）。

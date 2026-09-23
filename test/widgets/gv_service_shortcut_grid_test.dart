@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
-import 'package:gv_chat_app/widgets/gv_service_shortcut_grid.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/widgets/gv_service_shortcut_grid.dart';
 
 void main() {
   testWidgets('local service shortcuts render and respond to taps',

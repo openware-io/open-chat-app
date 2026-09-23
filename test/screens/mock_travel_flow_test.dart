@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
-import 'package:gv_chat_app/models/mock_service_category.dart';
-import 'package:gv_chat_app/screens/mock_service_screen.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/models/mock_service_category.dart';
+import 'package:open_chat_app/screens/mock_service_screen.dart';
 
 void main() {
   testWidgets('flight mock flow reaches passenger form and success',

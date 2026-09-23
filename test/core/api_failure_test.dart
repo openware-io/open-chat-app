@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/api_failure.dart';
+import 'package:open_chat_app/core/api_failure.dart';
 
 void main() {
   test('maps v1 error fields and authentication semantics', () {

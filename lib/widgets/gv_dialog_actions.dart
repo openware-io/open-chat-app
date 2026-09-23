@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:gv_ui/gv_ui.dart';
 
 /// 统一 Alert / Confirm：底部微信式对半横条（左取消、右确定），单按钮为通栏。

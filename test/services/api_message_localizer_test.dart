@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/services/api_message_localizer.dart';
+import 'package:open_chat_app/services/api_message_localizer.dart';
 
 void main() {
   group('localizeServerMessage', () {

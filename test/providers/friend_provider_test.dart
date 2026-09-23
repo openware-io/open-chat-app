@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/friend_models.dart';
-import 'package:gv_chat_app/models/im_user.dart';
-import 'package:gv_chat_app/providers/friend_provider.dart';
-import 'package:gv_chat_app/repositories/friend_repository.dart';
+import 'package:open_chat_app/models/friend_models.dart';
+import 'package:open_chat_app/models/im_user.dart';
+import 'package:open_chat_app/providers/friend_provider.dart';
+import 'package:open_chat_app/repositories/friend_repository.dart';
 
 void main() {
   test('friend remark lookup trims values and ignores blank remarks', () {

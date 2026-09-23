@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/upload_mime.dart';
+import 'package:open_chat_app/core/upload_mime.dart';
 
 void main() {
   test('maps supported voice extensions to their real MIME types', () {

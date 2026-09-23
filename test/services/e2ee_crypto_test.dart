@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/services/e2ee/e2ee_crypto.dart';
+import 'package:open_chat_app/services/e2ee/e2ee_crypto.dart';
 
 void main() {
   group('E2eeCrypto', () {

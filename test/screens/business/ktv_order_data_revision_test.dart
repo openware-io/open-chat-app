@@ -5,12 +5,12 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/currency.dart';
-import 'package:gv_chat_app/models/ktv_models.dart';
-import 'package:gv_chat_app/providers/currency_provider.dart';
-import 'package:gv_chat_app/providers/pending_approval_provider.dart';
-import 'package:gv_chat_app/repositories/business/ktv_api_client.dart';
-import 'package:gv_chat_app/screens/business/ktv_timing_screen.dart';
+import 'package:open_chat_app/core/currency.dart';
+import 'package:open_chat_app/models/ktv_models.dart';
+import 'package:open_chat_app/providers/currency_provider.dart';
+import 'package:open_chat_app/providers/pending_approval_provider.dart';
+import 'package:open_chat_app/repositories/business/ktv_api_client.dart';
+import 'package:open_chat_app/screens/business/ktv_timing_screen.dart';
 import 'package:provider/provider.dart';
 
 /// 「确认/拒绝之后，订单数据必须重拉」的守卫（A380 收银端）。

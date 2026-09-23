@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/gv_automation_keys.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
-import 'package:gv_chat_app/widgets/gv_chat_room_bottom.dart';
+import 'package:open_chat_app/core/gv_automation_keys.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/widgets/gv_chat_room_bottom.dart';
 
 void main() {
   testWidgets('camera action opens the combined photo and video camera',

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/services/hybrid_bridge_dispatcher.dart';
+import 'package:open_chat_app/services/hybrid_bridge_dispatcher.dart';
 
 void main() {
   test('dispatches structured method and params', () async {

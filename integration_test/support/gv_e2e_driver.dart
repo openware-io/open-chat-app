@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/gv_automation_keys.dart';
+import 'package:open_chat_app/core/gv_automation_keys.dart';
 
 class GvE2eConfig {
   const GvE2eConfig();

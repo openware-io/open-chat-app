@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:gv_ui/gv_ui.dart';
 import 'package:provider/provider.dart';
 

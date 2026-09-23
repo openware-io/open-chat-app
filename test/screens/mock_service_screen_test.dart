@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
-import 'package:gv_chat_app/models/mock_service_category.dart';
-import 'package:gv_chat_app/screens/mock_service_screen.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/models/mock_service_category.dart';
+import 'package:open_chat_app/screens/mock_service_screen.dart';
 
 void main() {
   test('mock service category parses route values with a safe fallback', () {

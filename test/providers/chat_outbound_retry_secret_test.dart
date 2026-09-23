@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gv_core/gv_core.dart' show GvSocketClient;
 
-import 'package:gv_chat_app/models/chat_message.dart';
-import 'package:gv_chat_app/providers/chat/chat_outbound_message_coordinator.dart';
+import 'package:open_chat_app/models/chat_message.dart';
+import 'package:open_chat_app/providers/chat/chat_outbound_message_coordinator.dart';
 
 /// 普通消息「一直发送中」事故回归测试。
 ///

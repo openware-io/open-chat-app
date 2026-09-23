@@ -4,12 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:gv_chat_app/core/local_storage.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
-import 'package:gv_chat_app/models/chat_message.dart';
-import 'package:gv_chat_app/models/favorite_models.dart';
-import 'package:gv_chat_app/repositories/favorite_repository.dart';
-import 'package:gv_chat_app/screens/favorite_detail_screen.dart';
+import 'package:open_chat_app/core/local_storage.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/models/chat_message.dart';
+import 'package:open_chat_app/models/favorite_models.dart';
+import 'package:open_chat_app/repositories/favorite_repository.dart';
+import 'package:open_chat_app/screens/favorite_detail_screen.dart';
 
 /// 收藏详情页行为：内容自渲染 +「查看原消息」按服务端状态决定是否跳转（fail closed）。
 class _FakeFavoriteRepository implements FavoriteRepository {

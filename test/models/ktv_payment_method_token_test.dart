@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/currency.dart';
-import 'package:gv_chat_app/models/ktv_models.dart';
+import 'package:open_chat_app/core/currency.dart';
+import 'package:open_chat_app/models/ktv_models.dart';
 
 /// 规范 16 §9：可用支付方式里数量腿（WALLET / POINT）的**数量**口径。
 ///

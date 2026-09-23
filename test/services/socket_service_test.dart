@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/core/websocket_protocol.dart';
-import 'package:gv_chat_app/services/socket_service.dart';
+import 'package:open_chat_app/core/websocket_protocol.dart';
+import 'package:open_chat_app/services/socket_service.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() {

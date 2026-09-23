@@ -15,7 +15,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:gal/gal.dart';
-import 'package:gv_chat_app/l10n/app_localizations.dart';
+import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gv_core/gv_core.dart';
 import 'package:gv_ui/gv_ui.dart';

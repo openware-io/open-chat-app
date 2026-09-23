@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_chat_app/models/points_account_binding.dart';
+import 'package:open_chat_app/models/points_account_binding.dart';
 
 void main() {
   group('points account validation', () {

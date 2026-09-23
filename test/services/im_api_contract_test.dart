@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:gv_chat_app/core/local_storage.dart';
-import 'package:gv_chat_app/services/api_client.dart';
-import 'package:gv_chat_app/services/im_api.dart';
+import 'package:open_chat_app/core/local_storage.dart';
+import 'package:open_chat_app/services/api_client.dart';
+import 'package:open_chat_app/services/im_api.dart';
 
 /// 前后端请求契约测试：锁定手写请求体的字段名与后端 DTO 校验字段一致。
 ///

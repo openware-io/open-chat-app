@@ -1,6 +1,6 @@
 ---
 name: generate-gv-chat-flutter
-description: Enforce GV Chat's existing Flutter architecture, localization, responsive layout, reusable UI, list performance, state management, and validation conventions. Use whenever generating or modifying Dart/Flutter frontend code for gv_chat_app from backend requirements, API changes, UI requests, bug fixes, or AI-produced patches.
+description: Enforce GV Chat's existing Flutter architecture, localization, responsive layout, reusable UI, list performance, state management, and validation conventions. Use whenever generating or modifying Dart/Flutter frontend code for open_chat_app from backend requirements, API changes, UI requests, bug fixes, or AI-produced patches.
 ---
 
 # Generate GV Chat Flutter Code

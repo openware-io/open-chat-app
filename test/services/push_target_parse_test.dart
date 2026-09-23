@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:gv_chat_app/services/push_notification_service.dart';
+import 'package:open_chat_app/services/push_notification_service.dart';
 
 /// 推送点击导航 peerId 解析回归测试。
 ///
