@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 import '../../core/config.dart';
 import '../../core/local_storage.dart';

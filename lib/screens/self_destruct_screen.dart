@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../services/api_client.dart';
 import '../services/im_api.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_nav_bar.dart';
 
 /// 聊天记录自动清理策略子页：off / 1mo / 3mo / 6mo / 1yr 五选一。
 /// 注意：该策略只清除聊天记录，不会注销账号（账号仍可正常登录）。

@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
-import '../widgets/gv_nav_bar.dart';
+import '../core/open_toast.dart';
+import 'package:open_ui/open_ui.dart' show GvTypography;
+import '../widgets/open_nav_bar.dart';
 
 /// 裁剪参数：imageBytes；[title] / [confirmButtonText] 为 null 时用 [AppLocalizations]。
 class GvSquareCropExtra {

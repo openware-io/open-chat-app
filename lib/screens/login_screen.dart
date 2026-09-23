@@ -5,15 +5,15 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
-import '../core/gv_automation_keys.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
+import '../core/open_automation_keys.dart';
+import 'package:open_ui/open_ui.dart' show GvTypography;
 import '../providers/auth_provider.dart';
 import '../providers/call_provider.dart';
 import '../providers/chat_provider.dart';
 import '../providers/friend_provider.dart';
 import '../providers/group_provider.dart';
 import '../services/local_network_preflight.dart';
-import '../widgets/gv_auth_agreement_checkbox.dart';
+import '../widgets/open_auth_agreement_checkbox.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, this.initialUsername});

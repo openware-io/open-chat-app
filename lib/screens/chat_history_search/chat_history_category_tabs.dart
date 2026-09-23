@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show ScrollCacheExtent;
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 
 import '../../core/app_colors.dart';
 import '../../core/formatters.dart';
-import '../../core/gv_http_headers.dart';
+import '../../core/open_http_headers.dart';
 import '../../core/media_url.dart';
 import '../../models/chat_message.dart';
-import '../../widgets/gv_chat_video_thumbnail.dart';
+import '../../widgets/open_chat_video_thumbnail.dart';
 import 'chat_history_flat_list.dart';
 import 'chat_history_search_helpers.dart';
 

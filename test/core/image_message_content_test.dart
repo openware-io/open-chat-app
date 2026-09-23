@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 void main() {
   group('image message content', () {

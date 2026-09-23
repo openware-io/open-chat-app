@@ -646,20 +646,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
-  gv_core:
-    dependency: "direct main"
-    description:
-      path: "packages/gv_core"
-      relative: true
-    source: path
-    version: "0.1.0"
-  gv_ui:
-    dependency: "direct main"
-    description:
-      path: "packages/gv_ui"
-      relative: true
-    source: path
-    version: "0.1.0"
   hooks:
     dependency: transitive
     description:
@@ -993,6 +979,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  open_core:
+    dependency: "direct main"
+    description:
+      path: "packages/open_core"
+      relative: true
+    source: path
+    version: "0.1.0"
+  open_ui:
+    dependency: "direct main"
+    description:
+      path: "packages/open_ui"
+      relative: true
+    source: path
+    version: "0.1.0"
   package_config:
     dependency: transitive
     description:

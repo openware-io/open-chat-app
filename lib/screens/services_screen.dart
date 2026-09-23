@@ -5,19 +5,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
-import 'package:gv_core/gv_core.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_core/open_core.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
 import '../core/config.dart';
-import '../core/gv_automation_keys.dart';
-import '../core/gv_http_headers.dart';
-import '../core/gv_toast.dart';
+import '../core/open_automation_keys.dart';
+import '../core/open_http_headers.dart';
+import '../core/open_toast.dart';
 import '../core/local_storage.dart';
 import '../providers/mini_app_services_provider.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_nav_bar.dart';
 import 'protocol_webview_screen.dart';
 import '../core/app_environment.dart';
 
@@ -442,7 +442,7 @@ String normalizeMiniProgramUrl(String url) {
   if (uri == null || !(uri.path == '/a380' || uri.path == '/a380/' || uri.path == '/b' || uri.path == '/b/')) {
     return url;
   }
-  const testOrigin = String.fromEnvironment('GV_HYBRID_TEST_ORIGIN');
+  const testOrigin = String.fromEnvironment('OPEN_HYBRID_TEST_ORIGIN');
   final debugPath = uri.path.startsWith('/b') ? '/b/' : '/a380/';
   if (!AppEnvironment.isProduction && testOrigin.isNotEmpty) {
     final local = Uri.tryParse(testOrigin);

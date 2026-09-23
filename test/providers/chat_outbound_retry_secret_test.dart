@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_core/gv_core.dart' show GvSocketClient;
+import 'package:open_core/open_core.dart' show GvSocketClient;
 
 import 'package:open_chat_app/models/chat_message.dart';
 import 'package:open_chat_app/providers/chat/chat_outbound_message_coordinator.dart';

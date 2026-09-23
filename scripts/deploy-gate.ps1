@@ -13,7 +13,7 @@ $appRoot = Split-Path -Parent $PSScriptRoot
 Write-Host '=== [1/3] flutter analyze ==='
 Push-Location $appRoot
 try {
-  & $flutter analyze lib test integration_test packages/gv_core/lib packages/gv_ui/lib
+  & $flutter analyze lib test integration_test packages/open_core/lib packages/open_ui/lib
   if ($LASTEXITCODE -ne 0) { throw 'flutter analyze failed' }
 } finally { Pop-Location }
 

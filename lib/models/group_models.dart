@@ -1,1 +1,1 @@
-export 'package:gv_core/gv_core.dart' show GroupItem, GroupMember;
+export 'package:open_core/open_core.dart' show GroupItem, GroupMember;

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-import '../theme/gv_tokens.dart';
+import '../theme/open_tokens.dart';
 
-export '../theme/gv_tokens.dart' show GvLayout, GvRadii, GvShadows, GvSpacing;
+export '../theme/open_tokens.dart' show GvLayout, GvRadii, GvShadows, GvSpacing;
 
 /// 语义色均指向 iOS [CupertinoColors]，随系统浅/深自动解析。
 ///

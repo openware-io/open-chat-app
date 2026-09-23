@@ -1,4 +1,4 @@
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 /// 多端登录设备会话（对应后端 DeviceSessionResponse）。
 class DeviceSession {

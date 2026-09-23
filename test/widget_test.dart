@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:open_chat_app/gv_app.dart';
+import 'package:open_chat_app/open_app.dart';
 import 'package:open_chat_app/models/client_remote_settings.dart';
 import 'package:open_chat_app/providers/app_locale_provider.dart';
 import 'package:open_chat_app/providers/app_theme_mode_provider.dart';

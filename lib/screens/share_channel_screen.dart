@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_channel_code.dart';
-import '../core/gv_toast.dart';
+import '../core/open_channel_code.dart';
+import '../core/open_toast.dart';
 import '../l10n/app_localizations.dart';
 import '../models/channel_models.dart';
 import '../providers/chat_provider.dart';
 import '../providers/friend_provider.dart';
 import '../providers/group_provider.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_nav_bar.dart';
-import '../widgets/gv_search_bar.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_nav_bar.dart';
+import '../widgets/open_search_bar.dart';
 
-/// 把频道分享信息（名称 + 频道号 + `GV_CHANNEL` 码）作为一条文本消息转发到所选会话。
+/// 把频道分享信息（名称 + 频道号 + `OPEN_CHANNEL` 码）作为一条文本消息转发到所选会话。
 ///
 /// 会话范围：好友（私聊）、群聊、以及当前用户拥有的频道（仅管理员可发布）。
 class ShareChannelScreen extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 /// 小程序服务列表边界，统一处理远端数据、缓存和错误文案。
 abstract interface class MiniAppServicesRepository {

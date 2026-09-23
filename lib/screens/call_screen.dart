@@ -5,15 +5,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/call_surface_ready.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/call_provider.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_rtc_video_view.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_rtc_video_view.dart';
 
 class CallScreen extends StatefulWidget {
   const CallScreen({super.key, this.answerIncoming = false});

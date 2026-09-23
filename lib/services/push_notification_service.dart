@@ -13,8 +13,8 @@ import 'package:go_router/go_router.dart';
 
 import '../app/app_routes.dart';
 import '../core/config.dart';
-import '../core/gv_chat_navigation.dart';
-import '../core/gv_root_navigator.dart';
+import '../core/open_chat_navigation.dart';
+import '../core/open_root_navigator.dart';
 import '../l10n/app_localizations.dart';
 import '../models/chat_message.dart';
 import '../repositories/app_preferences_repository.dart';
@@ -393,7 +393,7 @@ class PushNotificationService extends ChangeNotifier {
     const appKey = AppConfig.jpushDartAppKey;
     if (appKey.isEmpty && Platform.isIOS) {
       debugPrint(
-          '[Push] GV_JPUSH_APPKEY is empty; JPush cannot receive pushes.');
+          '[Push] OPEN_JPUSH_APPKEY is empty; JPush cannot receive pushes.');
     }
 
     jpush.addEventHandler(

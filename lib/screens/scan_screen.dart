@@ -10,23 +10,23 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 
 import '../core/api_failure.dart';
-import '../core/gv_channel_code.dart';
-import '../core/gv_automation_keys.dart';
-import '../core/gv_chat_navigation.dart';
-import '../core/gv_qr_image_decode.dart';
-import '../core/gv_qr_login.dart';
-import '../core/gv_scan_error_feedback.dart';
-import '../core/gv_toast.dart';
-import '../core/gv_uid.dart';
+import '../core/open_channel_code.dart';
+import '../core/open_automation_keys.dart';
+import '../core/open_chat_navigation.dart';
+import '../core/open_qr_image_decode.dart';
+import '../core/open_qr_login.dart';
+import '../core/open_scan_error_feedback.dart';
+import '../core/open_toast.dart';
+import '../core/open_uid.dart';
 
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 import '../providers/auth_provider.dart';
 import '../providers/chat_provider.dart';
 import '../providers/friend_provider.dart';
 import '../services/im_api.dart';
-import '../widgets/gv_dialog_actions.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_dialog_actions.dart';
+import '../widgets/open_nav_bar.dart';
 
 /// 扫码加好友流程中的可展示错误（文案已由 [AppLocalizations] 生成）。
 class _ScanUserMessageException implements Exception {

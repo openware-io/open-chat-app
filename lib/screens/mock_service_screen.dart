@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/mock_service_category.dart';
-import '../widgets/gv_nav_bar.dart';
-import '../widgets/gv_search_bar.dart';
+import '../widgets/open_nav_bar.dart';
+import '../widgets/open_search_bar.dart';
 import 'mock_travel_flow_screens.dart';
 import 'mock_venue_flow_screens.dart';
 

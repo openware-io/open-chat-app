@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../models/device_session.dart';
 import '../services/api_client.dart';
 import '../services/im_api.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_nav_bar.dart';
 
 /// 登录设备管理：展示多端登录会话（登录方式 / 登录 IP / 设备 / 最后活跃时间），
 /// 支持主设备踢出副设备、副设备主动退出（参考百度网盘登录账号管理）。

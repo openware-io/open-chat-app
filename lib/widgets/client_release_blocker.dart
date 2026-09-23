@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
+import 'package:open_ui/open_ui.dart' show GvTypography;
 
 import '../core/app_colors.dart';
 import '../l10n/app_localizations.dart';

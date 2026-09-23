@@ -4,7 +4,7 @@ import 'media_url.dart';
 import 'namecard_message.dart';
 
 /// 占位：[ChatMessage.msgType] 为 image/video/voice 且已开始上传、`chat:send` 尚未发出的 [ChatMessage.content]。
-const String gvChatPendingMediaUploadContent = '__gv_pending_media_upload__';
+const String gvChatPendingMediaUploadContent = '__open_pending_media_upload__';
 
 String previewTextFromContent(String msgType, String? content) {
   if (content == null) return '';

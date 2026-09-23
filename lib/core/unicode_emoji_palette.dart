@@ -6,7 +6,7 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypographyScale;
+import 'package:open_ui/open_ui.dart' show GvTypographyScale;
 
 import 'app_theme.dart';
 

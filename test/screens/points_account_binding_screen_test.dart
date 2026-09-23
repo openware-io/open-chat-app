@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:open_chat_app/core/gv_automation_keys.dart';
+import 'package:open_chat_app/core/open_automation_keys.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:open_chat_app/screens/points_account_binding_screen.dart';
 

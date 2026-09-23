@@ -5,11 +5,11 @@ import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_automation_keys.dart';
-import '../core/gv_toast.dart';
+import '../core/open_automation_keys.dart';
+import '../core/open_toast.dart';
 import '../providers/auth_provider.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
-import '../widgets/gv_nav_bar.dart';
+import 'package:open_ui/open_ui.dart' show GvTypography;
+import '../widgets/open_nav_bar.dart';
 
 InputDecoration _borderlessField(
   BuildContext context, {

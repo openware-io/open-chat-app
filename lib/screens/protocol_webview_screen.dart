@@ -15,8 +15,8 @@ import '../services/hybrid_bridge_dispatcher.dart';
 import '../services/hybrid_bridge_policy.dart';
 import '../services/api_client.dart';
 import '../core/app_environment.dart';
-import '../core/gv_automation_keys.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../core/open_automation_keys.dart';
+import '../widgets/open_nav_bar.dart';
 
 bool _platformSupportsProtocolWebView() {
   if (kIsWeb) return false;
@@ -445,7 +445,7 @@ String _oauthStateFromLocation(String location) {
 
 /// 与 HybridBridgePolicy 保持一致的联调测试 origin（仅 debug 且显式定义时启用）。
 String? get _debugTestOriginValue {
-  const value = String.fromEnvironment('GV_HYBRID_TEST_ORIGIN');
+  const value = String.fromEnvironment('OPEN_HYBRID_TEST_ORIGIN');
   if (AppEnvironment.isProduction || value.isEmpty) return null;
   final uri = Uri.tryParse(value);
   if (uri == null || !uri.hasAuthority || uri.host.isEmpty) return null;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:open_chat_app/core/gv_automation_keys.dart';
+import 'package:open_chat_app/core/open_automation_keys.dart';
 import 'package:open_chat_app/main.dart' as app;
 import 'package:integration_test/integration_test.dart';
 
-import 'support/gv_e2e_driver.dart';
+import 'support/open_e2e_driver.dart';
 
 const _config = GvE2eConfig();
 
@@ -74,7 +74,7 @@ Future<void> _verifyMessageEntries(GvE2eDriver driver) async {
     );
     await driver.backTo(GvAutomationKeys.chatListScreen);
   } else {
-    driver.step('扫码：跳过相机授权（传 GV_TEST_ALLOW_CAMERA=true 可开启）');
+    driver.step('扫码：跳过相机授权（传 OPEN_TEST_ALLOW_CAMERA=true 可开启）');
   }
 }
 
@@ -117,7 +117,7 @@ Future<void> _verifyContacts(GvE2eDriver driver) async {
     timeout: const Duration(seconds: 8),
     reason: '通讯录搜索框没有出现。',
   );
-  await driver.tester.enterText(search, '__gv_e2e_no_match__');
+  await driver.tester.enterText(search, '__open_e2e_no_match__');
   await driver.tester.pump(const Duration(milliseconds: 500));
   await driver.tester.enterText(search, '');
   await driver.tester.pump(const Duration(milliseconds: 350));

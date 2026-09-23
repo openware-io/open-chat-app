@@ -1,4 +1,4 @@
-﻿param(
+param(
     [Parameter(Mandatory = $true, Position = 0)]
     [ValidateSet("android", "ios", "web", "windows", "hap")]
     [string] $Target,
@@ -109,10 +109,10 @@ switch ($Target) {
 }
 
 Add-DartDefine -Args $flutterArgs -Name "APP_ENV" -Value $EnvName
-Add-DartDefine -Args $flutterArgs -Name "GV_API_BASE" -Value $ApiBase
-Add-DartDefine -Args $flutterArgs -Name "GV_WS_URI" -Value $WsUri
-Add-DartDefine -Args $flutterArgs -Name "GV_JPUSH_APPKEY" -Value $JPushAppKey
-Add-DartDefine -Args $flutterArgs -Name "GV_HYBRID_TEST_ORIGIN" -Value $HybridTestOrigin
+Add-DartDefine -Args $flutterArgs -Name "OPEN_API_BASE" -Value $ApiBase
+Add-DartDefine -Args $flutterArgs -Name "OPEN_WS_URI" -Value $WsUri
+Add-DartDefine -Args $flutterArgs -Name "OPEN_JPUSH_APPKEY" -Value $JPushAppKey
+Add-DartDefine -Args $flutterArgs -Name "OPEN_HYBRID_TEST_ORIGIN" -Value $HybridTestOrigin
 
 Write-Host "Running: flutter $($flutterArgs -join ' ')"
 & flutter @flutterArgs

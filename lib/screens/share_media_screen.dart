@@ -4,23 +4,23 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_core/gv_core.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_core/open_core.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/api_failure.dart';
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../l10n/app_localizations.dart';
 import '../models/shared_media_item.dart';
 import '../providers/chat_provider.dart';
 import '../providers/friend_provider.dart';
 import '../providers/group_provider.dart';
 import '../services/im_api.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_nav_bar.dart';
-import '../widgets/gv_search_bar.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_nav_bar.dart';
+import '../widgets/open_search_bar.dart';
 import 'chat_room/chat_room_media_helpers.dart';
 
 /// 系统「分享」进 App 后，微信式「选择发送给朋友」：把分享的图片/视频/文件/文本转发到所选会话。

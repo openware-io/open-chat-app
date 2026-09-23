@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'app_colors.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
+import 'package:open_ui/open_ui.dart' show GvTypography;
 
 /// 桌面端 [MaterialPageRoute] 等：不参与过场，避免 [ThemeData.platform] 强行 iOS 时在 Windows 仍出现 Cupertino 滑入。
 class _GvInstantPageTransitionsBuilder extends PageTransitionsBuilder {

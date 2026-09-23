@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 import '../core/playback_audio_context.dart';
 import '../models/outgoing_call_trace.dart';
 import '../repositories/call_repository.dart';
@@ -754,7 +754,7 @@ class CallProvider extends ChangeNotifier {
         return;
       }
 
-      _remoteComposite ??= await createLocalMediaStream('gv_remote');
+      _remoteComposite ??= await createLocalMediaStream('open_remote');
       if (session != _rtcSession) return;
       final ids = _remoteComposite!.getTracks().map((x) => x.id).toSet();
       if (ids.contains(t.id)) {
@@ -1163,7 +1163,7 @@ class CallProvider extends ChangeNotifier {
       final receivers = await _pc!.getReceivers();
       if (session != _rtcSession || _pc == null) return;
       var added = false;
-      _remoteComposite ??= await createLocalMediaStream('gv_remote');
+      _remoteComposite ??= await createLocalMediaStream('open_remote');
       if (session != _rtcSession) return;
       final ids = _remoteComposite!.getTracks().map((x) => x.id).toSet();
       for (final r in receivers) {

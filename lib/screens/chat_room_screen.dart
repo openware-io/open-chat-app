@@ -17,8 +17,8 @@ import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:gal/gal.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_core/gv_core.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_core/open_core.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -27,13 +27,13 @@ import 'package:record/record.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_automation_keys.dart';
-import '../core/gv_channel_code.dart';
-import '../core/gv_secondary_navigation.dart';
-import '../core/gv_toast.dart';
+import '../core/open_automation_keys.dart';
+import '../core/open_channel_code.dart';
+import '../core/open_secondary_navigation.dart';
+import '../core/open_toast.dart';
 import '../core/config.dart';
 import '../core/formatters.dart';
-import '../core/gv_message_forward.dart';
+import '../core/open_message_forward.dart';
 import '../core/message_preview.dart';
 import '../core/upload_mime.dart';
 import '../models/channel_models.dart';
@@ -51,15 +51,15 @@ import '../core/api_failure.dart';
 import '../services/api_client.dart';
 import '../services/chat_media_clipboard_service.dart';
 import '../services/im_api.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_dialog_actions.dart';
-import '../widgets/gv_nav_bar.dart';
-import '../widgets/gv_chat_room_bottom.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_dialog_actions.dart';
+import '../widgets/open_nav_bar.dart';
+import '../widgets/open_chat_room_bottom.dart';
 import 'chat_room/chat_room_list_models.dart';
 import 'chat_room/chat_room_media_helpers.dart';
 import 'chat_room/chat_room_message_tile.dart';
 import 'chat_room/chat_room_paging_dots.dart';
-import 'chat_room/gv_chat_camera_screen.dart';
+import 'chat_room/open_chat_camera_screen.dart';
 
 typedef _AtMentionCandidate = ({
   int userId,
@@ -4369,7 +4369,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     );
   }
 
-  /// 频道二维码弹层：内容为 `GV_CHANNEL:{code}`，App 内扫码即可订阅。
+  /// 频道二维码弹层：内容为 `OPEN_CHANNEL:{code}`，App 内扫码即可订阅。
   Future<void> _showChannelQrCodeDialog(ChannelInfo info) async {
     final payload = buildGvChannelCodePayload(info.code);
     final qrKey = GlobalKey();
@@ -4500,7 +4500,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
       await Gal.putImageBytes(
         data.buffer.asUint8List(),
         name:
-            'gv_channel_qr_${safeCode.isEmpty ? 'channel' : safeCode}_${DateTime.now().millisecondsSinceEpoch}',
+            'open_channel_qr_${safeCode.isEmpty ? 'channel' : safeCode}_${DateTime.now().millisecondsSinceEpoch}',
       );
       if (ctx.mounted) GvToast.show(ctx, l10n.toastSavedToGallery);
     } on GalException catch (e) {

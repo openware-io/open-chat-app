@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 
 import '../app/app_routes.dart';
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/mock_service_category.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_nav_bar.dart';
 
 /// 机票与打车的纯前端演示流程，不发起网络请求或创建真实订单。
 String _travelPriceLabel(AppLocalizations l10n, int price) =>

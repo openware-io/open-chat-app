@@ -99,7 +99,7 @@ Future<void> main(List<String> arguments) async {
         break;
       case 'print':
         final message = event['message']?.toString() ?? '';
-        const prefix = '[GV_STEP] ';
+        const prefix = '[OPEN_STEP] ';
         if (message.startsWith(prefix)) {
           final step = _TestStep(
             name: message.substring(prefix.length).trim(),
@@ -370,7 +370,7 @@ void _printUsage() {
   -h, --help         显示帮助
 
 未识别的参数会继续传给 flutter test，例如：
-  --dart-define=GV_API_BASE=https://example.com
+  --dart-define=OPEN_API_BASE=https://example.com
 ''');
 }
 

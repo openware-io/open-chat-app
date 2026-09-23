@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_automation_keys.dart';
+import '../core/open_automation_keys.dart';
 import '../models/friend_models.dart';
 import '../providers/chat_provider.dart';
 import '../providers/friend_provider.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_nav_bar.dart';
 
 Future<void> _acceptRequestAndSendGreeting(
   BuildContext context,

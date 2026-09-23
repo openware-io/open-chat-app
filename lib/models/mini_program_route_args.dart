@@ -19,6 +19,6 @@ class MiniProgramRouteArgs {
   /// 拉取图标时的请求头（如 Bearer），与 [CachedNetworkImage] 一致。
   final Map<String, String>? iconHttpHeaders;
 
-  /// 后台小程序 ID，用于 `GV_MINA:` 分享码与扫码打开。
+  /// 后台小程序 ID，用于 `OPEN_MINA:` 分享码与扫码打开。
   final String miniProgramId;
 }

@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 
 import '../../core/app_colors.dart';
 import '../../core/formatters.dart';
-import '../../core/gv_toast.dart';
+import '../../core/open_toast.dart';
 import '../../core/media_url.dart';
 import '../../models/chat_message.dart';
 import 'chat_history_search_helpers.dart';

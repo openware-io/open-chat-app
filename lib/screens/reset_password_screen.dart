@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../app/app_routes.dart';
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../services/api_client.dart';
 import '../services/im_api.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_nav_bar.dart';
 
 /// 重置密码：由邮件链接 token 进入（也支持手动输入 token），
 /// 输入新密码 → `POST /auth/password/reset`。

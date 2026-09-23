@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show FilteringTextInputFormatter;
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
+import 'package:open_ui/open_ui.dart' show GvTypography;
 import 'package:provider/provider.dart';
 
 import '../../core/app_colors.dart';
@@ -11,8 +11,8 @@ import '../../models/ktv_models.dart';
 import '../../providers/currency_provider.dart';
 import '../../providers/pending_approval_provider.dart';
 import '../../repositories/business/ktv_api_client.dart';
-import '../../widgets/gv_pending_approval_banner.dart';
-import '../../widgets/gv_nav_bar.dart';
+import '../../widgets/open_pending_approval_banner.dart';
+import '../../widgets/open_nav_bar.dart';
 import 'ktv_bottom_nav.dart';
 
 /// KTV 组合收款页：列出待结算订单，逐笔拆分现金/储值币/积分收款

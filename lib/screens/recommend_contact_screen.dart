@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../core/message_preview.dart';
 import '../core/namecard_message.dart';
 import '../models/friend_models.dart';
 import '../providers/chat_provider.dart';
 import '../providers/client_remote_config_provider.dart';
 import '../providers/friend_provider.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_nav_bar.dart';
-import '../widgets/gv_search_bar.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_nav_bar.dart';
+import '../widgets/open_search_bar.dart';
 
 /// 将 [card] 以 `namecard` 消息发给所选好友（[GoRouter] `extra` 为 [NamecardPayload]）。
 class RecommendContactScreen extends StatefulWidget {

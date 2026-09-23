@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 import 'package:video_compress/video_compress.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 import '../../core/app_colors.dart';
-import '../../core/gv_toast.dart';
+import '../../core/open_toast.dart';
 import '../../services/im_api.dart';
 import 'chat_room_constants.dart';
 
@@ -255,7 +255,7 @@ Future<void> gvRunChatFileDownload(
   );
   try {
     final dir = await getApplicationDocumentsDirectory();
-    final folder = Directory('${dir.path}/gv_chat_downloads');
+    final folder = Directory('${dir.path}/open_chat_downloads');
     if (!await folder.exists()) await folder.create(recursive: true);
     final safe = gvSanitizeDownloadFileName(fileName);
     var path = '${folder.path}/$safe';

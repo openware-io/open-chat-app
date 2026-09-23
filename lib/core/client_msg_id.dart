@@ -1,1 +1,1 @@
-export 'package:gv_core/gv_core.dart' show genClientMsgId;
+export 'package:open_core/open_core.dart' show genClientMsgId;

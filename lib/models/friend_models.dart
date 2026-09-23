@@ -1,2 +1,2 @@
-export 'package:gv_core/gv_core.dart'
+export 'package:open_core/open_core.dart'
     show FriendItem, FriendRequestItem, FriendUserBrief;

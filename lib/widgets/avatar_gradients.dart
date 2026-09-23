@@ -1,1 +1,1 @@
-export 'package:gv_ui/gv_ui.dart' show avatarGradientColorsForId;
+export 'package:open_ui/open_ui.dart' show avatarGradientColorsForId;

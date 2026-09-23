@@ -6,9 +6,9 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:provider/provider.dart';
 
 import 'app/app_dependencies.dart';
-import 'core/gv_http_overrides.dart';
+import 'core/open_http_overrides.dart';
 import 'core/immersive_system_ui.dart';
-import 'gv_app.dart';
+import 'open_app.dart';
 import 'services/local_network_preflight.dart';
 
 Future<void> main() async {

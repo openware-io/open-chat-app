@@ -21,7 +21,7 @@ enum PendingApprovalAction {
 
 /// 客户自助加项「待确认」的全局提醒状态（B 端 / A380 收银端）。
 ///
-/// 与后台端（gv_saas_admin）同一口径、同一数据源：`GET /business/orders/pending-approval`。
+/// 与后台端（open_saas_admin）同一口径、同一数据源：`GET /business/orders/pending-approval`。
 ///
 /// 实时性与一致性：
 /// - **轮询 15s**（[pollInterval]），页面在后台（[setForeground] = false）时暂停，回到前台立即补拉；

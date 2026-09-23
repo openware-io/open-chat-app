@@ -25,7 +25,7 @@ import 'package:open_chat_app/repositories/group_repository.dart';
 import 'package:open_chat_app/services/api_client.dart';
 import 'package:open_chat_app/services/e2ee/e2ee_manager.dart';
 import 'package:open_chat_app/services/im_api.dart';
-import 'package:gv_core/gv_core.dart' show GvSocketClient;
+import 'package:open_core/open_core.dart' show GvSocketClient;
 
 /// ChatProvider 私密聊天服务层测试（本地可重复，不依赖生产）。
 ///

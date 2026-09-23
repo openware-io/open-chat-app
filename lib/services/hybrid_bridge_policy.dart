@@ -13,7 +13,7 @@ class HybridBridgePolicy {
   final String redirectPath;
   final Set<String> scopes;
 
-  static const _testOrigin = String.fromEnvironment('GV_HYBRID_TEST_ORIGIN');
+  static const _testOrigin = String.fromEnvironment('OPEN_HYBRID_TEST_ORIGIN');
 
   static Map<String, HybridBridgePolicy> get _policies {
     final origin = _debugTestOrigin ?? 'https://miniservice.dev.example.com';

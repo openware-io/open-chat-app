@@ -6,15 +6,15 @@ class EnvConfig {
   static const appEnv = AppEnvironment.rawName;
 
   static const _apiBaseOverride =
-      String.fromEnvironment('GV_API_BASE', defaultValue: '');
+      String.fromEnvironment('OPEN_API_BASE', defaultValue: '');
 
   static const _wsUriOverride =
-      String.fromEnvironment('GV_WS_URI', defaultValue: '');
+      String.fromEnvironment('OPEN_WS_URI', defaultValue: '');
 
   static const _mediaBaseOverride =
-      String.fromEnvironment('GV_MEDIA_BASE', defaultValue: '');
+      String.fromEnvironment('OPEN_MEDIA_BASE', defaultValue: '');
   static const _jpushProductionOverride =
-      String.fromEnvironment('GV_JPUSH_PRODUCTION', defaultValue: '');
+      String.fromEnvironment('OPEN_JPUSH_PRODUCTION', defaultValue: '');
 
   static const defaultApiBase = appEnv == 'prod'
       ? 'https://api.dev.example.com'

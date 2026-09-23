@@ -1,6 +1,6 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
+import 'package:open_ui/open_ui.dart' show GvTypography;
 import 'package:provider/provider.dart';
 
 import '../../app/app_routes.dart';
@@ -8,7 +8,7 @@ import '../../core/app_colors.dart';
 import '../../core/app_theme.dart';
 import '../../models/ktv_models.dart';
 import '../../repositories/business/ktv_api_client.dart';
-import '../../widgets/gv_nav_bar.dart';
+import '../../widgets/open_nav_bar.dart';
 
 /// KTV 快速开台：POST /api/v1/business/orders（businessType=KTV + 包厢 + 可选客户）。
 /// 成功后携带返回的订单/会话上下文跳转到计时页。

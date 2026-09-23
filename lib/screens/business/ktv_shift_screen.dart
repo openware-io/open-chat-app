@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
+import 'package:open_ui/open_ui.dart' show GvTypography;
 import 'package:provider/provider.dart';
 
 import '../../core/app_colors.dart';
@@ -9,7 +9,7 @@ import '../../models/ktv_models.dart';
 import '../../providers/currency_provider.dart';
 import '../../providers/pending_approval_provider.dart';
 import '../../repositories/business/ktv_api_client.dart';
-import '../../widgets/gv_nav_bar.dart';
+import '../../widgets/open_nav_bar.dart';
 import 'ktv_bottom_nav.dart';
 
 /// KTV 开班/交班页：

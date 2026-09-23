@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
+import 'package:open_ui/open_ui.dart' show GvTypography;
 import 'package:provider/provider.dart';
 
 import '../../core/app_colors.dart';
 import '../../core/app_theme.dart';
 import '../../models/ktv_models.dart';
 import '../../providers/pending_approval_provider.dart';
-import '../../widgets/gv_nav_bar.dart';
+import '../../widgets/open_nav_bar.dart';
 
 /// 「客户待确认加项」集中处理页（B 端 / A380 收银端）。
 ///

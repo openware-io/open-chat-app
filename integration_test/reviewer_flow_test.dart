@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:open_chat_app/core/gv_automation_keys.dart';
+import 'package:open_chat_app/core/open_automation_keys.dart';
 import 'package:open_chat_app/main.dart' as app;
 import 'package:open_chat_app/screens/chat_room/chat_room_message_tile.dart';
 import 'package:integration_test/integration_test.dart';
@@ -31,7 +31,7 @@ void main() {
         expect(
           _config.hasCredentials,
           isTrue,
-          reason: '应用当前未登录，请传入 GV_TEST_USERNAME 和 GV_TEST_PASSWORD。',
+          reason: '应用当前未登录，请传入 OPEN_TEST_USERNAME 和 OPEN_TEST_PASSWORD。',
         );
         await tester.enterText(
           find.byKey(GvAutomationKeys.loginUsername),
@@ -74,7 +74,7 @@ void main() {
         conversation,
         timeout: const Duration(seconds: 30),
         reason: '没有找到目标会话。请确认会话名称，或传入正确的 '
-            'GV_TEST_CHAT_TYPE 和 GV_TEST_PEER_ID。',
+            'OPEN_TEST_CHAT_TYPE 和 OPEN_TEST_PEER_ID。',
       );
 
       _step('点击进入目标会话');
@@ -275,26 +275,26 @@ Future<void> _waitUntilAbsent(
   expect(finder, findsNothing, reason: reason);
 }
 
-void _step(String message) => debugPrint('[GV_STEP] $message');
+void _step(String message) => debugPrint('[OPEN_STEP] $message');
 
 class _ReviewerFlowConfig {
   const _ReviewerFlowConfig();
 
-  final String username = const String.fromEnvironment('GV_TEST_USERNAME');
-  final String password = const String.fromEnvironment('GV_TEST_PASSWORD');
+  final String username = const String.fromEnvironment('OPEN_TEST_USERNAME');
+  final String password = const String.fromEnvironment('OPEN_TEST_PASSWORD');
   final String conversationName =
-      const String.fromEnvironment('GV_TEST_CONVERSATION_NAME');
+      const String.fromEnvironment('OPEN_TEST_CONVERSATION_NAME');
   final String chatType = const String.fromEnvironment(
-    'GV_TEST_CHAT_TYPE',
+    'OPEN_TEST_CHAT_TYPE',
     defaultValue: 'group',
   );
-  final String peerId = const String.fromEnvironment('GV_TEST_PEER_ID');
+  final String peerId = const String.fromEnvironment('OPEN_TEST_PEER_ID');
   final String messagePrefix = const String.fromEnvironment(
-    'GV_TEST_MESSAGE_PREFIX',
+    'OPEN_TEST_MESSAGE_PREFIX',
     defaultValue: 'GV机审测试',
   );
   final bool allowSend = const bool.fromEnvironment(
-    'GV_TEST_ALLOW_SEND',
+    'OPEN_TEST_ALLOW_SEND',
     defaultValue: false,
   );
 

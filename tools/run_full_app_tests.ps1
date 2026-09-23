@@ -41,29 +41,29 @@ $runnerArguments = @(
     "--device=$Device",
     "--target=integration_test",
     "--dart-define=APP_ENV=$AppEnvironment",
-    "--dart-define=GV_API_BASE=$ApiBase",
-    "--dart-define=GV_WS_URI=$WebSocketUri",
-    "--dart-define=GV_MEDIA_BASE=$MediaBase",
-    "--dart-define=GV_JPUSH_PRODUCTION=$jpushProduction",
-    "--dart-define=GV_TEST_USERNAME=$Username",
-    "--dart-define=GV_TEST_PASSWORD=$Password",
-    "--dart-define=GV_TEST_CHAT_TYPE=$ChatType"
+    "--dart-define=OPEN_API_BASE=$ApiBase",
+    "--dart-define=OPEN_WS_URI=$WebSocketUri",
+    "--dart-define=OPEN_MEDIA_BASE=$MediaBase",
+    "--dart-define=OPEN_JPUSH_PRODUCTION=$jpushProduction",
+    "--dart-define=OPEN_TEST_USERNAME=$Username",
+    "--dart-define=OPEN_TEST_PASSWORD=$Password",
+    "--dart-define=OPEN_TEST_CHAT_TYPE=$ChatType"
 )
 
 if (-not [string]::IsNullOrWhiteSpace($ConversationName)) {
-    $runnerArguments += "--dart-define=GV_TEST_CONVERSATION_NAME=$ConversationName"
+    $runnerArguments += "--dart-define=OPEN_TEST_CONVERSATION_NAME=$ConversationName"
 }
 if (-not [string]::IsNullOrWhiteSpace($PeerId)) {
-    $runnerArguments += "--dart-define=GV_TEST_PEER_ID=$PeerId"
+    $runnerArguments += "--dart-define=OPEN_TEST_PEER_ID=$PeerId"
 }
 if (-not [string]::IsNullOrWhiteSpace($JPushAppKey)) {
-    $runnerArguments += "--dart-define=GV_JPUSH_APPKEY=$JPushAppKey"
+    $runnerArguments += "--dart-define=OPEN_JPUSH_APPKEY=$JPushAppKey"
 }
 if ($AllowSend) {
-    $runnerArguments += "--dart-define=GV_TEST_ALLOW_SEND=true"
+    $runnerArguments += "--dart-define=OPEN_TEST_ALLOW_SEND=true"
 }
 if ($AllowCamera) {
-    $runnerArguments += "--dart-define=GV_TEST_ALLOW_CAMERA=true"
+    $runnerArguments += "--dart-define=OPEN_TEST_ALLOW_CAMERA=true"
 }
 
 & dart @runnerArguments

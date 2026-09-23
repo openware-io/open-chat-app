@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 import '../repositories/auth_repository.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:uuid/uuid.dart';
 
-import '../core/gv_app_update_platform.dart';
+import '../core/open_app_update_platform.dart';
 import '../core/local_storage.dart';
 import '../models/client_release_models.dart';
 import '../repositories/client_release_repository.dart';

@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../app/app_routes.dart';
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../services/api_client.dart';
 import '../services/im_api.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_nav_bar.dart';
 
 /// 忘记密码：支持三种找回方式——手机号(短信验证码)、邮箱(重置链接)、密保问题。
 /// 手机号与密保问题在本地完成重置；邮箱走既有重置令牌链路。

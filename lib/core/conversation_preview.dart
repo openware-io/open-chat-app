@@ -7,9 +7,9 @@ import '../models/chat_message.dart';
 /// be active when the recall arrived. The chat list resolves these values with
 /// the current [AppLocalizations] instead.
 const String gvConversationRecallSelfPreview =
-    '__gv_conversation_recall_self__';
+    '__open_conversation_recall_self__';
 const String gvConversationRecallPeerPreview =
-    '__gv_conversation_recall_peer__';
+    '__open_conversation_recall_peer__';
 
 /// Builds the persisted conversation preview for [message].
 String conversationPreviewForMessage(

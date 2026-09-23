@@ -6,7 +6,7 @@ import '../core/app_theme.dart';
 import '../providers/chat_provider.dart';
 import '../providers/client_release_coordinator.dart';
 import '../providers/friend_provider.dart';
-import '../widgets/gv_tab_bar.dart';
+import '../widgets/open_tab_bar.dart';
 
 class MainShell extends StatelessWidget {
   const MainShell({super.key, required this.navigationShell});

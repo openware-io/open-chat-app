@@ -42,7 +42,7 @@ void main() {
   });
 
   test('与 Web 后台词表完全对齐（含 WAITING_SETTLEMENT = 待结算）', () {
-    // 与 gv_saas_admin/src/constants/terms.js#ORDER_STATUS_TEXT 相同的状态集合
+    // 与 open_saas_admin/src/constants/terms.js#ORDER_STATUS_TEXT 相同的状态集合
     expect(ktvOrderStatusText.keys.toSet(), {
       'DRAFT', 'SERVING', 'WAITING_SETTLEMENT', 'WAITING_PAYMENT', 'WAITING_ARRIVAL',
       'COMPLETED', 'PARTIAL_REFUNDED', 'REFUNDED', 'VOIDED', 'CANCELLED',

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../l10n/app_localizations.dart';
 import '../services/im_oauth_service.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_nav_bar.dart';
 import 'protocol_webview_screen.dart';
 
 /// KTV 服务入口授权页（C 端服务 Tab）。

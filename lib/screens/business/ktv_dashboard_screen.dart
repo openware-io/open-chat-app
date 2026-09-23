@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
+import 'package:open_ui/open_ui.dart' show GvTypography;
 import 'package:provider/provider.dart';
 
 import '../../app/app_routes.dart';
@@ -10,8 +10,8 @@ import '../../core/order_data_revision_reload.dart';
 import '../../models/ktv_models.dart';
 import '../../providers/pending_approval_provider.dart';
 import '../../repositories/business/ktv_api_client.dart';
-import '../../widgets/gv_pending_approval_banner.dart';
-import '../../widgets/gv_nav_bar.dart';
+import '../../widgets/open_pending_approval_banner.dart';
+import '../../widgets/open_nav_bar.dart';
 import 'ktv_bottom_nav.dart';
 
 /// KTV 包厢看板：数据来自 GET /api/v1/business/resources（KTV_ROOM）+ 会话状态投影。

@@ -5,9 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
-import '../core/gv_root_navigator.dart';
+import '../core/open_root_navigator.dart';
 import '../providers/call_provider.dart';
-import 'gv_avatar.dart';
+import 'open_avatar.dart';
 
 /// Top card matching H5 `IncomingCall.vue`.
 class IncomingCallOverlay extends StatelessWidget {

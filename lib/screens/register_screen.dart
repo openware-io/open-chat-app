@@ -8,8 +8,8 @@ import '../core/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/auth_provider.dart';
 import '../services/local_network_preflight.dart';
-import '../widgets/gv_auth_agreement_checkbox.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_auth_agreement_checkbox.dart';
+import '../widgets/open_nav_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

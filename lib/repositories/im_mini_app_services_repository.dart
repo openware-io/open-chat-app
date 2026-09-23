@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import '../core/local_storage.dart';
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 import '../services/api_client.dart';
 import '../services/im_api.dart';
 import 'mini_app_services_repository.dart';

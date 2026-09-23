@@ -4,15 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_automation_keys.dart';
-import '../core/gv_toast.dart';
+import '../core/open_automation_keys.dart';
+import '../core/open_toast.dart';
 import '../l10n/app_localizations.dart';
 import '../models/points_account_binding.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_nav_bar.dart';
 
 class PointsAccountBindingScreen extends StatefulWidget {
   const PointsAccountBindingScreen({

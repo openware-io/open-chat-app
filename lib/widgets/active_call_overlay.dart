@@ -4,14 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../app/app_routes.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/call_provider.dart';
-import 'gv_avatar.dart';
-import 'gv_rtc_video_view.dart';
+import 'open_avatar.dart';
+import 'open_rtc_video_view.dart';
 
 const Size _videoOverlaySize = Size(112, 156);
 const Size _audioOverlaySize = Size(72, 88);

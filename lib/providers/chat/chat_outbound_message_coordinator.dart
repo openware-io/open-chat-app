@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 import '../../core/message_preview.dart';
 

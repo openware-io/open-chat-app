@@ -4,19 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../app/app_routes.dart';
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
 import '../core/formatters.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../core/message_preview.dart';
 import '../l10n/app_localizations.dart';
 import '../models/chat_message.dart';
 import '../repositories/favorite_repository.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_nav_bar.dart';
 import 'favorite_detail_screen.dart';
 
 /// 「收藏」列表页：分页加载收藏消息、按类型筛选，点击进入收藏详情页。

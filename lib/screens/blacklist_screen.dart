@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
@@ -7,9 +7,9 @@ import '../core/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/friend_models.dart';
 import '../providers/friend_provider.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_dialog_actions.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_dialog_actions.dart';
+import '../widgets/open_nav_bar.dart';
 
 /// 黑名单列表：展示被拉黑用户，点按/长按可「移出黑名单」。
 class BlacklistScreen extends StatefulWidget {

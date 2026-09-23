@@ -1,4 +1,4 @@
-import 'package:gv_core/gv_core.dart' show jsonInt, parseUtcDateTime;
+import 'package:open_core/open_core.dart' show jsonInt, parseUtcDateTime;
 
 import 'secret_chat_models.dart';
 

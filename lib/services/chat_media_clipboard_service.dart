@@ -121,7 +121,7 @@ class GvChatMediaClipboardService {
     required String fallbackExtension,
   }) async {
     final temp = await getTemporaryDirectory();
-    final folder = Directory('${temp.path}/gv_chat_clipboard');
+    final folder = Directory('${temp.path}/open_chat_clipboard');
     if (!await folder.exists()) await folder.create(recursive: true);
     final candidate = _fileExtension(mediaUrl);
     final supportedCandidate = prefix == 'image'

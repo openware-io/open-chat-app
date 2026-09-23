@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:gv_core/gv_core.dart' show jsonInt;
+import 'package:open_core/open_core.dart' show jsonInt;
 
 import '../models/group_models.dart';
 import '../repositories/group_repository.dart';

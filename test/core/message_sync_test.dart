@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 import 'package:open_chat_app/models/message_sync.dart';
 
 void main() {

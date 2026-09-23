@@ -1,4 +1,4 @@
-import 'package:gv_core/gv_core.dart' show jsonInt;
+import 'package:open_core/open_core.dart' show jsonInt;
 
 /// 频道详情（`GET /api/v1/channels/{id}` / 创建 / 我的频道）。
 ///

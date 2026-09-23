@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:ui' show PlatformDispatcher;
 
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/api_message_localizer.dart';

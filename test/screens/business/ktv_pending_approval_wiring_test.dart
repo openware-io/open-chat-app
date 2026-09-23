@@ -121,7 +121,7 @@ void main() {
   });
 
   test('提醒 UI 不自己发请求、不硬编码币种', () {
-    final banner = read('lib/widgets/gv_pending_approval_banner.dart');
+    final banner = read('lib/widgets/open_pending_approval_banner.dart');
     expect(banner.contains('getPendingApproval'), isFalse,
         reason: '横幅只消费全局快照，避免每个入口各拉一次');
     expect(banner.contains('amountText'), isTrue,

@@ -11,10 +11,10 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  gv_core:
-    path: packages/gv_core
-  gv_ui:
-    path: packages/gv_ui
+  open_core:
+    path: packages/open_core
+  open_ui:
+    path: packages/open_ui
   dio: ^5.4.3+1
   web_socket_channel: ^3.0.3
   shared_preferences: ^2.2.3

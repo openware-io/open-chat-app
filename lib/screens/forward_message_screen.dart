@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../core/message_preview.dart';
 import '../models/chat_message.dart';
 import '../models/secret_chat_models.dart';
@@ -16,9 +16,9 @@ import '../providers/chat_provider.dart';
 import '../providers/client_remote_config_provider.dart';
 import '../providers/friend_provider.dart';
 import '../providers/group_provider.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_nav_bar.dart';
-import '../widgets/gv_search_bar.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_nav_bar.dart';
+import '../widgets/open_search_bar.dart';
 
 /// 转发消息：可选好友（单聊）、群聊、私密聊天、私密群聊。
 ///

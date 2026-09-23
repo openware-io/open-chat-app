@@ -5,17 +5,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/api_failure.dart';
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_toast.dart';
+import '../core/open_toast.dart';
 import '../providers/chat_provider.dart';
 import '../services/chat_backup_file_io.dart';
-import '../widgets/gv_dialog_actions.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_dialog_actions.dart';
+import '../widgets/open_nav_bar.dart';
 
 /// 聊天记录备份与迁移：纯客户端、本地文件级。
 ///

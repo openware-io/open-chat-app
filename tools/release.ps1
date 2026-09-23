@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param(
   [string]$Version = '',
   [int]$BuildNumber = 0,
@@ -9,7 +9,7 @@ param(
   [string]$AdminBaseUrl = 'https://api.dev.example.com/api/v1',
   [string]$AdminUser = 'admin',
   [string]$AdminPassword = '',
-  [string]$CmsRepoPath = 'D:\projects\cnb\meta-cogni-cms',
+  [string]$CmsRepoPath = 'D:\projects\cnb\openware-cms',
   [string]$JPushAppKey = 'YOUR_JPUSH_APPKEY',
   [switch]$SkipBuild,
   [switch]$SkipPublish,
@@ -19,7 +19,7 @@ param(
 # One-shot Android release: bump version -> build prod APK -> upload artifact ->
 # create release record -> submit -> verify.
 # Release package is ALWAYS an APK (flutter build apk --release). AAB is Google Play only.
-# Authoritative docs: open_chat_app/BUILD.md (packaging), gv_im_server/docs/standards/15_CLIENT_RELEASE_SKILL.md (this flow).
+# Authoritative docs: open_chat_app/BUILD.md (packaging), open_im_server/docs/standards/15_CLIENT_RELEASE_SKILL.md (this flow).
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
@@ -125,8 +125,8 @@ if ($UploadMode -eq 'Cms') {
     Write-Host '== SkipPublish: upload skipped'
   } else {
     $password = $AdminPassword
-    if (-not $password) { $password = $env:GV_ADMIN_PASSWORD }
-    if (-not $password) { Fail 'Admin password required: -AdminPassword or env GV_ADMIN_PASSWORD' }
+    if (-not $password) { $password = $env:OPEN_ADMIN_PASSWORD }
+    if (-not $password) { Fail 'Admin password required: -AdminPassword or env OPEN_ADMIN_PASSWORD' }
     if ($DryRun) {
       Write-Host '[dry-run] would login and upload APK via object storage'
     } else {
@@ -171,8 +171,8 @@ if ($SkipPublish) {
   if (-not $ReleaseNotes) { Fail 'ReleaseNotes is required to publish' }
 
   $password = $AdminPassword
-  if (-not $password) { $password = $env:GV_ADMIN_PASSWORD }
-  if (-not $password) { Fail 'Admin password required: -AdminPassword or env GV_ADMIN_PASSWORD' }
+  if (-not $password) { $password = $env:OPEN_ADMIN_PASSWORD }
+  if (-not $password) { Fail 'Admin password required: -AdminPassword or env OPEN_ADMIN_PASSWORD' }
   $token = Get-AdminToken -BaseUrl $AdminBaseUrl -User $AdminUser -Password $password
 
   # Build JSON explicitly so the single-element 'artifacts' is always a JSON array:

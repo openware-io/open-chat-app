@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
+import 'package:open_ui/open_ui.dart' show GvTypography;
 
 import '../../app/app_routes.dart';
 import '../../core/app_colors.dart';
 import '../../core/app_theme.dart';
-import '../../widgets/gv_nav_bar.dart';
+import '../../widgets/open_nav_bar.dart';
 
 /// B端（商家 / 门店）登录占位页。
 ///

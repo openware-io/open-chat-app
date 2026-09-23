@@ -8,15 +8,15 @@ import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_automation_keys.dart';
-import '../core/gv_secondary_navigation.dart';
-import '../core/gv_toast.dart';
+import '../core/open_automation_keys.dart';
+import '../core/open_secondary_navigation.dart';
+import '../core/open_toast.dart';
 import '../models/points_account_binding.dart';
 import '../providers/auth_provider.dart';
 import '../services/im_api.dart';
-import 'package:gv_ui/gv_ui.dart' show GvTypography;
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_nav_bar.dart';
+import 'package:open_ui/open_ui.dart' show GvTypography;
+import '../widgets/open_avatar.dart';
+import '../widgets/open_nav_bar.dart';
 
 InputDecoration _borderlessField(
   BuildContext context, {

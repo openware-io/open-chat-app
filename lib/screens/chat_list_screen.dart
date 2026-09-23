@@ -4,19 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
 import '../core/conversation_preview.dart';
 import '../core/formatters.dart';
-import '../core/gv_channel_code.dart';
-import '../core/gv_chat_navigation.dart';
-import '../core/gv_automation_keys.dart';
-import '../core/gv_toast.dart';
+import '../core/open_channel_code.dart';
+import '../core/open_chat_navigation.dart';
+import '../core/open_automation_keys.dart';
+import '../core/open_toast.dart';
 import '../l10n/app_localizations.dart';
-import '../core/gv_secondary_navigation.dart';
+import '../core/open_secondary_navigation.dart';
 import '../models/channel_models.dart';
 import '../models/conversation.dart';
 import '../providers/chat_provider.dart';
@@ -24,10 +24,10 @@ import '../providers/client_remote_config_provider.dart';
 import '../providers/friend_provider.dart';
 import '../providers/group_provider.dart';
 import '../services/api_client.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_dialog_actions.dart';
-import '../widgets/gv_nav_bar.dart';
-import '../widgets/gv_search_bar.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_dialog_actions.dart';
+import '../widgets/open_nav_bar.dart';
+import '../widgets/open_search_bar.dart';
 
 /// 与列表项内 [GvAvatar.size] 一致；用于计算分割线左内边距（从名称列左缘开始对齐）。
 const double _kChatListAvatarSize = 50;
@@ -580,7 +580,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
             Future<void> submit(String raw) async {
               final text = raw.trim();
               if (text.isEmpty) return;
-              // 粘贴频道号 / GV_CHANNEL 分享信息时直接解析并订阅，无需先按名称搜索。
+              // 粘贴频道号 / OPEN_CHANNEL 分享信息时直接解析并订阅，无需先按名称搜索。
               final code = extractChannelCode(text);
               if (code != null) {
                 try {

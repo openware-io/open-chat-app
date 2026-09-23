@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_secondary_navigation.dart';
-import '../core/gv_toast.dart';
-import 'package:gv_core/gv_core.dart';
+import '../core/open_secondary_navigation.dart';
+import '../core/open_toast.dart';
+import 'package:open_core/open_core.dart';
 import '../providers/auth_provider.dart';
 import '../providers/chat_provider.dart';
 import '../providers/client_remote_config_provider.dart';
 import '../providers/friend_provider.dart';
 import '../providers/group_provider.dart';
 import '../services/api_client.dart';
-import '../widgets/gv_avatar.dart';
-import '../widgets/gv_dialog_actions.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_avatar.dart';
+import '../widgets/open_dialog_actions.dart';
+import '../widgets/open_nav_bar.dart';
 
 class GroupInfoScreen extends StatefulWidget {
   const GroupInfoScreen({super.key, required this.id});

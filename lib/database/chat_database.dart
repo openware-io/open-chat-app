@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 import '../models/chat_session_storage_stat.dart';
 

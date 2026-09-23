@@ -1,4 +1,4 @@
-import 'package:gv_core/gv_core.dart' show parseUtcDateTime;
+import 'package:open_core/open_core.dart' show parseUtcDateTime;
 
 import '../core/currency.dart';
 
@@ -99,7 +99,7 @@ String formatKtvAmount(int minorUnits, String currency) =>
 
 /// 订单状态中文（`ord_order.status`）：后端全部状态都要有中文，**不得把英文枚举透给收银员**。
 ///
-/// 口径与 Web 后台 `gv_saas_admin` 的 `constants/terms.js#ORDER_STATUS_TEXT` 对齐（含 `WAITING_SETTLEMENT`
+/// 口径与 Web 后台 `open_saas_admin` 的 `constants/terms.js#ORDER_STATUS_TEXT` 对齐（含 `WAITING_SETTLEMENT`
 /// =「待结算」）；未登记的新状态回退原码（可见、可排查），不用猜的中文。
 const Map<String, String> ktvOrderStatusText = {
   'DRAFT': '进行中',

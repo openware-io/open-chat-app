@@ -1,4 +1,4 @@
-import 'package:gv_core/gv_core.dart' show jsonInt, parseUtcDateTime;
+import 'package:open_core/open_core.dart' show jsonInt, parseUtcDateTime;
 
 /// 私密聊天销毁策略取值（与后端 `destroy_policy` 契约一致）。
 abstract final class SecretChatDestroyPolicy {

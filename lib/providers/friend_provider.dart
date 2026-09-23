@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 import '../repositories/friend_repository.dart';
 
 /// Debug/profile only: append 500 synthetic [FriendItem]s after each friends load

@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

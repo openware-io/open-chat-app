@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 
 import '../core/config.dart';
 
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 import '../core/chat_type_wire.dart';
 import '../core/upload_mime.dart';

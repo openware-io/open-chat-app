@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 import '../repositories/mini_app_services_repository.dart';
 
 class MiniAppServicesProvider extends ChangeNotifier {
@@ -175,7 +175,7 @@ class MiniAppServicesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// 按后台配置的 [MiniAppServiceItem.id] 查找，与 `GV_MINA:` 扫码逻辑一致。
+  /// 按后台配置的 [MiniAppServiceItem.id] 查找，与 `OPEN_MINA:` 扫码逻辑一致。
   MiniAppServiceItem? findMiniProgramById(String id) {
     final want = id.trim();
     if (want.isEmpty) return null;

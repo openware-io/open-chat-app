@@ -1,4 +1,4 @@
-import 'package:gv_core/gv_core.dart';
+import 'package:open_core/open_core.dart';
 
 class MessageSyncItem {
   const MessageSyncItem({

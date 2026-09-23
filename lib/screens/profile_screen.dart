@@ -7,23 +7,23 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:gal/gal.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gv_ui/gv_ui.dart';
+import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../app/app_routes.dart';
 import '../core/app_colors.dart';
 import '../core/app_theme.dart';
-import '../core/gv_secondary_navigation.dart';
-import '../core/gv_automation_keys.dart';
-import '../core/gv_toast.dart';
-import '../core/gv_uid.dart';
+import '../core/open_secondary_navigation.dart';
+import '../core/open_automation_keys.dart';
+import '../core/open_toast.dart';
+import '../core/open_uid.dart';
 import '../models/im_user.dart';
 import '../providers/auth_provider.dart';
-import '../widgets/gv_avatar.dart';
+import '../widgets/open_avatar.dart';
 import '../l10n/app_localizations.dart';
-import '../widgets/gv_dialog_actions.dart';
-import '../widgets/gv_nav_bar.dart';
+import '../widgets/open_dialog_actions.dart';
+import '../widgets/open_nav_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
