@@ -1,6 +1,6 @@
 # open_chat_app
 
-GV Chat Flutter 客户端，与 gv_chat_server 配套。
+Open IM Flutter 客户端，与 Open IM 服务端配套。
 
 ## 消息通知（极光 JPush + Google FCM）
 
