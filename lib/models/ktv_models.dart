@@ -652,7 +652,7 @@ class KtvCatalogItem {
     final text = quantity == quantity.roundToDouble()
         ? quantity.toInt().toString()
         : quantity.toString();
-    return '库存 ' + text;
+    return '库存 $text';
   }
 }
 

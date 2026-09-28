@@ -1039,7 +1039,8 @@ class _ChatCell extends StatelessWidget {
                               (conv.draftText != null &&
                                       conv.draftText!.isNotEmpty)
                                   ? AppColors.danger.resolveFrom(context)
-                                  : AppColors.textSecondary.resolveFrom(context),
+                                  : AppColors.textSecondary
+                                      .resolveFrom(context),
                             ),
                           ),
                         ],

@@ -9,8 +9,9 @@ String formatTime(DateTime d) {
   if (diff.inMilliseconds < 60000) return '刚刚';
   if (diff.inMilliseconds < 3600000) return '${diff.inMinutes}分钟前';
 
-  final isToday =
-      local.year == now.year && local.month == now.month && local.day == now.day;
+  final isToday = local.year == now.year &&
+      local.month == now.month &&
+      local.day == now.day;
   final yesterday = now.subtract(oneDay);
   final isYesterday = local.year == yesterday.year &&
       local.month == yesterday.month &&
@@ -42,7 +43,9 @@ String formatChatTime(DateTime d) {
   final hh = local.hour.toString().padLeft(2, '0');
   final mm = local.minute.toString().padLeft(2, '0');
 
-  if (local.year == now.year && local.month == now.month && local.day == now.day) {
+  if (local.year == now.year &&
+      local.month == now.month &&
+      local.day == now.day) {
     return '$hh:$mm';
   }
 

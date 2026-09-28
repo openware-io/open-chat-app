@@ -213,14 +213,16 @@ class ChatRealtimeMessageCoordinator {
     );
   }
 
-  String _peerIdForPrivateOrGroup(ChatMessage msg, int my, String rawConversationId) {
+  String _peerIdForPrivateOrGroup(
+      ChatMessage msg, int my, String rawConversationId) {
     if (msg.chatType == 'private') {
       if (msg.from == my) return msg.toId;
       // 系统消息（from == 0）不能用发送方当对端：那会凭空多出一个「用户 0」会话并带未读角标
       // （真机实测：同意好友后列表多出「用户 0」，角标与服务端未读口径对不上）。
       // 与同步链路保持一致，从推送报文的 conversationId（conv:private:A:B）解析「不是我」的一方。
       if (msg.from == 0) {
-        return _peerFromPrivateConversationId(rawConversationId, my) ?? msg.toId;
+        return _peerFromPrivateConversationId(rawConversationId, my) ??
+            msg.toId;
       }
       return '${msg.from}';
     }
@@ -244,7 +246,8 @@ class ChatRealtimeMessageCoordinator {
   }
 
   /// 系统消息不计入未读角标，与服务端未读口径一致（服务端过滤 `msg_type <> 'SYSTEM'`）。
-  bool _isSystemMessage(ChatMessage msg) => msg.msgType.toLowerCase() == 'system';
+  bool _isSystemMessage(ChatMessage msg) =>
+      msg.msgType.toLowerCase() == 'system';
 
   ({bool done, String? markReadMsgId}) _applyOptimisticSendMergeIfNeeded({
     required ChatMessage msg,

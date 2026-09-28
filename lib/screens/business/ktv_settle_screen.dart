@@ -168,14 +168,16 @@ class _KtvSettleScreenState extends State<KtvSettleScreen>
     final lines = <Widget>[];
 
     if (bill.roomFee.name.isNotEmpty) {
-      lines.add(_row(bill.roomFee.name, bill.roomFee.amount.formatted, primary));
+      lines
+          .add(_row(bill.roomFee.name, bill.roomFee.amount.formatted, primary));
     }
     for (final item in bill.items) {
-      final label = item.name + (item.quantity > 1 ? ' ×' + item.quantity.toString() : '');
+      final label = item.name + (item.quantity > 1 ? ' ×${item.quantity}' : '');
       lines.add(_row(label, item.amount.formatted, primary));
     }
     if (bill.serverFee.name.isNotEmpty && !bill.serverFee.amount.isZero) {
-      lines.add(_row(bill.serverFee.name, bill.serverFee.amount.formatted, primary));
+      lines.add(
+          _row(bill.serverFee.name, bill.serverFee.amount.formatted, primary));
     }
     for (final p in bill.promotions) {
       lines.add(_row(p.name, p.amount.formatted, secondary));
@@ -199,10 +201,10 @@ class _KtvSettleScreenState extends State<KtvSettleScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('包厢 ' + (widget.args?.roomName ?? '-'),
+          Text('包厢 ${widget.args?.roomName ?? '-'}',
               style: GvTypography.title(primary)),
           const SizedBox(height: 4),
-          Text('账单快照（' + bill.currencyLabel + '）',
+          Text('账单快照（${bill.currencyLabel}）',
               style: GvTypography.caption(secondary)),
           const SizedBox(height: 12),
           ...lines,
@@ -241,4 +243,3 @@ class _KtvSettleScreenState extends State<KtvSettleScreen>
     );
   }
 }
-

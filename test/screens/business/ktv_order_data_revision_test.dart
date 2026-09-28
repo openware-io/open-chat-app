@@ -33,8 +33,7 @@ void main() {
   }
 
   group('行为：信号 -> 本页重拉自己的订单数据', () {
-    testWidgets('计时加项页监听信号后重拉本单订单，金额卡片换成服务端新值',
-        (tester) async {
+    testWidgets('计时加项页监听信号后重拉本单订单，金额卡片换成服务端新值', (tester) async {
       final captured = <RequestOptions>[];
       // 第一次读订单返回 6150（旧值），重拉后返回 10150（服务端已经算进包厢费）。
       final client = _client(
@@ -63,8 +62,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(_orderCalls(captured), 2, reason: '订单数据变了就必须重拉，不能停在旧值');
-      expect(find.text('¥101.50'), findsOneWidget,
-          reason: '金额卡片必须换成服务端最新总额');
+      expect(find.text('¥101.50'), findsOneWidget, reason: '金额卡片必须换成服务端最新总额');
       expect(find.text('¥61.50'), findsNothing);
     });
 
@@ -109,8 +107,8 @@ void main() {
       );
       expect(refreshBody.contains('_orderDataRevision'), isFalse,
           reason: '只读拉取（含 15s 轮询）不是改动，不得抬版本号');
-      final actBody =
-          source.substring(source.indexOf('Future<PendingApprovalAction> _act('));
+      final actBody = source
+          .substring(source.indexOf('Future<PendingApprovalAction> _act('));
       final failureBranch = actBody.substring(
         actBody.indexOf('_error = KtvApiClient.describeError(e);'),
       );
@@ -138,7 +136,9 @@ void main() {
   group('源码守卫：四个订单页都监听信号并重拉本页既有数据', () {
     test('看板 / 收银 / 计时 / 结台都 bind，且重拉走本页既有加载方法', () {
       final expected = <String, List<String>>{
-        'lib/screens/business/ktv_dashboard_screen.dart': ['_load(silent: true)'],
+        'lib/screens/business/ktv_dashboard_screen.dart': [
+          '_load(silent: true)'
+        ],
         'lib/screens/business/ktv_cashier_screen.dart': [
           '_loadList(silent: true)',
           '_loadDetail(orderId, silent: true)',
@@ -236,7 +236,8 @@ void main() {
       expect(model.contains("json['liveTotalAmount']"), isTrue);
       expect(model.contains("json['live_total_amount']"), isTrue);
       expect(model.contains('liveTotalAmount = liveTotalAmount ?? totalAmount'),
-          isTrue, reason: '直接构造（dev mock）时也要有可展示总额');
+          isTrue,
+          reason: '直接构造（dev mock）时也要有可展示总额');
     });
   });
 }
@@ -285,9 +286,8 @@ KtvApiClient _client({
     captured.add(options);
     Object? body;
     if (options.path == '/business/orders/ord_002') {
-      final index = orderCalls < orderTotals.length
-          ? orderCalls
-          : orderTotals.length - 1;
+      final index =
+          orderCalls < orderTotals.length ? orderCalls : orderTotals.length - 1;
       orderCalls += 1;
       body = <String, dynamic>{
         'id': 'ord_002',

@@ -13,7 +13,11 @@ void main() {
         'safeCode': 'AB CD EF 01',
         'destroyPolicy': '1h',
         'members': [
-          {'userId': 7, 'devicePublicKey': 'PUB7', 'joinedAt': '2026-08-19T00:00:00'},
+          {
+            'userId': 7,
+            'devicePublicKey': 'PUB7',
+            'joinedAt': '2026-08-19T00:00:00'
+          },
           {'userId': 8, 'devicePublicKey': null, 'joinedAt': null},
         ],
         'createdBy': 7,

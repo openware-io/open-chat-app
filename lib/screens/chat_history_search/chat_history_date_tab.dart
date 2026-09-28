@@ -32,8 +32,7 @@ class ChatHistoryDateTab extends StatefulWidget {
 
 class _ChatHistoryDateTabState extends State<ChatHistoryDateTab> {
   final Set<String> _markedDates = <String>{};
-  DateTime _visibleMonth =
-      DateTime(DateTime.now().year, DateTime.now().month);
+  DateTime _visibleMonth = DateTime(DateTime.now().year, DateTime.now().month);
   String? _selectedDate;
   List<ChatMessage> _dayMessages = <ChatMessage>[];
   bool _loadingDay = false;
@@ -184,7 +183,8 @@ class _ChatHistoryDateTabState extends State<ChatHistoryDateTab> {
 
     final cells = <Widget>[
       for (var i = 0; i < leading; i++) const SizedBox(),
-      for (var d = 1; d <= daysInMonth; d++) _dayCell(context, DateTime(year, month, d)),
+      for (var d = 1; d <= daysInMonth; d++)
+        _dayCell(context, DateTime(year, month, d)),
     ];
     while (cells.length % 7 != 0) {
       cells.add(const SizedBox());

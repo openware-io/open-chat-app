@@ -216,19 +216,14 @@ class _KtvTimingScreenState extends State<KtvTimingScreen>
   /// 加号：只改本地购物车，**不提交**。上限取服务端可用库存（查库存防超卖）。
   void _increase(KtvCatalogItem item) {
     if (item.isSoldOut) {
-      _snack('「' +
-          item.name +
-          '」' +
-          (item.unavailableReason.isEmpty ? '当前不可点' : item.unavailableReason));
+      _snack(
+          '「${item.name}」${item.unavailableReason.isEmpty ? '当前不可点' : item.unavailableReason}');
       return;
     }
     final current = _cartQuantity(item.id);
     if (!item.canIncrease(current)) {
-      _snack('「' +
-          item.name +
-          '」可用库存仅 ' +
-          item.stockText.replaceFirst('库存 ', '') +
-          '，请先补货');
+      _snack(
+          '「${item.name}」可用库存仅 ${item.stockText.replaceFirst('库存 ', '')}，请先补货');
       return;
     }
     setState(() => _cart[item.id] = current + 1);
@@ -273,7 +268,7 @@ class _KtvTimingScreenState extends State<KtvTimingScreen>
         _order = o;
         _cart.clear();
       });
-      _snack('已加 ' + lines.length.toString() + ' 项');
+      _snack('已加 ${lines.length} 项');
       await _loadCatalog();
     });
   }
@@ -300,7 +295,7 @@ class _KtvTimingScreenState extends State<KtvTimingScreen>
     final h = d.inHours.toString().padLeft(2, '0');
     final m = (d.inMinutes % 60).toString().padLeft(2, '0');
     final s = (d.inSeconds % 60).toString().padLeft(2, '0');
-    return h + ':' + m + ':' + s;
+    return '$h:$m:$s';
   }
 
   String get _statusText => _session?.statusText ?? '未知';
@@ -353,18 +348,14 @@ class _KtvTimingScreenState extends State<KtvTimingScreen>
                       ),
                       child: Column(
                         children: [
-                          Text('会话状态：' + _statusText,
+                          Text('会话状态：$_statusText',
                               style: GvTypography.caption(secondary)),
                           const SizedBox(height: 8),
                           Text(sessionStatus == 'OPEN' ? _clock() : '--:--:--',
                               style: GvTypography.headline(primary)),
                           const SizedBox(height: 4),
                           Text(
-                            '包厢 ' +
-                                (order?.roomName ??
-                                    widget.args?.roomName ??
-                                    '-') +
-                                ' · 状态以服务端为准',
+                            '包厢 ${order?.roomName ?? widget.args?.roomName ?? '-'} · 状态以服务端为准',
                             style: GvTypography.caption(secondary),
                           ),
                         ],
@@ -394,7 +385,7 @@ class _KtvTimingScreenState extends State<KtvTimingScreen>
                     else if (_catalogError != null)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Text('目录加载失败：' + _catalogError!,
+                        child: Text('目录加载失败：${_catalogError!}',
                             style: GvTypography.caption(secondary)),
                       )
                     else if (_catalog.isEmpty)
@@ -445,10 +436,10 @@ class _KtvTimingScreenState extends State<KtvTimingScreen>
                                         item.unitPrice.formatted +
                                             (item.unit.isEmpty
                                                 ? ''
-                                                : ' / ' + item.unit) +
+                                                : ' / ${item.unit}') +
                                             (item.stockText.isEmpty
                                                 ? ''
-                                                : ' · ' + item.stockText),
+                                                : ' · ${item.stockText}'),
                                         style: GvTypography.caption(secondary),
                                       ),
                                     ],
@@ -493,7 +484,7 @@ class _KtvTimingScreenState extends State<KtvTimingScreen>
                         style: FilledButton.styleFrom(backgroundColor: accent),
                         child: Text(_cartTotalQuantity == 0
                             ? '确认加项'
-                            : '确认加项（' + _cartTotalQuantity.toString() + ' 件）'),
+                            : '确认加项（$_cartTotalQuantity 件）'),
                       ),
                     ),
                   ],
@@ -516,7 +507,7 @@ class _KtvTimingScreenState extends State<KtvTimingScreen>
           Row(
             children: [
               Expanded(
-                child: Text('订单 ' + order.orderNo,
+                child: Text('订单 ${order.orderNo}',
                     style: GvTypography.title(primary)),
               ),
               // 金额只取服务端的「可直接展示总额」：liveTotalAmount 已含当前会话实时
@@ -528,10 +519,7 @@ class _KtvTimingScreenState extends State<KtvTimingScreen>
           ),
           const SizedBox(height: 4),
           Text(
-            '包厢 ' +
-                (order.roomName ?? '-') +
-                ' · 客户 ' +
-                (order.customerMasked ?? '-'),
+            '包厢 ${order.roomName ?? '-'} · 客户 ${order.customerMasked ?? '-'}',
             style: GvTypography.caption(secondary),
           ),
         ],

@@ -63,8 +63,7 @@ class _ChatStorageScreenState extends State<ChatStorageScreen> {
     }
   }
 
-  int get _totalBytes =>
-      _stats.fold<int>(0, (sum, s) => sum + s.messageBytes);
+  int get _totalBytes => _stats.fold<int>(0, (sum, s) => sum + s.messageBytes);
 
   ({String name, String? avatar}) _sessionDisplay(
     ChatSessionStorageStat stat,
@@ -72,7 +71,10 @@ class _ChatStorageScreenState extends State<ChatStorageScreen> {
     for (final c in context.read<ChatProvider>().conversations) {
       if (c.id == stat.peerId && c.chatType == stat.chatType) {
         final name = c.name.trim();
-        return (name: name.isNotEmpty ? name : _fallbackName(stat), avatar: c.avatar);
+        return (
+          name: name.isNotEmpty ? name : _fallbackName(stat),
+          avatar: c.avatar
+        );
       }
     }
     return (name: _fallbackName(stat), avatar: null);

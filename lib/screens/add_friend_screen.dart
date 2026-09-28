@@ -208,12 +208,13 @@ class _AddFriendScreenState extends State<AddFriendScreen> {
                                                         .read<ApiClient>()
                                                         .extractErrorMessage(e)
                                                         .toLowerCase();
-                                                    if (msg.contains('already') &&
-                                                        msg.contains('friend')) {
+                                                    if (msg.contains(
+                                                            'already') &&
+                                                        msg.contains(
+                                                            'friend')) {
                                                       GvToast.show(
                                                         context,
-                                                        l10n
-                                                            .addFriendAlreadyFriends,
+                                                        l10n.addFriendAlreadyFriends,
                                                       );
                                                     }
                                                   }

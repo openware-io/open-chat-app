@@ -44,8 +44,16 @@ void main() {
   test('与 Web 后台词表完全对齐（含 WAITING_SETTLEMENT = 待结算）', () {
     // 与 open_saas_admin/src/constants/terms.js#ORDER_STATUS_TEXT 相同的状态集合
     expect(ktvOrderStatusText.keys.toSet(), {
-      'DRAFT', 'SERVING', 'WAITING_SETTLEMENT', 'WAITING_PAYMENT', 'WAITING_ARRIVAL',
-      'COMPLETED', 'PARTIAL_REFUNDED', 'REFUNDED', 'VOIDED', 'CANCELLED',
+      'DRAFT',
+      'SERVING',
+      'WAITING_SETTLEMENT',
+      'WAITING_PAYMENT',
+      'WAITING_ARRIVAL',
+      'COMPLETED',
+      'PARTIAL_REFUNDED',
+      'REFUNDED',
+      'VOIDED',
+      'CANCELLED',
     });
     // 三端同词：后台/H5/App 都是「待结算」（曾出现收银端「待收款」）
     expect(orderStatusLabel('WAITING_SETTLEMENT'), '待结算');
@@ -56,14 +64,28 @@ void main() {
 
   test('会话态 RESERVED = 待开台；包厢被预订（资源态）才是「已预订」', () {
     const session = KtvSession(
-      id: '1', orderId: '1', status: 'RESERVED', billingStartAt: null,
-      pausedSeconds: 0, openedAt: null, closedAt: null, expectedVersion: 0,
+      id: '1',
+      orderId: '1',
+      status: 'RESERVED',
+      billingStartAt: null,
+      pausedSeconds: 0,
+      openedAt: null,
+      closedAt: null,
+      expectedVersion: 0,
     );
     expect(session.statusText, '待开台');
-    expect(KtvSession(
-      id: '1', orderId: '1', status: 'OPEN', billingStartAt: null,
-      pausedSeconds: 0, openedAt: null, closedAt: null, expectedVersion: 0,
-    ).statusText, '计时中');
+    expect(
+        const KtvSession(
+          id: '1',
+          orderId: '1',
+          status: 'OPEN',
+          billingStartAt: null,
+          pausedSeconds: 0,
+          openedAt: null,
+          closedAt: null,
+          expectedVersion: 0,
+        ).statusText,
+        '计时中');
   });
 
   test('收银页/看板不再出现过时叫法（待收款 / 已预留）', () {
@@ -73,8 +95,10 @@ void main() {
       'lib/models/ktv_models.dart',
     ]) {
       final source = File(path).readAsStringSync();
-      expect(source.contains('待收款'), isFalse, reason: '$path 仍有「待收款」（统一为「待结算」）');
-      expect(source.contains('已预留'), isFalse, reason: '$path 仍有「已预留」（会话用「待开台」、包厢预订用「已预订」）');
+      expect(source.contains('待收款'), isFalse,
+          reason: '$path 仍有「待收款」（统一为「待结算」）');
+      expect(source.contains('已预留'), isFalse,
+          reason: '$path 仍有「已预留」（会话用「待开台」、包厢预订用「已预订」）');
     }
   });
 
@@ -89,7 +113,8 @@ void main() {
   });
 
   test('收银页不再自带局部状态 switch（统一走 orderStatusLabel）', () {
-    final source = File('lib/screens/business/ktv_cashier_screen.dart').readAsStringSync();
+    final source =
+        File('lib/screens/business/ktv_cashier_screen.dart').readAsStringSync();
     expect(source.contains('orderStatusLabel('), isTrue,
         reason: '收银页必须复用模型层唯一入口');
     expect(source.contains("case 'WAITING_SETTLEMENT':"), isFalse,

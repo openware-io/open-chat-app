@@ -4,7 +4,8 @@ import '../models/shared_media_item.dart';
 
 /// 接收系统「分享」进 App 的内容（原生 ACTION_SEND / ACTION_SEND_MULTIPLE）。
 class ShareIntentService {
-  static const MethodChannel _channel = MethodChannel('com.gv.chat/share_intent');
+  static const MethodChannel _channel =
+      MethodChannel('com.gv.chat/share_intent');
 
   /// 冷启动（分享直接拉起 App）时暂存的分享内容；[onSharedMediaReceived] 只用于热启动回调。
   List<SharedMediaItem>? _pending;

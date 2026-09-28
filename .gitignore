@@ -53,6 +53,11 @@ app.*.map.json
 # Android release signing — never commit
 /android/key.properties
 /android/*.jks
+# Firebase 项目配置由本机或 CI 安全注入；不可提交真实项目标识/API key。
+/android/app/google-services.json
+
+# 仅用于兼容旧设备的自定义信任根由发布配置注入，避免与应用源码混放。
+/android/app/src/main/res/raw/*.pem
 
 # iOS push notification certificates — never commit
 /ios/*.p12

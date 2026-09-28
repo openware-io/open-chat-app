@@ -139,8 +139,7 @@ Future<void> _pumpDetail(
 
 void main() {
   testWidgets('详情页渲染收藏自身保存的内容（不依赖原消息）', (tester) async {
-    final repository =
-        _FakeFavoriteRepository(FavoriteSource.unavailable);
+    final repository = _FakeFavoriteRepository(FavoriteSource.unavailable);
     await _pumpDetail(
       tester,
       message: _favorite(),
@@ -223,7 +222,8 @@ void main() {
     await tester.pump(const Duration(seconds: 3));
   });
 
-  testWidgets('详情页「多选」回传 FavoriteDetailResult.enterMultiSelect', (tester) async {
+  testWidgets('详情页「多选」回传 FavoriteDetailResult.enterMultiSelect',
+      (tester) async {
     FavoriteDetailResult? popped;
     final repository = _FakeFavoriteRepository(FavoriteSource.unavailable);
     await _pumpDetail(

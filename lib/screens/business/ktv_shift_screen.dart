@@ -234,7 +234,7 @@ class _KtvShiftScreenState extends State<KtvShiftScreen> {
       const SizedBox(height: 8),
       if (!shift.differenceAmount.isZero)
         Text(
-          '差额 ' + shift.differenceAmount.formatted + '，需复核',
+          '差额 ${shift.differenceAmount.formatted}，需复核',
           style: GvTypography.caption(secondary),
         ),
       const SizedBox(height: 24),

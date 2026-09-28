@@ -536,7 +536,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
               title: l10n.friendGroupsTitle,
               inkBorderRadius: BorderRadius.zero,
             ),
-          /*  if (groupChatEnabled) ...[
+            /*  if (groupChatEnabled) ...[
               _contactsCardDivider(context),
               _cell(
                 key: GvAutomationKeys.contactsCreateGroup,

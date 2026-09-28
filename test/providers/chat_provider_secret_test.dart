@@ -113,8 +113,7 @@ void main() {
           reason: '私密消息走加密通道，不应出现普通通道的 sending 状态');
     });
 
-    test('图片消息发送不产生 sending 占位，且载荷含媒体对象 id（媒体发送中事故回归）',
-        () async {
+    test('图片消息发送不产生 sending 占位，且载荷含媒体对象 id（媒体发送中事故回归）', () async {
       server.setPeerPublicKey('1', peerPublicKeyB64);
       await provider.ensureSecretChatHandshake('1');
 
@@ -159,8 +158,7 @@ void main() {
 
       expect(provider.messagesFor('1', 'secret'), hasLength(1),
           reason: '发送方乐观插入与轮询拉取同一条消息不得重复');
-      expect(server.readAfterSeq['1'], isNull,
-          reason: '拉取自己的消息不触发已读上报（不计时）');
+      expect(server.readAfterSeq['1'], isNull, reason: '拉取自己的消息不触发已读上报（不计时）');
     });
 
     test('接收方真正解密看到对方消息后才上报已读，销毁计时由已读触发', () async {
@@ -189,8 +187,7 @@ void main() {
 
       // 本地 2 条：sendSecretText 的乐观消息 + 拉取到的对方消息。
       expect(provider.messagesFor('1', 'secret'), hasLength(2));
-      expect(server.readAfterSeq['1'], 7,
-          reason: '解密看到对方消息后应上报已读以开始销毁计时');
+      expect(server.readAfterSeq['1'], 7, reason: '解密看到对方消息后应上报已读以开始销毁计时');
       final peerMsg = provider
           .messagesFor('1', 'secret')
           .firstWhere((m) => m.msgId == 'peer-msg-1');
@@ -240,8 +237,7 @@ void main() {
       await Future<void>.delayed(const Duration(milliseconds: 100));
       expect(provider.messagesFor('1', 'secret'), hasLength(3),
           reason: '密钥就绪后重试应能拉到之前失败的消息（不丢失）');
-      expect(server.readAfterSeq['1'], 7,
-          reason: '解密成功后上报已读，开始销毁计时');
+      expect(server.readAfterSeq['1'], 7, reason: '解密成功后上报已读，开始销毁计时');
     });
 
     test('服务端权威销毁：states 增量同步后本地移除（无需端侧定时器/无需重进）', () async {
@@ -300,7 +296,8 @@ void main() {
         },
       ];
       // 发送方本端无已读上报（自己的消息），销毁仅靠 states 增量同步。
-      final destroyAt = DateTime.now().toUtc().add(const Duration(milliseconds: 120));
+      final destroyAt =
+          DateTime.now().toUtc().add(const Duration(milliseconds: 120));
       server.destroyedAt[myMsgId] = destroyAt;
       server.destroyDeadlines['1'] = destroyAt;
 
@@ -347,8 +344,7 @@ void main() {
       final secretConvs = provider.conversations
           .where((c) => c.chatType == 'secret' && c.id == '1')
           .toList();
-      expect(secretConvs, isNotEmpty,
-          reason: '接收方解密展示后应存在私密会话条目');
+      expect(secretConvs, isNotEmpty, reason: '接收方解密展示后应存在私密会话条目');
       expect(secretConvs.single.lastMessage, contains('接收方预览内容'),
           reason: '会话列表应快捷展示最近一条私密消息');
     });
@@ -425,8 +421,7 @@ void main() {
           .messagesFor('1', 'secret')
           .where((m) => m.msgId == peerMsgId)
           .toList();
-      expect(tombstone, hasLength(1),
-          reason: '撤回应保留消息并渲染墓碑，而非删除');
+      expect(tombstone, hasLength(1), reason: '撤回应保留消息并渲染墓碑，而非删除');
       expect(tombstone.single.msgType, 'recall');
       expect(tombstone.single.status, 'recalled');
     });
@@ -466,7 +461,8 @@ class _SecretWireServer {
                 'userB': 200,
                 'userAPublicKey': peer,
                 'userBPublicKey': my,
-                'handshakeState': (peer != null && my != null) ? 'ready' : 'pending',
+                'handshakeState':
+                    (peer != null && my != null) ? 'ready' : 'pending',
                 'safeCode': '',
                 'destroyPolicy': 'off',
               };
@@ -499,7 +495,8 @@ class _SecretWireServer {
                 path.endsWith('/states') &&
                 options.method.toUpperCase() == 'GET') {
               final chatId = _chatIdFromPath(path);
-              final afterRaw = options.queryParameters['afterDestroyAt']?.toString();
+              final afterRaw =
+                  options.queryParameters['afterDestroyAt']?.toString();
               final after = afterRaw == null || afterRaw.isEmpty
                   ? null
                   : DateTime.tryParse(afterRaw);
@@ -511,8 +508,8 @@ class _SecretWireServer {
                   'destroyAt': entry.value.toIso8601String(),
                 });
               }
-              destroyed.sort((a, b) =>
-                  (a['destroyAt'] as String).compareTo(b['destroyAt'] as String));
+              destroyed.sort((a, b) => (a['destroyAt'] as String)
+                  .compareTo(b['destroyAt'] as String));
               return {'secretChatId': chatId, 'destroyed': destroyed};
             }
             if (path.endsWith('/secret-messages') &&
@@ -526,7 +523,8 @@ class _SecretWireServer {
             }
             if (path.contains('/secret-messages') &&
                 options.method.toUpperCase() == 'GET') {
-              final chatId = options.queryParameters['secretChatId']?.toString();
+              final chatId =
+                  options.queryParameters['secretChatId']?.toString();
               return messages[chatId] ?? const [];
             }
             if (path.endsWith('/mine') && path.contains('secret-chats')) {
@@ -566,8 +564,7 @@ class _FakeChatRepository implements ChatRepository {
   final ImApi _imApi;
 
   @override
-  Future<SecretChatInfo> secretChatInfo(String id) =>
-      _imApi.secretChatInfo(id);
+  Future<SecretChatInfo> secretChatInfo(String id) => _imApi.secretChatInfo(id);
 
   @override
   Future<SecretChatInfo> submitSecretChatHandshake({
@@ -738,8 +735,8 @@ class _FakeChatRepository implements ChatRepository {
   Future<int> unreadCount() async => 0;
 
   @override
-  Future<List<({String conversationId, int count})>> unreadByConversation() async =>
-      const [];
+  Future<List<({String conversationId, int count})>>
+      unreadByConversation() async => const [];
 
   @override
   Future<Map<String, dynamic>> clearPrivateChat(String peerId) async => {};
@@ -780,7 +777,8 @@ class _FakeChatRepository implements ChatRepository {
   Future<void> deleteChannel(String id) async {}
 
   @override
-  Future<List<ChannelInfo>> searchChannels(String keyword, {int limit = 20}) async =>
+  Future<List<ChannelInfo>> searchChannels(String keyword,
+          {int limit = 20}) async =>
       const [];
 
   @override
@@ -1035,7 +1033,8 @@ class _FakeGroupRepository implements GroupRepository {
   Future<void> updateMyNickname(int groupId, String nickname) async {}
 
   @override
-  Future<void> muteMember(int groupId, int userId, int? durationMinutes) async {}
+  Future<void> muteMember(
+      int groupId, int userId, int? durationMinutes) async {}
 
   @override
   Future<void> setRole(int groupId, int userId, String role) async {}

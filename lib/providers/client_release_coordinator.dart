@@ -29,7 +29,10 @@ class ClientReleaseCoordinator extends ChangeNotifier {
 
   /// 有可选更新（非强制）且尚未提示过。
   bool get shouldPromptOptional =>
-      _result != null && _result!.requiresUpdate && !_result!.mandatory && !_optionalPrompted;
+      _result != null &&
+      _result!.requiresUpdate &&
+      !_result!.mandatory &&
+      !_optionalPrompted;
 
   void markOptionalPrompted() {
     _optionalPrompted = true;

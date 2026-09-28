@@ -492,237 +492,258 @@ class GvChatBottomComposerState extends State<GvChatBottomComposer>
                             : Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                            _tapIcon(
-                              onTap: () {
-                                closePanel();
-                                widget.onToggleVoiceMode();
-                              },
-                              color: fg,
-                              padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
-                              semanticsLabel: widget.voiceMode
-                                  ? l10n.composerKeyboardInput
-                                  : l10n.composerVoiceInput,
-                              icon: widget.voiceMode
-                                  ? LucideIcons.keyboard
-                                  : LucideIcons.mic,
-                            ),
-                            Expanded(
-                              child: widget.voiceMode
-                                  ? Listener(
-                                      key: widget.voiceHoldAreaKey,
-                                      behavior: HitTestBehavior.opaque,
-                                      onPointerDown: (e) =>
-                                          widget.onVoicePointerDown(e),
-                                      onPointerMove: widget.onVoicePointerMove,
-                                      onPointerUp: widget.onVoicePointerUp,
-                                      onPointerCancel:
-                                          widget.onVoicePointerCancel,
-                                      child: AnimatedContainer(
-                                        duration:
-                                            const Duration(milliseconds: 160),
-                                        height: _oneLineH,
-                                        decoration: BoxDecoration(
-                                          color: widget.recording
-                                              ? AppColors.danger
-                                                  .resolveFrom(context)
-                                              : fieldBg,
-                                          borderRadius: BorderRadius.circular(
-                                              GvRadii.input),
-                                          border: Border.all(
-                                            color: widget.recording
-                                                ? Colors.white
-                                                    .withValues(alpha: 0.18)
-                                                : Colors.transparent,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: AnimatedSwitcher(
-                                            duration: const Duration(
-                                                milliseconds: 120),
-                                            child: Row(
-                                              key: ValueKey(widget.recording),
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Icon(
-                                                  LucideIcons.mic,
-                                                  size: 16,
-                                                  color: widget.recording
-                                                      ? Colors.white
-                                                      : fg,
-                                                ),
-                                                const SizedBox(width: 6),
-                                                Flexible(
-                                                  child: Text(
-                                                    widget.recording
-                                                        ? l10n
-                                                            .chatVoiceReleaseToSend
-                                                        : l10n
-                                                            .composerHoldToTalk,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      fontSize: widget.recording
-                                                          ? 13
-                                                          : _fontSize,
-                                                      height: _lineHeight,
-                                                      fontWeight:
-                                                          widget.recording
-                                                              ? FontWeight.w600
-                                                              : FontWeight.w400,
-                                                      color: widget.recording
-                                                          ? Colors.white
-                                                          : fg,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  : ConstrainedBox(
-                                      constraints: const BoxConstraints(
-                                        minHeight: _oneLineH,
-                                      ),
-                                      child: TextField(
-                                        key: GvAutomationKeys.chatComposerInput,
-                                        controller: widget.textController,
-                                        focusNode: widget.focusNode,
-                                        minLines: 1,
-                                        maxLines: 5,
-                                        // 不要用 [TextInputAction.send] / done 等：[EditableText] 在 [onSubmitted] 之后会
-                                        // [_scheduleRestartConnection]，IME 重连会像失焦再聚焦。unspecified 走 shouldUnfocus:false，
-                                        // 不触发重连，键盘「发送」仍通常可用（由系统按多行输入配置）。
-                                        textInputAction:
-                                            TextInputAction.unspecified,
-                                        onTap: _dismissPanelForKeyboardInput,
-                                        onTapOutside: widget.onTapOutside,
-                                        onSubmitted: widget.onSubmitted,
-                                        onEditingComplete: () {
-                                          widget.textController
-                                              .clearComposing();
-                                        },
-                                        style: (!kIsWeb &&
-                                                defaultTargetPlatform ==
-                                                    TargetPlatform.iOS)
-                                            ? TextStyle(
-                                                fontSize: _fontSize,
-                                                height: _lineHeight,
-                                                color: fg,
-                                              )
-                                            : gvChatComposerTextFieldStyle(
-                                                TextStyle(
-                                                  fontSize: _fontSize,
-                                                  height: _lineHeight,
-                                                  color: fg,
-                                                ),
-                                              ),
-                                        strutStyle: gvChatBubbleStrutIosOnly(
-                                          fontSize: _fontSize,
-                                          height: _lineHeight,
-                                        ),
-                                        onChanged: widget.onTextChanged,
-                                        decoration: InputDecoration(
-                                          hintText: l10n.composerHint,
-                                          filled: true,
-                                          isDense: true,
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                            horizontal: 12,
-                                            vertical: _inputVPad,
-                                          ),
-                                          fillColor: fieldBg,
-                                          border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                GvRadii.input),
-                                            borderSide: BorderSide.none,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                            ),
-                            if (!widget.voiceMode) ...[
-                              const SizedBox(width: 4),
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
                                   _tapIcon(
-                                    onTap: _onEmojiButton,
+                                    onTap: () {
+                                      closePanel();
+                                      widget.onToggleVoiceMode();
+                                    },
                                     color: fg,
                                     padding:
-                                        const EdgeInsets.fromLTRB(0, 2, 4, 2),
-                                    semanticsLabel:
-                                        l10n.chatSemanticEmojiPicker,
-                                icon: LucideIcons.face_slightly_smiling,
-                                    fireOnDown: true,
+                                        const EdgeInsets.fromLTRB(4, 2, 4, 2),
+                                    semanticsLabel: widget.voiceMode
+                                        ? l10n.composerKeyboardInput
+                                        : l10n.composerVoiceInput,
+                                    icon: widget.voiceMode
+                                        ? LucideIcons.keyboard
+                                        : LucideIcons.mic,
                                   ),
-                                  ValueListenableBuilder<TextEditingValue>(
-                                    valueListenable: widget.textController,
-                                    builder: (context, value, _) {
-                                      final hasText =
-                                          value.text.trim().isNotEmpty;
-                                      final showSend =
-                                          hasText || widget.forceSendVisible;
-                                      const edgePad =
-                                          EdgeInsets.fromLTRB(0, 2, 4, 2);
-                                      final slotW =
-                                          _iconSlot + edgePad.horizontal;
-                                      final slotH =
-                                          _iconSlot + edgePad.vertical;
-                                      return SizedBox(
-                                        width: slotW,
-                                        height: slotH,
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          fit: StackFit.expand,
-                                          children: [
-                                            Offstage(
-                                              offstage: showSend,
-                                              child: IgnorePointer(
-                                                ignoring: showSend,
-                                                child: _tapIcon(
-                                                  onTap: _onMoreButton,
-                                                  color: fg,
-                                                  padding: edgePad,
-                                                  semanticsLabel:
-                                                      l10n.commonMore,
-                                                  icon: LucideIcons.circle_plus,
-                                                  fireOnDown: true,
+                                  Expanded(
+                                    child: widget.voiceMode
+                                        ? Listener(
+                                            key: widget.voiceHoldAreaKey,
+                                            behavior: HitTestBehavior.opaque,
+                                            onPointerDown: (e) =>
+                                                widget.onVoicePointerDown(e),
+                                            onPointerMove:
+                                                widget.onVoicePointerMove,
+                                            onPointerUp:
+                                                widget.onVoicePointerUp,
+                                            onPointerCancel:
+                                                widget.onVoicePointerCancel,
+                                            child: AnimatedContainer(
+                                              duration: const Duration(
+                                                  milliseconds: 160),
+                                              height: _oneLineH,
+                                              decoration: BoxDecoration(
+                                                color: widget.recording
+                                                    ? AppColors.danger
+                                                        .resolveFrom(context)
+                                                    : fieldBg,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        GvRadii.input),
+                                                border: Border.all(
+                                                  color: widget.recording
+                                                      ? Colors.white.withValues(
+                                                          alpha: 0.18)
+                                                      : Colors.transparent,
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: AnimatedSwitcher(
+                                                  duration: const Duration(
+                                                      milliseconds: 120),
+                                                  child: Row(
+                                                    key: ValueKey(
+                                                        widget.recording),
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Icon(
+                                                        LucideIcons.mic,
+                                                        size: 16,
+                                                        color: widget.recording
+                                                            ? Colors.white
+                                                            : fg,
+                                                      ),
+                                                      const SizedBox(width: 6),
+                                                      Flexible(
+                                                        child: Text(
+                                                          widget.recording
+                                                              ? l10n
+                                                                  .chatVoiceReleaseToSend
+                                                              : l10n
+                                                                  .composerHoldToTalk,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                            fontSize:
+                                                                widget.recording
+                                                                    ? 13
+                                                                    : _fontSize,
+                                                            height: _lineHeight,
+                                                            fontWeight:
+                                                                widget.recording
+                                                                    ? FontWeight
+                                                                        .w600
+                                                                    : FontWeight
+                                                                        .w400,
+                                                            color: widget
+                                                                    .recording
+                                                                ? Colors.white
+                                                                : fg,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                            Offstage(
-                                              offstage: !showSend,
-                                              child: IgnorePointer(
-                                                ignoring: !showSend ||
-                                                    !widget.sendEnabled,
-                                                child: _tapIcon(
-                                                  key: GvAutomationKeys
-                                                      .chatComposerSend,
-                                                  onTap: widget.onSend,
-                                                  color: widget.sendEnabled
-                                                      ? CupertinoColors
-                                                          .systemBlue
-                                                      : AppColors.textHint
-                                                          .resolveFrom(context),
-                                                  padding: edgePad,
-                                                  semanticsLabel:
-                                                      l10n.commonSend,
-                                                  icon: Icons.send_rounded,
+                                          )
+                                        : ConstrainedBox(
+                                            constraints: const BoxConstraints(
+                                              minHeight: _oneLineH,
+                                            ),
+                                            child: TextField(
+                                              key: GvAutomationKeys
+                                                  .chatComposerInput,
+                                              controller: widget.textController,
+                                              focusNode: widget.focusNode,
+                                              minLines: 1,
+                                              maxLines: 5,
+                                              // 不要用 [TextInputAction.send] / done 等：[EditableText] 在 [onSubmitted] 之后会
+                                              // [_scheduleRestartConnection]，IME 重连会像失焦再聚焦。unspecified 走 shouldUnfocus:false，
+                                              // 不触发重连，键盘「发送」仍通常可用（由系统按多行输入配置）。
+                                              textInputAction:
+                                                  TextInputAction.unspecified,
+                                              onTap:
+                                                  _dismissPanelForKeyboardInput,
+                                              onTapOutside: widget.onTapOutside,
+                                              onSubmitted: widget.onSubmitted,
+                                              onEditingComplete: () {
+                                                widget.textController
+                                                    .clearComposing();
+                                              },
+                                              style: (!kIsWeb &&
+                                                      defaultTargetPlatform ==
+                                                          TargetPlatform.iOS)
+                                                  ? TextStyle(
+                                                      fontSize: _fontSize,
+                                                      height: _lineHeight,
+                                                      color: fg,
+                                                    )
+                                                  : gvChatComposerTextFieldStyle(
+                                                      TextStyle(
+                                                        fontSize: _fontSize,
+                                                        height: _lineHeight,
+                                                        color: fg,
+                                                      ),
+                                                    ),
+                                              strutStyle:
+                                                  gvChatBubbleStrutIosOnly(
+                                                fontSize: _fontSize,
+                                                height: _lineHeight,
+                                              ),
+                                              onChanged: widget.onTextChanged,
+                                              decoration: InputDecoration(
+                                                hintText: l10n.composerHint,
+                                                filled: true,
+                                                isDense: true,
+                                                contentPadding:
+                                                    const EdgeInsets.symmetric(
+                                                  horizontal: 12,
+                                                  vertical: _inputVPad,
+                                                ),
+                                                fillColor: fieldBg,
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          GvRadii.input),
+                                                  borderSide: BorderSide.none,
                                                 ),
                                               ),
                                             ),
-                                          ],
+                                          ),
+                                  ),
+                                  if (!widget.voiceMode) ...[
+                                    const SizedBox(width: 4),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        _tapIcon(
+                                          onTap: _onEmojiButton,
+                                          color: fg,
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 2, 4, 2),
+                                          semanticsLabel:
+                                              l10n.chatSemanticEmojiPicker,
+                                          icon:
+                                              LucideIcons.face_slightly_smiling,
+                                          fireOnDown: true,
                                         ),
-                                      );
-                                    },
-                                  ),
+                                        ValueListenableBuilder<
+                                            TextEditingValue>(
+                                          valueListenable:
+                                              widget.textController,
+                                          builder: (context, value, _) {
+                                            final hasText =
+                                                value.text.trim().isNotEmpty;
+                                            final showSend = hasText ||
+                                                widget.forceSendVisible;
+                                            const edgePad =
+                                                EdgeInsets.fromLTRB(0, 2, 4, 2);
+                                            final slotW =
+                                                _iconSlot + edgePad.horizontal;
+                                            final slotH =
+                                                _iconSlot + edgePad.vertical;
+                                            return SizedBox(
+                                              width: slotW,
+                                              height: slotH,
+                                              child: Stack(
+                                                alignment: Alignment.center,
+                                                fit: StackFit.expand,
+                                                children: [
+                                                  Offstage(
+                                                    offstage: showSend,
+                                                    child: IgnorePointer(
+                                                      ignoring: showSend,
+                                                      child: _tapIcon(
+                                                        onTap: _onMoreButton,
+                                                        color: fg,
+                                                        padding: edgePad,
+                                                        semanticsLabel:
+                                                            l10n.commonMore,
+                                                        icon: LucideIcons
+                                                            .circle_plus,
+                                                        fireOnDown: true,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Offstage(
+                                                    offstage: !showSend,
+                                                    child: IgnorePointer(
+                                                      ignoring: !showSend ||
+                                                          !widget.sendEnabled,
+                                                      child: _tapIcon(
+                                                        key: GvAutomationKeys
+                                                            .chatComposerSend,
+                                                        onTap: widget.onSend,
+                                                        color: widget
+                                                                .sendEnabled
+                                                            ? CupertinoColors
+                                                                .systemBlue
+                                                            : AppColors.textHint
+                                                                .resolveFrom(
+                                                                    context),
+                                                        padding: edgePad,
+                                                        semanticsLabel:
+                                                            l10n.commonSend,
+                                                        icon:
+                                                            Icons.send_rounded,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ],
                               ),
-                            ],
-                          ],
-                        ),
                       ),
                     ),
                   ],

@@ -71,7 +71,8 @@ class Currency {
   }
 
   /// 是否为租户级可选币种。
-  static bool isSupported(String? raw) => supportedCodes.contains(normalize(raw));
+  static bool isSupported(String? raw) =>
+      supportedCodes.contains(normalize(raw));
 
   /// 币种小数位，未知/空值按 2 位（最小单位口径）。
   static int decimalsOf(String? raw) => decimals[normalize(raw)] ?? 2;

@@ -142,8 +142,7 @@ void main() {
 
     test('逐行断言：数量腿相关行不含货币符号、币种码与主单位名', () {
       final file = File(path);
-      expect(file.existsSync(), isTrue,
-          reason: '未找到 $path（测试需在包根目录运行）');
+      expect(file.existsSync(), isTrue, reason: '未找到 $path（测试需在包根目录运行）');
 
       final violations = <String>[];
       final lines = file.readAsLinesSync();

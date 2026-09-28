@@ -25,8 +25,10 @@ Future<void> _runProbe() async {
   final userA = 'e2ee_a_$stamp';
   final userB = 'e2ee_b_$stamp';
   const password = 'Test@12345';
-  final dioA = Dio(BaseOptions(baseUrl: base, connectTimeout: const Duration(seconds: 20)));
-  final dioB = Dio(BaseOptions(baseUrl: base, connectTimeout: const Duration(seconds: 20)));
+  final dioA = Dio(
+      BaseOptions(baseUrl: base, connectTimeout: const Duration(seconds: 20)));
+  final dioB = Dio(
+      BaseOptions(baseUrl: base, connectTimeout: const Duration(seconds: 20)));
 
   // 1. 注册两个用户
   final tokenA = await _register(dioA, userA, password);
@@ -40,12 +42,15 @@ Future<void> _runProbe() async {
   final pairB = await _generatePair();
   final devA = 'dev-$stamp-a';
   final devB = 'dev-$stamp-b';
-  await dioA.post('/device-keys', data: {'deviceId': devA, 'publicKey': pairA.publicKey});
-  await dioB.post('/device-keys', data: {'deviceId': devB, 'publicKey': pairB.publicKey});
+  await dioA.post('/device-keys',
+      data: {'deviceId': devA, 'publicKey': pairA.publicKey});
+  await dioB.post('/device-keys',
+      data: {'deviceId': devB, 'publicKey': pairB.publicKey});
   debugPrint('✅ 设备密钥注册完成');
 
   // 3. A 创建私密会话（找 B 的 userId）
-  final search = await dioA.get('/users/search', queryParameters: {'keyword': userB});
+  final search =
+      await dioA.get('/users/search', queryParameters: {'keyword': userB});
   final bUser = (search.data as List).firstWhere((u) => u['username'] == userB);
   final bId = (bUser['id'] as num).toInt();
   final chatResp = await dioA.post('/secret-chats', data: {'userB': bId});
@@ -53,8 +58,10 @@ Future<void> _runProbe() async {
   debugPrint('✅ 私密会话创建: id=$chatId');
 
   // 4. 双方握手：各自提交公钥
-  await dioA.post('/secret-chats/$chatId/handshake', data: {'publicKey': pairA.publicKey});
-  await dioB.post('/secret-chats/$chatId/handshake', data: {'publicKey': pairB.publicKey});
+  await dioA.post('/secret-chats/$chatId/handshake',
+      data: {'publicKey': pairA.publicKey});
+  await dioB.post('/secret-chats/$chatId/handshake',
+      data: {'publicKey': pairB.publicKey});
   final chat = await dioA.get('/secret-chats/$chatId');
   final userAPub = chat.data['userAPublicKey'] as String;
   final userBPub = chat.data['userBPublicKey'] as String;
@@ -89,7 +96,8 @@ Future<void> _runProbe() async {
   });
   final items = (list.data as List).where((m) => m['msgId'] == msgId).toList();
   expect(items, isNotEmpty, reason: 'B 应能拉到密文');
-  final decrypted = await _decrypt(sharedB, items.first['ciphertext'] as String);
+  final decrypted =
+      await _decrypt(sharedB, items.first['ciphertext'] as String);
   expect(decrypted, plaintext, reason: 'B 解密应与明文一致');
   debugPrint('✅ B 拉取并解密成功: "$decrypted"');
   debugPrint('🎉 E2EE 端到端链路全部验证通过');
@@ -125,7 +133,8 @@ Future<Uint8List> _deriveShared(String privateB64, String peerPublicB64) async {
   final kp = await x.newKeyPairFromSeed(base64Decode(privateB64));
   final shared = await x.sharedSecretKey(
     keyPair: kp,
-    remotePublicKey: SimplePublicKey(base64Decode(peerPublicB64), type: KeyPairType.x25519),
+    remotePublicKey:
+        SimplePublicKey(base64Decode(peerPublicB64), type: KeyPairType.x25519),
   );
   return Uint8List.fromList(await shared.extractBytes());
 }

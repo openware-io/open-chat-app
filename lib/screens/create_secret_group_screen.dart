@@ -64,12 +64,13 @@ class _CreateSecretGroupScreenState extends State<CreateSecretGroupScreen> {
   Future<void> _create(ChatProvider chat) async {
     if (_selected.isEmpty) return;
     if (!context.read<ClientRemoteConfigProvider>().secretGroupChatEnabled) {
-      GvToast.show(
-          context, AppLocalizations.of(context)!.featureSecretGroupChatDisabled);
+      GvToast.show(context,
+          AppLocalizations.of(context)!.featureSecretGroupChatDisabled);
       return;
     }
     try {
-      final info = await chat.createSecretGroupChat(memberUserIds: _selected.toList());
+      final info =
+          await chat.createSecretGroupChat(memberUserIds: _selected.toList());
       if (!mounted) return;
       GvToast.show(
         context,
@@ -81,7 +82,8 @@ class _CreateSecretGroupScreenState extends State<CreateSecretGroupScreen> {
       if (mounted) {
         GvToast.show(
           context,
-          AppLocalizations.of(context)!.toastOperationFailed(ApiFailure.messageOf(e)),
+          AppLocalizations.of(context)!
+              .toastOperationFailed(ApiFailure.messageOf(e)),
         );
       }
     }

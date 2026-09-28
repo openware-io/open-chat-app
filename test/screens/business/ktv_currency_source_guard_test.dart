@@ -20,8 +20,7 @@ void main() {
 
   test('lib/screens/business 不得硬编码 ¥ / ￥ / CNY / RMB / USD', () {
     final dir = Directory(businessDir);
-    expect(dir.existsSync(), isTrue,
-        reason: '未找到 $businessDir（测试需在包根目录运行）');
+    expect(dir.existsSync(), isTrue, reason: '未找到 $businessDir（测试需在包根目录运行）');
 
     final pattern = RegExp(r'¥|￥|CNY|RMB|USD');
     final violations = <String>[];
@@ -51,7 +50,8 @@ void main() {
   });
 
   test('班次页不得再写死 ×100 / ÷100（金额换算跟随币种小数位）', () {
-    final source = File('$businessDir/ktv_shift_screen.dart').readAsStringSync();
+    final source =
+        File('$businessDir/ktv_shift_screen.dart').readAsStringSync();
     for (final banned in const [
       '~/ 100',
       '* 100',

@@ -161,7 +161,8 @@ void main() {
       for (final text in samples) {
         expect(currencyTrace.hasMatch(text), isFalse, reason: text);
         expect(text.contains('.'), isFalse, reason: text);
-        expect(RegExp(r'[A-Za-z\u4e00-\u9fa5]').hasMatch(text), isFalse, reason: text);
+        expect(RegExp(r'[A-Za-z\u4e00-\u9fa5]').hasMatch(text), isFalse,
+            reason: text);
       }
     });
 

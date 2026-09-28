@@ -438,7 +438,8 @@ class _FavoriteDetailScreenState extends State<FavoriteDetailScreen> {
     }
   }
 
-  Widget _buildFile(BuildContext context, AppLocalizations l10n, String baseUrl) {
+  Widget _buildFile(
+      BuildContext context, AppLocalizations l10n, String baseUrl) {
     var name = l10n.favoritesFilterFile;
     var url = '';
     try {
@@ -550,8 +551,9 @@ class _FavoriteDetailScreenState extends State<FavoriteDetailScreen> {
           color: gvPageScaffoldBackground(context),
           border: Border(
             top: BorderSide(
-              color:
-                  AppColors.textHint.resolveFrom(context).withValues(alpha: 0.2),
+              color: AppColors.textHint
+                  .resolveFrom(context)
+                  .withValues(alpha: 0.2),
             ),
           ),
         ),

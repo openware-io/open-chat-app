@@ -35,9 +35,8 @@ class ChatBackup {
         'conversations': conversations
             .map((conversation) => conversation.toJson())
             .toList(growable: false),
-        'sessions': sessions
-            .map((session) => session.toJson())
-            .toList(growable: false),
+        'sessions':
+            sessions.map((session) => session.toJson()).toList(growable: false),
       };
 
   /// 解析备份文件；格式不匹配或结构非法时返回 null（不做抛错）。
@@ -74,9 +73,9 @@ class ChatBackup {
 
     return ChatBackup(
       uid: int.tryParse(json['uid']?.toString() ?? ''),
-      exportedAt: DateTime.tryParse(json['exportedAt']?.toString() ?? '')
-              ?.toUtc() ??
-          DateTime.now().toUtc(),
+      exportedAt:
+          DateTime.tryParse(json['exportedAt']?.toString() ?? '')?.toUtc() ??
+              DateTime.now().toUtc(),
       conversations: conversations,
       sessions: sessions,
     );

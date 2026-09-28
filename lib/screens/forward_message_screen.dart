@@ -86,10 +86,13 @@ class _ForwardMessageScreenState extends State<ForwardMessageScreen> {
     final cfg = context.read<ClientRemoteConfigProvider>();
     final l10n = AppLocalizations.of(context)!;
     final disabled = switch (_selectedChatType) {
-      'private' => !cfg.privateChatEnabled ? l10n.featurePrivateChatDisabled : null,
-      'secret' => !cfg.secretChatEnabled ? l10n.featureSecretChatDisabled : null,
-      'secret_group' =>
-        !cfg.secretGroupChatEnabled ? l10n.featureSecretGroupChatDisabled : null,
+      'private' =>
+        !cfg.privateChatEnabled ? l10n.featurePrivateChatDisabled : null,
+      'secret' =>
+        !cfg.secretChatEnabled ? l10n.featureSecretChatDisabled : null,
+      'secret_group' => !cfg.secretGroupChatEnabled
+          ? l10n.featureSecretGroupChatDisabled
+          : null,
       _ => null,
     };
     if (disabled != null) {
@@ -155,8 +158,7 @@ class _ForwardMessageScreenState extends State<ForwardMessageScreen> {
     final filteredSecretGroups = kw.isEmpty
         ? _secretGroups
         : _secretGroups
-            .where((s) =>
-                _secretGroupName(s, l10n).toLowerCase().contains(kw))
+            .where((s) => _secretGroupName(s, l10n).toLowerCase().contains(kw))
             .toList();
 
     final hasAny = filteredFriends.isNotEmpty ||
@@ -195,7 +197,8 @@ class _ForwardMessageScreenState extends State<ForwardMessageScreen> {
                   color: selected ? primary : null,
                 ),
                 child: selected
-                    ? const Icon(LucideIcons.check, size: 14, color: Colors.white)
+                    ? const Icon(LucideIcons.check,
+                        size: 14, color: Colors.white)
                     : null,
               ),
               const SizedBox(width: 10),

@@ -88,7 +88,9 @@ class ImFavoriteRepository implements FavoriteRepository {
     }
     // 服务端收藏响应返回 senderId/senderUsername，而 ChatMessage.fromJson 只认 from/fromUserId；
     // 做一次字段归一化，否则列表因 jsonIntRequired(from) 抛异常被吞、整页恒空。
-    if (map['from'] == null && map['fromUserId'] == null && map['from_user_id'] == null) {
+    if (map['from'] == null &&
+        map['fromUserId'] == null &&
+        map['from_user_id'] == null) {
       final sender = map['senderId'] ?? map['sender_id'];
       if (sender != null) map['from'] = sender;
     }

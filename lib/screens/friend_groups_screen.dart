@@ -36,9 +36,8 @@ class _FriendGroupsScreenState extends State<FriendGroupsScreen> {
   List<String> _groupNames(FriendProvider f) =>
       f.friendGroups.where((g) => g.trim().isNotEmpty).toList();
 
-  List<FriendItem> _friendsInGroup(FriendProvider f, String group) => f.friends
-      .where((fr) => (fr.groupName?.trim() ?? '') == group)
-      .toList();
+  List<FriendItem> _friendsInGroup(FriendProvider f, String group) =>
+      f.friends.where((fr) => (fr.groupName?.trim() ?? '') == group).toList();
 
   Future<void> _createGroup(BuildContext context) async {
     final name = await _promptGroupName(context);

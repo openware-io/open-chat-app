@@ -43,10 +43,8 @@ String localizeServerMessage(String message) {
 /// 错误码比文案稳定，因此按码优先于按文案查表。
 const Map<String, String> _currencyErrorCodesZh = {
   'CURRENCY_MISMATCH': '收款币种与订单币种不一致，请核对订单后重试',
-  'CURRENCY_PAYMENT_METHOD_UNSUPPORTED':
-      '当前租户币种不支持该支付方式（微信/支付宝仅支持人民币）',
-  'CURRENCY_SWITCH_BLOCKED_BY_BALANCE':
-      '仍存在非零余额的钱包或储值账户，暂时无法切换币种，请联系管理员处理',
+  'CURRENCY_PAYMENT_METHOD_UNSUPPORTED': '当前租户币种不支持该支付方式（微信/支付宝仅支持人民币）',
+  'CURRENCY_SWITCH_BLOCKED_BY_BALANCE': '仍存在非零余额的钱包或储值账户，暂时无法切换币种，请联系管理员处理',
   'CURRENCY_UNSUPPORTED': '不支持的币种，请选择人民币或美元',
 };
 
@@ -135,8 +133,8 @@ const Map<String, String> _serverMessageZh = {
   'group name too long': '群名称过长',
   'group capacity exceeded': '群成员已达上限',
   'not group member': '你不是该群成员',
-    'group is dissolved, no more messages allowed': '群聊已解散，不能继续发消息',
-    'group is unavailable': '群聊已解散或不可用',
+  'group is dissolved, no more messages allowed': '群聊已解散，不能继续发消息',
+  'group is unavailable': '群聊已解散或不可用',
   'not a group member': '你不是该群成员',
   'member not found': '成员不存在',
   'invalid member user id': '成员账号无效',

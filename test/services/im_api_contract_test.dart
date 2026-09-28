@@ -16,7 +16,8 @@ void main() {
 
   late ApiClient apiClient;
   late ImApi api;
-  final captured = <({String method, String path, Map<String, dynamic> body})>[];
+  final captured =
+      <({String method, String path, Map<String, dynamic> body})>[];
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
@@ -52,7 +53,8 @@ void main() {
   }
 
   group('私密聊天（Secret Chats）请求契约', () {
-    test('createSecretChat 发送 userB（后端 CreateSecretChatRequest @NotNull userB）', () async {
+    test('createSecretChat 发送 userB（后端 CreateSecretChatRequest @NotNull userB）',
+        () async {
       await api.createSecretChat(peerUserId: 8);
       final body = lastBodyFor('/secret-chats');
       expect(body.containsKey('userB'), isTrue,
@@ -100,7 +102,8 @@ void main() {
       expect(body['policy'], '1h');
     });
 
-    test('postSecretGroupMessage 发送 secretGroupId + msgId + recipients', () async {
+    test('postSecretGroupMessage 发送 secretGroupId + msgId + recipients',
+        () async {
       await api.postSecretGroupMessage(
         secretGroupId: 1,
         msgId: 'm1',

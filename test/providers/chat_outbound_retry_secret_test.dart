@@ -50,7 +50,8 @@ void main() {
       refreshConversationLastFromSession: (key) {},
       persistPendingMessage: (peerId, msg) {},
       confirmPendingMessage: (peerId, clientMsgId, confirmed) {},
-      removePendingMessage: (clientMsgId) => removedClientMsgIds.add(clientMsgId),
+      removePendingMessage: (clientMsgId) =>
+          removedClientMsgIds.add(clientMsgId),
       enqueueWsError: (_) {},
       notifyChanged: () {},
     );
@@ -66,7 +67,8 @@ void main() {
     expect(pendingAcks.containsKey('secret-client-1'), isFalse);
     expect(removedClientMsgIds, contains('secret-client-1'));
     // 普通 pending 正常重发
-    expect(socket.emitPayloads.map((p) => p['clientMsgId']), ['normal-client-2']);
+    expect(
+        socket.emitPayloads.map((p) => p['clientMsgId']), ['normal-client-2']);
     expect(socket.emitPayloads.single['chatType'], 'private');
   });
 

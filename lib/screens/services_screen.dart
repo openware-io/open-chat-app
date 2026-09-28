@@ -439,7 +439,11 @@ void _openMiniProgram(
 
 String normalizeMiniProgramUrl(String url) {
   final uri = Uri.tryParse(url);
-  if (uri == null || !(uri.path == '/a380' || uri.path == '/a380/' || uri.path == '/b' || uri.path == '/b/')) {
+  if (uri == null ||
+      !(uri.path == '/a380' ||
+          uri.path == '/a380/' ||
+          uri.path == '/b' ||
+          uri.path == '/b/')) {
     return url;
   }
   const testOrigin = String.fromEnvironment('OPEN_HYBRID_TEST_ORIGIN');

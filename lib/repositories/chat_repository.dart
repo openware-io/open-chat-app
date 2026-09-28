@@ -82,7 +82,8 @@ abstract interface class ChatRepository {
 
   Future<void> unsubscribeChannel(String id);
 
-  Future<ChannelInfo> updateChannel(String id, {String? name, String? announcement});
+  Future<ChannelInfo> updateChannel(String id,
+      {String? name, String? announcement});
 
   Future<void> deleteChannel(String id);
 

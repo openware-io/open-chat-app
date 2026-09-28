@@ -71,7 +71,8 @@ class _KtvQuickOpenScreenState extends State<KtvQuickOpenScreen> {
       final client = context.read<KtvApiClient>();
       final order = await client.createOrder(
         resourceId: widget.args?.roomId,
-        customerId: _customer.text.trim().isEmpty ? null : _customer.text.trim(),
+        customerId:
+            _customer.text.trim().isEmpty ? null : _customer.text.trim(),
       );
       if (!mounted) return;
       context.push(
@@ -149,4 +150,3 @@ class _KtvQuickOpenScreenState extends State<KtvQuickOpenScreen> {
     );
   }
 }
-

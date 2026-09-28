@@ -1,9 +1,14 @@
 plugins {
     id "com.android.application"
-    id "com.google.gms.google-services"
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+}
+
+// Firebase wiring is release-environment configuration. Local/CI builds without
+// a provisioned google-services.json must still be able to compile the app.
+if (file("google-services.json").exists()) {
+    apply plugin: "com.google.gms.google-services"
 }
 
 def localProperties = new Properties()

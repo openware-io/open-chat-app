@@ -54,11 +54,11 @@ class _KtvPendingApprovalScreenState extends State<KtvPendingApprovalScreen> {
     setState(() => _busyItems.remove(item.id));
     switch (result) {
       case PendingApprovalAction.success:
-        _toast('已确认「' + item.name + '」，应收已更新');
+        _toast('已确认「${item.name}」，应收已更新');
       case PendingApprovalAction.alreadyHandled:
         _toast('该加项已被处理，已刷新为最新状态');
       case PendingApprovalAction.failed:
-        _toast('确认失败：' + (controller.error ?? '请稍后重试'));
+        _toast('确认失败：${controller.error ?? '请稍后重试'}');
     }
   }
 
@@ -71,11 +71,11 @@ class _KtvPendingApprovalScreenState extends State<KtvPendingApprovalScreen> {
     setState(() => _busyItems.remove(item.id));
     switch (result) {
       case PendingApprovalAction.success:
-        _toast('已拒绝「' + item.name + '」');
+        _toast('已拒绝「${item.name}」');
       case PendingApprovalAction.alreadyHandled:
         _toast('该加项已被处理，已刷新为最新状态');
       case PendingApprovalAction.failed:
-        _toast('拒绝失败：' + (controller.error ?? '请稍后重试'));
+        _toast('拒绝失败：${controller.error ?? '请稍后重试'}');
     }
   }
 
@@ -86,7 +86,7 @@ class _KtvPendingApprovalScreenState extends State<KtvPendingApprovalScreen> {
     final done = await controller.confirmOrder(order.orderId);
     if (!mounted) return;
     setState(() => _busyOrder = false);
-    _toast(done > 0 ? '本单已确认 ' + done.toString() + ' 项' : '本单待确认项已被处理');
+    _toast(done > 0 ? '本单已确认 $done 项' : '本单待确认项已被处理');
   }
 
   void _toast(String message) {
@@ -174,13 +174,13 @@ class _KtvPendingApprovalScreenState extends State<KtvPendingApprovalScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('共 ' + controller.pendingCount.toString() + ' 条客户加项待确认',
+          Text('共 ${controller.pendingCount} 条客户加项待确认',
               style: GvTypography.title(primary)),
           const SizedBox(height: 4),
           Text(
             controller.view.amountText.isEmpty
                 ? '客户自助提交，确认后才计入应收'
-                : '合计 ' + controller.view.amountText + '（确认后计入应收）',
+                : '合计 ${controller.view.amountText}（确认后计入应收）',
             style: GvTypography.caption(secondary),
           ),
           if (controller.notice != null) ...[
@@ -234,14 +234,14 @@ class _KtvPendingApprovalScreenState extends State<KtvPendingApprovalScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('包厢 ' + order.roomLabel,
+                    Text('包厢 ${order.roomLabel}',
                         style: GvTypography.title(primary)),
                     const SizedBox(height: 2),
                     Text(
                       order.orderNo +
                           (order.sessionStatus.isEmpty
                               ? ''
-                              : ' · 会话 ' + _sessionText(order.sessionStatus)),
+                              : ' · 会话 ${_sessionText(order.sessionStatus)}'),
                       style: GvTypography.caption(secondary),
                     ),
                   ],
@@ -253,7 +253,7 @@ class _KtvPendingApprovalScreenState extends State<KtvPendingApprovalScreen> {
                   color: danger.withValues(alpha: 0.14),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text('待确认 ×' + order.pendingCount.toString(),
+                child: Text('待确认 ×${order.pendingCount}',
                     style: GvTypography.caption(danger)),
               ),
             ],
@@ -305,12 +305,7 @@ class _KtvPendingApprovalScreenState extends State<KtvPendingApprovalScreen> {
                     Text(item.name, style: GvTypography.body(primary)),
                     const SizedBox(height: 2),
                     Text(
-                      '× ' +
-                          item.quantityText +
-                          ' · ' +
-                          item.unitPrice.formatted +
-                          ' = ' +
-                          item.amount.formatted,
+                      '× ${item.quantityText} · ${item.unitPrice.formatted} = ${item.amount.formatted}',
                       style: GvTypography.caption(secondary),
                     ),
                   ],

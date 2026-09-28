@@ -105,15 +105,12 @@ class _SelfDestructScreenState extends State<SelfDestructScreen> {
     final primary = AppColors.primary.resolveFrom(context);
     final secondary = AppColors.textSecondary.resolveFrom(context);
     final hint = AppColors.textHint.resolveFrom(context);
-    final hover = AppColors.textPrimary
-        .resolveFrom(context)
-        .withValues(alpha: 0.06);
+    final hover =
+        AppColors.textPrimary.resolveFrom(context).withValues(alpha: 0.06);
     final divider = Divider(
       height: 1,
       thickness: 0.5,
-      color: AppColors.textHint
-          .resolveFrom(context)
-          .withValues(alpha: 0.22),
+      color: AppColors.textHint.resolveFrom(context).withValues(alpha: 0.22),
     );
 
     return Scaffold(
@@ -188,16 +185,14 @@ class _SelfDestructScreenState extends State<SelfDestructScreen> {
         size: 22,
         color: secondary,
       ),
-      trailing: selected
-          ? Icon(LucideIcons.check, size: 20, color: primary)
-          : null,
+      trailing:
+          selected ? Icon(LucideIcons.check, size: 20, color: primary) : null,
       onTap: enabled && !selected ? () => unawaited(_select(policy)) : null,
       borderRadius: borderRadius,
       hoverColor: hover,
       highlightColor: hover,
-      splashColor: AppColors.textPrimary
-          .resolveFrom(context)
-          .withValues(alpha: 0.10),
+      splashColor:
+          AppColors.textPrimary.resolveFrom(context).withValues(alpha: 0.10),
     );
   }
 }

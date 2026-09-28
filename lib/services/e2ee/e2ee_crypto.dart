@@ -97,10 +97,12 @@ class E2eeCrypto {
   /// 与服务端 `computeSafeCode` 的规范化拼接语义一致；两端从服务端取同序字段，
   /// 本地计算的安全码必然一致，可互相比对核验。
   static String computeSafeCode(String publicKeyA, String publicKeyB) {
-    final digest = legacy.sha256.convert(utf8.encode('$publicKeyA:$publicKeyB'));
+    final digest =
+        legacy.sha256.convert(utf8.encode('$publicKeyA:$publicKeyB'));
     final parts = <String>[];
     for (var i = 0; i < 8; i++) {
-      parts.add(digest.bytes[i].toRadixString(16).padLeft(2, '0').toUpperCase());
+      parts
+          .add(digest.bytes[i].toRadixString(16).padLeft(2, '0').toUpperCase());
     }
     return parts.join(' ');
   }

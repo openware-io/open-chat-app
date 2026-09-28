@@ -56,7 +56,8 @@ class ChannelInfo {
     return ChannelInfo(
       id: rawId == null ? '' : '$rawId',
       name: name.isEmpty ? '频道' : name,
-      description: str(json['announcement'] ?? json['description'] ?? json['intro']),
+      description:
+          str(json['announcement'] ?? json['description'] ?? json['intro']),
       code: str(json['code']),
       ownerId: owner,
       memberCount: memberCount,

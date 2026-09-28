@@ -504,7 +504,8 @@ class ChatDatabase extends _$ChatDatabase {
   /// 字节数用 SQLite `LENGTH(CAST(col AS BLOB))` 估算各文本列的字节占用，
   /// 覆盖 content / msgType / msgId / clientMsgId / replyMsgId / atUsersJson /
   /// mediaObjectIdsJson / fromUsername / fromAvatar，作为「本机聊天记录占用」。
-  Future<List<ChatSessionStorageStat>> loadSessionStorageStats(String scope) async {
+  Future<List<ChatSessionStorageStat>> loadSessionStorageStats(
+      String scope) async {
     final rows = await customSelect(
       '''
       SELECT
@@ -545,11 +546,9 @@ class ChatDatabase extends _$ChatDatabase {
   /// 清空当前 scope 下全部会话的本地消息与待发送队列（仅本机记录，不影响云端）。
   Future<void> clearAllSessions(String scope) {
     return transaction(() async {
-      await (delete(cachedMessages)
-            ..where((t) => t.scopeId.equals(scope)))
+      await (delete(cachedMessages)..where((t) => t.scopeId.equals(scope)))
           .go();
-      await (delete(chatOutboxEntries)
-            ..where((t) => t.scopeId.equals(scope)))
+      await (delete(chatOutboxEntries)..where((t) => t.scopeId.equals(scope)))
           .go();
     });
   }

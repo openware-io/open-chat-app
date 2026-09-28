@@ -14,7 +14,19 @@ abstract final class SecretChatDestroyPolicy {
   static const String d1 = '1d';
   static const String w1 = '1w';
 
-  static const List<String> all = [off, s1, s2, s5, s10, s30, m1, m5, h1, d1, w1];
+  static const List<String> all = [
+    off,
+    s1,
+    s2,
+    s5,
+    s10,
+    s30,
+    m1,
+    m5,
+    h1,
+    d1,
+    w1
+  ];
 
   /// 归一化后端可能返回的变体（如 `30_SECONDS` / `30_sec`）为契约值。
   static String normalize(Object? value) {
@@ -95,8 +107,10 @@ class SecretChatInfo {
       destroyPolicy: SecretChatDestroyPolicy.normalize(
         json['destroyPolicy'] ?? json['destroy_policy'],
       ),
-      userAPublicKey: optStr(json['userAPublicKey'] ?? json['user_a_public_key']),
-      userBPublicKey: optStr(json['userBPublicKey'] ?? json['user_b_public_key']),
+      userAPublicKey:
+          optStr(json['userAPublicKey'] ?? json['user_a_public_key']),
+      userBPublicKey:
+          optStr(json['userBPublicKey'] ?? json['user_b_public_key']),
       handshakeState: optStr(json['handshakeState'] ?? json['handshake_state']),
       createdAt: parseUtcDateTime(
         json['createdAt'] ?? json['created_at'],

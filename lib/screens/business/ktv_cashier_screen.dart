@@ -249,11 +249,10 @@ class _KtvCashierScreenState extends State<KtvCashierScreen>
       if (!mounted) return;
       final change = result.changeAmount.isZero
           ? ''
-          : '，找零 ' + result.changeAmount.formatted;
+          : '，找零 ${result.changeAmount.formatted}';
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content:
-              Text('收款成功，剩余应收 ' + result.remainingAmount.formatted + change),
+          content: Text('收款成功，剩余应收 ${result.remainingAmount.formatted}$change'),
         ),
       );
       await _loadDetail(order.id);
@@ -333,8 +332,9 @@ class _KtvCashierScreenState extends State<KtvCashierScreen>
       itemCount: _orders.length + 1,
       separatorBuilder: (_, __) => const SizedBox(height: 10),
       itemBuilder: (context, index) {
-        if (index == 0)
+        if (index == 0) {
           return const GvPendingApprovalBanner(margin: EdgeInsets.zero);
+        }
         final bill = _orders[index - 1];
         final pendingCount = pending?.countOfOrder(bill.id) ?? 0;
         return Material(
@@ -356,18 +356,18 @@ class _KtvCashierScreenState extends State<KtvCashierScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '包厢 ' + (bill.roomName ?? '-'),
+                          '包厢 ${bill.roomName ?? '-'}',
                           style: GvTypography.title(primary),
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          bill.orderNo + ' · ' + _orderStatusText(bill.status),
+                          '${bill.orderNo} · ${_orderStatusText(bill.status)}',
                           style: GvTypography.caption(secondary),
                         ),
                         if (pendingCount > 0) ...[
                           const SizedBox(height: 4),
                           Text(
-                            '待确认加项 ×' + pendingCount.toString(),
+                            '待确认加项 ×$pendingCount',
                             style: GvTypography.caption(
                                 AppColors.danger.resolveFrom(context)),
                           ),
@@ -401,8 +401,8 @@ class _KtvCashierScreenState extends State<KtvCashierScreen>
         GvPendingApprovalBanner(orderId: _selected?.id),
         TextButton(
           onPressed: _backToList,
-          child: Row(
-            children: const [
+          child: const Row(
+            children: [
               Icon(Icons.arrow_back, size: 16),
               SizedBox(width: 4),
               Text('返回列表'),
@@ -419,14 +419,10 @@ class _KtvCashierScreenState extends State<KtvCashierScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('应收 ' + bill.totalAmount.formatted,
+              Text('应收 ${bill.totalAmount.formatted}',
                   style: GvTypography.title(accent)),
               const SizedBox(height: 4),
-              Text(
-                  '已收 ' +
-                      bill.paidAmount.formatted +
-                      ' · ' +
-                      bill.currencyLabel,
+              Text('已收 ${bill.paidAmount.formatted} · ${bill.currencyLabel}',
                   style: GvTypography.caption(secondary)),
             ],
           ),

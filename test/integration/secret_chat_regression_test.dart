@@ -32,8 +32,10 @@ Future<void> _runRegression() async {
   final userB = 'reg_b_$stamp';
   const password = 'Test@12345';
 
-  final dioA = Dio(BaseOptions(baseUrl: base, connectTimeout: const Duration(seconds: 20)));
-  final dioB = Dio(BaseOptions(baseUrl: base, connectTimeout: const Duration(seconds: 20)));
+  final dioA = Dio(
+      BaseOptions(baseUrl: base, connectTimeout: const Duration(seconds: 20)));
+  final dioB = Dio(
+      BaseOptions(baseUrl: base, connectTimeout: const Duration(seconds: 20)));
 
   // ── 1. 注册双方 ──
   final tokenA = await _register(dioA, userA, password);
@@ -45,34 +47,43 @@ Future<void> _runRegression() async {
   // ── 2. 设备密钥注册 ──
   final pairA = await _generatePair();
   final pairB = await _generatePair();
-  await dioA.post('/device-keys', data: {'deviceId': 'dev-a-$stamp', 'publicKey': pairA.publicKey});
-  await dioB.post('/device-keys', data: {'deviceId': 'dev-b-$stamp', 'publicKey': pairB.publicKey});
+  await dioA.post('/device-keys',
+      data: {'deviceId': 'dev-a-$stamp', 'publicKey': pairA.publicKey});
+  await dioB.post('/device-keys',
+      data: {'deviceId': 'dev-b-$stamp', 'publicKey': pairB.publicKey});
   debugPrint('✅ 设备密钥注册');
 
   // ── 3. A 创建私密聊天：字段必须是 userB（事故1）──
-  final search = await dioA.get('/users/search', queryParameters: {'keyword': userB});
+  final search =
+      await dioA.get('/users/search', queryParameters: {'keyword': userB});
   final bUser = (search.data as List).firstWhere((u) => u['username'] == userB);
   final bId = (bUser['id'] as num).toInt();
   final chatResp = await dioA.post('/secret-chats', data: {'userB': bId});
   final chatId = (chatResp.data['id'] as num).toInt();
-  expect(chatResp.data['userA'] != null && chatResp.data['userB'] != null, isTrue,
+  expect(
+      chatResp.data['userA'] != null && chatResp.data['userB'] != null, isTrue,
       reason: '创建私密聊天应返回 userA/userB（契约字段）');
   debugPrint('✅ 创建私密聊天 id=$chatId');
 
   // ── 4. 接收方发现机制：B 的 /secret-chats/mine 必须能看到 A 创建的会话（事故2）──
   final mine = await dioB.get('/secret-chats/mine');
-  final found = (mine.data as List).where((s) => '${s['id']}' == '$chatId').toList();
+  final found =
+      (mine.data as List).where((s) => '${s['id']}' == '$chatId').toList();
   expect(found, isNotEmpty, reason: '接收方 /secret-chats/mine 必须能看到发起方创建的会话');
   debugPrint('✅ 接收方能看到私密会话');
 
   // ── 5. 设置定时销毁：字段必须是 policy（事故3）──
-  final policyResp = await dioA.post('/secret-chats/$chatId/destroy-policy', data: {'policy': '30s'});
-  expect(policyResp.data['destroyPolicy'], '30s', reason: '设置销毁策略应返回 destroyPolicy=30s');
+  final policyResp = await dioA
+      .post('/secret-chats/$chatId/destroy-policy', data: {'policy': '30s'});
+  expect(policyResp.data['destroyPolicy'], '30s',
+      reason: '设置销毁策略应返回 destroyPolicy=30s');
   debugPrint('✅ 定时销毁策略 30s 设置成功');
 
   // ── 6. 双方握手，安全码自动生成且一致（事故4）──
-  await dioA.post('/secret-chats/$chatId/handshake', data: {'publicKey': pairA.publicKey});
-  await dioB.post('/secret-chats/$chatId/handshake', data: {'publicKey': pairB.publicKey});
+  await dioA.post('/secret-chats/$chatId/handshake',
+      data: {'publicKey': pairA.publicKey});
+  await dioB.post('/secret-chats/$chatId/handshake',
+      data: {'publicKey': pairB.publicKey});
   final chat = await dioA.get('/secret-chats/$chatId');
   expect(chat.data['handshakeState'], 'ready', reason: '双方提交公钥后握手应 ready');
   final serverSafeCode = chat.data['safeCode'] as String;
@@ -86,8 +97,10 @@ Future<void> _runRegression() async {
 
   // ── 7. A 加密发送（此刻 B 尚未拉取 = 离线未读）──
   final plaintext = '回归消息-$stamp';
-  final sharedA = await _deriveShared(pairA.privateKey, chat.data['userBPublicKey'] as String);
-  final sharedB = await _deriveShared(pairB.privateKey, chat.data['userAPublicKey'] as String);
+  final sharedA = await _deriveShared(
+      pairA.privateKey, chat.data['userBPublicKey'] as String);
+  final sharedB = await _deriveShared(
+      pairB.privateKey, chat.data['userAPublicKey'] as String);
   final cipher = await _encrypt(sharedA, plaintext);
   final msgId = 'reg-msg-$stamp';
   await dioA.post('/secret-messages', data: {
@@ -124,7 +137,8 @@ Future<void> _runRegression() async {
     'afterSeq': 0,
   });
   final aMsg2 = (aView2.data as List).firstWhere((m) => m['msgId'] == msgId);
-  expect(aMsg2['destroyAt'], isNotNull, reason: 'B 已读后 A 视角也能看到 destroyAt（同步删除）');
+  expect(aMsg2['destroyAt'], isNotNull,
+      reason: 'B 已读后 A 视角也能看到 destroyAt（同步删除）');
 
   // ── 11. 等待到期销毁（30s + 余量）──
   debugPrint('等待 36s 验证定时销毁...');
@@ -168,7 +182,8 @@ Future<Uint8List> _deriveShared(String privateB64, String peerPublicB64) async {
   final kp = await x.newKeyPairFromSeed(base64Decode(privateB64));
   final shared = await x.sharedSecretKey(
     keyPair: kp,
-    remotePublicKey: SimplePublicKey(base64Decode(peerPublicB64), type: KeyPairType.x25519),
+    remotePublicKey:
+        SimplePublicKey(base64Decode(peerPublicB64), type: KeyPairType.x25519),
   );
   return Uint8List.fromList(await shared.extractBytes());
 }

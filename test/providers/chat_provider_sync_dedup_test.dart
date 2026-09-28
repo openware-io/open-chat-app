@@ -123,8 +123,7 @@ void main() {
         reason: '同 clientMsgId 的占位与服务端消息必须视为同一条（上传视频重复回归）');
     expect(after.single.msgId, 'srv-365418376367325184',
         reason: '占位应被服务端消息替换（msgId 更新为服务端 id）');
-    expect(after.single.status, isNot('sending'),
-        reason: '替换后不应再是发送中');
+    expect(after.single.status, isNot('sending'), reason: '替换后不应再是发送中');
   });
 
   test('服务端消息 msgId 与本地相同（已 ack 确认）时同步不重复、不替换', () async {
@@ -329,8 +328,8 @@ class _SyncFakeChatRepository implements ChatRepository {
   Future<int> unreadCount() async => 0;
 
   @override
-  Future<List<({String conversationId, int count})>> unreadByConversation() async =>
-      const [];
+  Future<List<({String conversationId, int count})>>
+      unreadByConversation() async => const [];
 
   @override
   Future<Map<String, dynamic>> clearPrivateChat(String peerId) async => {};
@@ -339,8 +338,7 @@ class _SyncFakeChatRepository implements ChatRepository {
   Future<Map<String, dynamic>> clearGroupChat(String groupId) async => {};
 
   @override
-  Future<SecretChatInfo> secretChatInfo(String id) =>
-      _imApi.secretChatInfo(id);
+  Future<SecretChatInfo> secretChatInfo(String id) => _imApi.secretChatInfo(id);
 
   @override
   Future<SecretChatInfo> submitSecretChatHandshake({
@@ -379,7 +377,8 @@ class _SyncFakeChatRepository implements ChatRepository {
       {'counted': 0};
 
   @override
-  Future<Map<String, dynamic>> secretChatDestroyStatus(int secretChatId) async =>
+  Future<Map<String, dynamic>> secretChatDestroyStatus(
+          int secretChatId) async =>
       {};
 
   @override
@@ -465,7 +464,8 @@ class _SyncFakeChatRepository implements ChatRepository {
   Future<void> deleteChannel(String id) async {}
 
   @override
-  Future<List<ChannelInfo>> searchChannels(String keyword, {int limit = 20}) async =>
+  Future<List<ChannelInfo>> searchChannels(String keyword,
+          {int limit = 20}) async =>
       const [];
 
   @override
@@ -734,7 +734,8 @@ class _EmptyGroupRepository implements GroupRepository {
   Future<void> updateMyNickname(int groupId, String nickname) async {}
 
   @override
-  Future<void> muteMember(int groupId, int userId, int? durationMinutes) async {}
+  Future<void> muteMember(
+      int groupId, int userId, int? durationMinutes) async {}
 
   @override
   Future<void> setRole(int groupId, int userId, String role) async {}

@@ -77,8 +77,7 @@ class _ChatBackupScreenState extends State<ChatBackupScreen> {
             if (conversationCount == 0 && messageCount == 0) {
               errorMessage = l10n.chatBackupExportEmpty;
             } else {
-              final jsonStr =
-                  const JsonEncoder.withIndent('  ').convert(data);
+              final jsonStr = const JsonEncoder.withIndent('  ').convert(data);
               final bytes = Uint8List.fromList(utf8.encode(jsonStr));
               savedPath = await saveChatBackupFile(
                 fileName,
@@ -163,7 +162,8 @@ class _ChatBackupScreenState extends State<ChatBackupScreen> {
     } catch (e) {
       if (mounted) {
         setState(() => _busy = false);
-        GvToast.show(context, '$l10n.chatBackupRestoreFailed: ${ApiFailure.messageOf(e)}');
+        GvToast.show(context,
+            '$l10n.chatBackupRestoreFailed: ${ApiFailure.messageOf(e)}');
       }
       return;
     }
@@ -242,9 +242,8 @@ class _ChatBackupScreenState extends State<ChatBackupScreen> {
     final primary = AppColors.textPrimary.resolveFrom(context);
     final hint = AppColors.textHint.resolveFrom(context);
     final secondary = AppColors.textSecondary.resolveFrom(context);
-    final hover = AppColors.textPrimary
-        .resolveFrom(context)
-        .withValues(alpha: 0.06);
+    final hover =
+        AppColors.textPrimary.resolveFrom(context).withValues(alpha: 0.06);
 
     return Scaffold(
       backgroundColor: gvPageScaffoldBackground(context),

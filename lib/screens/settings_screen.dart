@@ -807,7 +807,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 : (_versionLabel.isEmpty
                                     ? l10n.settingsVersionCurrent
                                     : '${l10n.settingsVersionCurrent} $_versionLabel'),
-                            badge: _updateAvailable ? const _NewVersionDot() : null,
+                            badge: _updateAvailable
+                                ? const _NewVersionDot()
+                                : null,
                             onTap: () => _checkClientRelease(context),
                             inkBorderRadius: const BorderRadius.vertical(
                               top: Radius.circular(GvRadii.card),
@@ -879,8 +881,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   // 注销账号：比退出登录更危险，视觉弱化（小号红色文字），保留双确认（提示 + 密码）。
                   TextButton(
-                    onPressed: () =>
-                        unawaited(_confirmDeleteAccount(context)),
+                    onPressed: () => unawaited(_confirmDeleteAccount(context)),
                     child: Text(
                       l10n.settingsDeleteAccount,
                       style: GvTypography.caption(
@@ -894,8 +895,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: FilledButton(
                       key: GvAutomationKeys.settingsLogout,
                       style: FilledButton.styleFrom(
-                        backgroundColor:
-                            AppColors.danger.resolveFrom(context),
+                        backgroundColor: AppColors.danger.resolveFrom(context),
                         foregroundColor: Colors.white,
                         minimumSize: const Size(double.infinity, 50),
                       ),
@@ -913,8 +913,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               actions: [
                                 GvDialogActions.weChatFooter(
                                   ctx,
-                                  onSecondary: () =>
-                                      Navigator.pop(ctx, false),
+                                  onSecondary: () => Navigator.pop(ctx, false),
                                   onPrimary: () => Navigator.pop(ctx, true),
                                 ),
                               ],

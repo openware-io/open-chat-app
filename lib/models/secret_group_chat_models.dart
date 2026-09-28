@@ -137,15 +137,15 @@ class SecretGroupChatInfo {
       destroyPolicy: SecretChatDestroyPolicy.normalize(
         json['destroyPolicy'] ?? json['destroy_policy'],
       ),
-      anonymousEnabled: json['anonymousEnabled'] == true ||
-          json['anonymous_enabled'] == true,
+      anonymousEnabled:
+          json['anonymousEnabled'] == true || json['anonymous_enabled'] == true,
       pinnedMsgId: _optStr(json['pinnedMsgId'] ?? json['pinned_msg_id']),
       pinnedAt: parseUtcDateTime(json['pinnedAt'] ?? json['pinned_at']),
       inviteToken: _optStr(json['inviteToken'] ?? json['invite_token']),
-      inviteExpiresAt:
-          parseUtcDateTime(json['inviteExpiresAt'] ?? json['invite_expires_at']),
-      ownerOnlyPost: json['ownerOnlyPost'] == true ||
-          json['owner_only_post'] == true,
+      inviteExpiresAt: parseUtcDateTime(
+          json['inviteExpiresAt'] ?? json['invite_expires_at']),
+      ownerOnlyPost:
+          json['ownerOnlyPost'] == true || json['owner_only_post'] == true,
       members: members,
       createdBy: jsonInt(json['createdBy'] ?? json['created_by']),
       createdAt: parseUtcDateTime(json['createdAt'] ?? json['created_at']),

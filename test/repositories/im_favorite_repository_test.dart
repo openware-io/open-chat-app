@@ -14,7 +14,8 @@ void main() {
 
   late ApiClient apiClient;
   late ImFavoriteRepository repository;
-  final captured = <({String method, String path, Map<String, dynamic> body})>[];
+  final captured =
+      <({String method, String path, Map<String, dynamic> body})>[];
 
   /// 每个用例自定义响应：返回 null 表示按 500 失败。
   Map<String, dynamic>? Function(RequestOptions options) respond =
@@ -106,7 +107,9 @@ void main() {
     expect(source.messageId, 'm1');
   });
 
-  test('lookupSource 解析 MESSAGE_DELETED / CONVERSATION_UNAVAILABLE / NO_PERMISSION 均不可跳转', () async {
+  test(
+      'lookupSource 解析 MESSAGE_DELETED / CONVERSATION_UNAVAILABLE / NO_PERMISSION 均不可跳转',
+      () async {
     for (final entry in const {
       'MESSAGE_DELETED': FavoriteSourceState.messageDeleted,
       'CONVERSATION_UNAVAILABLE': FavoriteSourceState.conversationUnavailable,

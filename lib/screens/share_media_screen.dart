@@ -155,12 +155,15 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
     final groups = context.watch<GroupProvider>().groups;
     final myId = context.watch<ChatProvider>().myId;
 
-    final friendPool =
-        myId == null ? friends : friends.where((f) => f.friendId != myId).toList();
+    final friendPool = myId == null
+        ? friends
+        : friends.where((f) => f.friendId != myId).toList();
     final kw = _search.text.toLowerCase().trim();
     final filteredFriends = kw.isEmpty
         ? friendPool
-        : friendPool.where((f) => f.displayName.toLowerCase().contains(kw)).toList();
+        : friendPool
+            .where((f) => f.displayName.toLowerCase().contains(kw))
+            .toList();
     final filteredGroups = kw.isEmpty
         ? groups
         : groups.where((g) => g.name.toLowerCase().contains(kw)).toList();
@@ -185,29 +188,33 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                 children: [
                   if (filteredFriends.isNotEmpty) ...[
                     _sectionHeader(l10n.channelShareSectionFriends),
-                    _card(filteredFriends.map((f) => _row(
-                          icon: GvAvatar(
-                            name: f.displayName,
-                            uid: f.friendId,
-                            src: f.friendUser?.avatar,
-                            size: 40,
-                          ),
-                          title: f.displayName,
-                          onTap: () => _sendTo('${f.friendId}', 'private'),
-                        )).toList()),
+                    _card(filteredFriends
+                        .map((f) => _row(
+                              icon: GvAvatar(
+                                name: f.displayName,
+                                uid: f.friendId,
+                                src: f.friendUser?.avatar,
+                                size: 40,
+                              ),
+                              title: f.displayName,
+                              onTap: () => _sendTo('${f.friendId}', 'private'),
+                            ))
+                        .toList()),
                   ],
                   if (filteredGroups.isNotEmpty) ...[
                     _sectionHeader(l10n.channelShareSectionGroups),
-                    _card(filteredGroups.map((g) => _row(
-                          icon: GvAvatar(
-                            name: g.name,
-                            uid: g.id,
-                            src: g.avatar,
-                            size: 40,
-                          ),
-                          title: g.name,
-                          onTap: () => _sendTo('${g.id}', 'group'),
-                        )).toList()),
+                    _card(filteredGroups
+                        .map((g) => _row(
+                              icon: GvAvatar(
+                                name: g.name,
+                                uid: g.id,
+                                src: g.avatar,
+                                size: 40,
+                              ),
+                              title: g.name,
+                              onTap: () => _sendTo('${g.id}', 'group'),
+                            ))
+                        .toList()),
                   ],
                   if (filteredFriends.isEmpty && filteredGroups.isEmpty)
                     Padding(

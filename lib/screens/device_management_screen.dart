@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
-import 'package:open_ui/open_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_colors.dart';
@@ -155,15 +154,7 @@ class _DeviceManagementScreenState extends State<DeviceManagementScreen> {
     final time = d.lastActiveAt?.toLocal();
     final timeText = time == null
         ? ''
-        : time.year.toString() +
-            '-' +
-            time.month.toString().padLeft(2, '0') +
-            '-' +
-            time.day.toString().padLeft(2, '0') +
-            ' ' +
-            time.hour.toString().padLeft(2, '0') +
-            ':' +
-            time.minute.toString().padLeft(2, '0');
+        : '${time.year}-${time.month.toString().padLeft(2, '0')}-${time.day.toString().padLeft(2, '0')} ${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
     return Card(
       margin: EdgeInsets.zero,
       child: Padding(
@@ -185,8 +176,7 @@ class _DeviceManagementScreenState extends State<DeviceManagementScreen> {
             Text(l10n.gvFaDeviceLoginMethod(_methodLabel(l10n, d.loginMethod))),
             if ((d.loginIp ?? '').isNotEmpty)
               Text(l10n.gvFaDeviceLoginIp(d.loginIp!)),
-            if (timeText.isNotEmpty)
-              Text(l10n.gvFaDeviceLastActive(timeText)),
+            if (timeText.isNotEmpty) Text(l10n.gvFaDeviceLastActive(timeText)),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

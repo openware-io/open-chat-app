@@ -349,8 +349,7 @@ class _ScanScreenState extends State<ScanScreen> {
 
   Widget _buildScanErrorUi(BuildContext context, MobileScannerException error) {
     final l10n = AppLocalizations.of(context)!;
-    final webFallback =
-        kIsWeb &&
+    final webFallback = kIsWeb &&
         (error.errorCode == MobileScannerErrorCode.unsupported ||
             error.errorCode == MobileScannerErrorCode.permissionDenied);
     return ColoredBox(

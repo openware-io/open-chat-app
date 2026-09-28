@@ -78,7 +78,11 @@ void main() {
   });
 
   test('售罄项无论库存字段如何都不可加', () {
-    final soldOut = item(available: false, reason: '已售罄', stockControlled: true, availableQuantity: 0);
+    final soldOut = item(
+        available: false,
+        reason: '已售罄',
+        stockControlled: true,
+        availableQuantity: 0);
     expect(soldOut.canIncrease(0), isFalse);
   });
 }

@@ -85,7 +85,7 @@ class _KtvDashboardScreenState extends State<KtvDashboardScreen>
   void _onRoomTap(KtvRoom room) {
     final status = room.boardStatus.toUpperCase();
     if (status == 'RESERVED') {
-      _toast(room.name + ' 已预订，请到预约流程处理');
+      _toast('${room.name} 已预订，请到预约流程处理');
       return;
     }
     if (room.isAvailable) {
@@ -107,7 +107,7 @@ class _KtvDashboardScreenState extends State<KtvDashboardScreen>
       );
       return;
     }
-    _toast(room.name + ' 不可用');
+    _toast('${room.name} 不可用');
   }
 
   void _toast(String msg) {
@@ -229,7 +229,7 @@ class _KtvDashboardScreenState extends State<KtvDashboardScreen>
       return ListView(
         physics: const AlwaysScrollableScrollPhysics(),
         children: [
-          SizedBox(height: 120),
+          const SizedBox(height: 120),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(GvSpacing.page),
@@ -249,7 +249,7 @@ class _KtvDashboardScreenState extends State<KtvDashboardScreen>
       return ListView(
         physics: const AlwaysScrollableScrollPhysics(),
         children: [
-          SizedBox(height: 120),
+          const SizedBox(height: 120),
           Center(
             child: Text('暂无包厢', style: GvTypography.body(secondary)),
           ),

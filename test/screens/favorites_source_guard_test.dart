@@ -28,8 +28,7 @@ void main() {
     final openAt = source.indexOf('gvOpenChat(');
     expect(lookupAt, greaterThanOrEqualTo(0),
         reason: '详情页「查看原消息」必须调用 lookupSource');
-    expect(openAt, greaterThan(lookupAt),
-        reason: '跳转必须发生在可用性查询之后');
+    expect(openAt, greaterThan(lookupAt), reason: '跳转必须发生在可用性查询之后');
     expect(source.contains('FavoriteSourceState.available'), isTrue,
         reason: '只有 AVAILABLE 才允许跳转');
     // 查询失败/其它状态的中文说明必须存在。

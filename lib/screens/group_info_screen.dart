@@ -894,10 +894,10 @@ class _GroupInfoScreenState extends State<GroupInfoScreen> {
     final privacy =
         context.read<ClientRemoteConfigProvider>().hideGroupMemberInfo;
     final isSelf = m.userId == myId;
-    final canViewAccount = myRole.toLowerCase() == 'owner' ||
-        allowMemberViewAccount;
-    final showIdentity = isSelf || friend != null ||
-        (!privacy && canViewAccount);
+    final canViewAccount =
+        myRole.toLowerCase() == 'owner' || allowMemberViewAccount;
+    final showIdentity =
+        isSelf || friend != null || (!privacy && canViewAccount);
 
     var display = m.nickname?.trim();
     if (display == null || display.isEmpty) {

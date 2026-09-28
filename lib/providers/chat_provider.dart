@@ -1224,9 +1224,8 @@ class ChatProvider extends ChangeNotifier {
       }
       for (final m in dedupedParsed) {
         final existing = byId[m.msgId];
-        byId[m.msgId] = existing == null
-            ? m
-            : mergeByMsgIdPreferringEdit(existing, m);
+        byId[m.msgId] =
+            existing == null ? m : mergeByMsgIdPreferringEdit(existing, m);
       }
       final merged = byId.values.toList();
       sortChatMessagesChronological(merged);
@@ -1809,7 +1808,8 @@ class ChatProvider extends ChangeNotifier {
     final list = messageMap[key];
     if (list != null) {
       final kept = list.where((m) => m.timestamp.isAfter(clearedAt)).toList();
-      final removed = list.where((m) => !m.timestamp.isAfter(clearedAt)).toList();
+      final removed =
+          list.where((m) => !m.timestamp.isAfter(clearedAt)).toList();
       if (removed.isNotEmpty) {
         messageMap[key] = kept;
         for (final message in removed) {
@@ -1864,7 +1864,8 @@ class ChatProvider extends ChangeNotifier {
 
     final affectedKeys = <String>{};
     for (final item in deleted) {
-      final peerId = _peerIdFromConversationId(item.conversationId, item.chatType);
+      final peerId =
+          _peerIdFromConversationId(item.conversationId, item.chatType);
       if (peerId == null || peerId.isEmpty) continue;
       final key = chatKey(item.chatType, peerId);
       final list = messageMap[key];
@@ -2018,7 +2019,8 @@ class ChatProvider extends ChangeNotifier {
     // ⚠️ 角标此前**只认服务端值**（syncUnreadCounts 异步回填），因此进入会话后
     // 角标要等一次网络往返才变化，表现为「有操作延迟」。这里先做**乐观本地更新**：
     // 按本次已读条数立即扣减，随后仍以服务端值校准。
-    final clearedCount = _applyOptimisticReadDecrement(msgIds, peerId, chatType);
+    final clearedCount =
+        _applyOptimisticReadDecrement(msgIds, peerId, chatType);
     if (clearedCount > 0) {
       notifyListeners();
     }
@@ -2032,7 +2034,8 @@ class ChatProvider extends ChangeNotifier {
   ///
   /// 返回实际扣减的数量（0 表示无需刷新）。服务端值随后由 [syncUnreadCounts] 校准，
   /// 因此即使多扣/少扣也会在下一个同步周期纠正。
-  int _applyOptimisticReadDecrement(List<String> msgIds, String? peerId, String? chatType) {
+  int _applyOptimisticReadDecrement(
+      List<String> msgIds, String? peerId, String? chatType) {
     if (!_hasServerUnread || _serverTotalUnread <= 0) return 0;
     final my = myId;
     if (my == null) return 0;
@@ -2043,14 +2046,17 @@ class ChatProvider extends ChangeNotifier {
       candidates++;
     }
     if (candidates == 0) return 0;
-    final decrement = candidates < _serverTotalUnread ? candidates : _serverTotalUnread;
+    final decrement =
+        candidates < _serverTotalUnread ? candidates : _serverTotalUnread;
     _serverTotalUnread = _serverTotalUnread - decrement;
     // 同步把本地会话未读清零，保证 tab 与列表一致（列表本来就会清零，这里兜住时序）。
     if (peerId != null && chatType != null) {
       final key = chatKey(chatType, peerId);
       for (var i = 0; i < conversations.length; i++) {
         final conv = conversations[i];
-        if (conv.id == peerId && conv.chatType == chatType && conv.unread != 0) {
+        if (conv.id == peerId &&
+            conv.chatType == chatType &&
+            conv.unread != 0) {
           conversations[i] = conv.copyWith(unread: 0);
           _persistConversations();
           break;
@@ -2123,9 +2129,8 @@ class ChatProvider extends ChangeNotifier {
     for (final e in perConv) {
       if (e.count > 0) perConvSum += e.count;
     }
-    final authoritative = total == null
-        ? perConvSum
-        : (total > perConvSum ? total : perConvSum);
+    final authoritative =
+        total == null ? perConvSum : (total > perConvSum ? total : perConvSum);
     final totalChanged =
         !_hasServerUnread || _serverTotalUnread != authoritative;
     _serverTotalUnread = authoritative;
@@ -3357,8 +3362,11 @@ class ChatProvider extends ChangeNotifier {
       ));
       maxProcessedSeq = seq;
       // 只有前台正在查看该私密群时，解密消息才算真正查阅。
-      if (isAppForeground() && currentChatId == groupId &&
-          currentChatType == 'secret_group' && from != myId && seq > maxReadSeq) {
+      if (isAppForeground() &&
+          currentChatId == groupId &&
+          currentChatType == 'secret_group' &&
+          from != myId &&
+          seq > maxReadSeq) {
         maxReadSeq = seq;
       }
     }
@@ -3368,9 +3376,9 @@ class ChatProvider extends ChangeNotifier {
     if (maxReadSeq > (_secretGroupReadReportedSeq[groupId] ?? 0)) {
       unawaited(_chat
           .markSecretGroupRead(
-            secretGroupId: int.tryParse(groupId) ?? 0,
-            afterSeq: maxReadSeq,
-          )
+        secretGroupId: int.tryParse(groupId) ?? 0,
+        afterSeq: maxReadSeq,
+      )
           .then((_) {
         if (maxReadSeq > (_secretGroupReadReportedSeq[groupId] ?? 0)) {
           _secretGroupReadReportedSeq[groupId] = maxReadSeq;
@@ -3429,7 +3437,8 @@ class ChatProvider extends ChangeNotifier {
       conversationPreviewForMessage(latest, viewerId: myId),
       incrementUnread: false,
     );
-    final incomingCount = (isAppForeground() && currentChatId == groupId &&
+    final incomingCount = (isAppForeground() &&
+            currentChatId == groupId &&
             currentChatType == 'secret_group')
         ? 0
         : newlyInserted.where((m) => m.from != myId).length;
@@ -3752,8 +3761,11 @@ class ChatProvider extends ChangeNotifier {
       ));
       maxProcessedSeq = seq;
       // 只有前台正在查看该私密会话时，解密消息才算真正查阅。
-      if (isAppForeground() && currentChatId == secretChatId &&
-          currentChatType == 'secret' && from != myId && seq > maxReadSeq) {
+      if (isAppForeground() &&
+          currentChatId == secretChatId &&
+          currentChatType == 'secret' &&
+          from != myId &&
+          seq > maxReadSeq) {
         maxReadSeq = seq;
       }
     }
@@ -3840,7 +3852,8 @@ class ChatProvider extends ChangeNotifier {
         incrementUnread: false,
       );
       // 对方发来的新消息计入未读角标（己方消息只做发送确认，不计未读）。
-      final incomingCount = (isAppForeground() && currentChatId == secretChatId &&
+      final incomingCount = (isAppForeground() &&
+              currentChatId == secretChatId &&
               currentChatType == 'secret')
           ? 0
           : newlyInserted.where((m) => m.from != myId).length;

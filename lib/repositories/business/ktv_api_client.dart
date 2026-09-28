@@ -570,13 +570,13 @@ class KtvApiClient {
       return await live();
     } on DioException catch (e) {
       if (e.response == null && fallbackToMockOnError) {
-        debugPrint('[KTV API] ' + op + ' 无后端，回退本地 mock: ' + (e.message ?? ''));
+        debugPrint('[KTV API] $op 无后端，回退本地 mock: ${e.message ?? ''}');
         return mock();
       }
       rethrow;
     } catch (e) {
       if (fallbackToMockOnError) {
-        debugPrint('[KTV API] ' + op + ' 回退本地 mock: ' + e.toString());
+        debugPrint('[KTV API] $op 回退本地 mock: $e');
         return mock();
       }
       rethrow;
@@ -668,7 +668,7 @@ class KtvApiClient {
     final id = orderId ?? 'ord_001';
     return KtvOrder(
       id: id,
-      orderNo: 'KT20260817-' + id.hashCode.toString().substring(0, 4),
+      orderNo: 'KT20260817-${id.hashCode.toString().substring(0, 4)}',
       status: status,
       roomId: resourceId ?? 'res_002',
       roomName: 'A02',
@@ -691,11 +691,11 @@ class KtvApiClient {
   List<KtvOrder> _mockOrders() {
     KtvOrder order(String id, String room, int amount) => KtvOrder(
           id: id,
-          orderNo: 'KT20260817-' + room.hashCode.toString().substring(0, 4),
+          orderNo: 'KT20260817-${room.hashCode.toString().substring(0, 4)}',
           status: 'WAITING_SETTLEMENT',
           roomName: room,
           customerMasked: '139****0002',
-          sessionId: 'ses_' + room,
+          sessionId: 'ses_$room',
           sessionStatus: 'CLOSED',
           totalAmount: KtvMoney(minorUnits: amount, currency: _devMockCurrency),
           paidAmount: KtvMoney(minorUnits: 0, currency: _devMockCurrency),

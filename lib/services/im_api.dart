@@ -600,8 +600,8 @@ class ImApi {
   /// 未走 generated 客户端是因为该端点较新，避免此处依赖生成代码的重新生成。
   Future<int> deleteMessagesForMe(List<String> msgIds) async {
     if (msgIds.isEmpty) return 0;
-    final response = await _c.dio.post<dynamic>('/messages/delete-for-me',
-        data: {'msgIds': msgIds});
+    final response = await _c.dio
+        .post<dynamic>('/messages/delete-for-me', data: {'msgIds': msgIds});
     final data = _asMap(response.data);
     final deleted = data['deleted'];
     return deleted is int ? deleted : int.tryParse('$deleted') ?? 0;
@@ -631,7 +631,8 @@ class ImApi {
   }
 
   /// 按会话未读数：GET /messages/unread-by-conversation。
-  Future<List<({String conversationId, int count})>> unreadByConversation() async {
+  Future<List<({String conversationId, int count})>>
+      unreadByConversation() async {
     final raw = await _c.dio.get<dynamic>('/messages/unread-by-conversation');
     return _asList(raw.data)
         .whereType<Map>()
@@ -642,7 +643,9 @@ class ImApi {
             conversationId: map['conversationId']?.toString() ?? '',
             count: count is int
                 ? count
-                : (count is num ? count.toInt() : (int.tryParse(count?.toString() ?? '') ?? 0)),
+                : (count is num
+                    ? count.toInt()
+                    : (int.tryParse(count?.toString() ?? '') ?? 0)),
           );
         })
         .where((e) => e.conversationId.isNotEmpty)

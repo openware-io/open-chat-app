@@ -54,7 +54,7 @@ class GvPendingApprovalBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '客户加项待确认 ' + controller.pendingCount.toString() + ' 条',
+                  '客户加项待确认 ${controller.pendingCount} 条',
                   style: GvTypography.body(primary),
                 ),
                 const SizedBox(height: 2),
@@ -81,12 +81,12 @@ class GvPendingApprovalBanner extends StatelessWidget {
 
   String _subtitle(PendingApprovalController controller, int orderCount) {
     if (orderCount > 0) {
-      return '本单 ' + orderCount.toString() + ' 条 · 确认后才计入应收';
+      return '本单 $orderCount 条 · 确认后才计入应收';
     }
     final amount = controller.view.amountText;
     if (amount.isEmpty) {
       return '客户自助提交 · 确认后才计入应收';
     }
-    return '合计 ' + amount + ' · 确认后才计入应收';
+    return '合计 $amount · 确认后才计入应收';
   }
 }

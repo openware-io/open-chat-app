@@ -89,17 +89,23 @@ void main() {
   });
 
   test('包厢展示名逐级兜底，绝不留空（门店必须先看清是哪间包厢的需求）', () {
-    KtvPendingOrder order(Map<String, dynamic> json) => KtvPendingOrder.fromJson(json);
+    KtvPendingOrder order(Map<String, dynamic> json) =>
+        KtvPendingOrder.fromJson(json);
 
     // 服务端 roomName 优先
-    expect(order({'orderId': 1, 'roomName': '小包 S03', 'roomCode': 'S03'}).roomLabel, '小包 S03');
+    expect(
+        order({'orderId': 1, 'roomName': '小包 S03', 'roomCode': 'S03'})
+            .roomLabel,
+        '小包 S03');
     // 名称快照为空 → 编码快照
-    expect(order({'orderId': 1, 'roomName': '', 'roomCode': 'S03'}).roomLabel, 'S03');
+    expect(order({'orderId': 1, 'roomName': '', 'roomCode': 'S03'}).roomLabel,
+        'S03');
     // 只有 roomCode 字段（服务端没给 roomName）
     expect(order({'orderId': 1, 'roomCode': 'K02'}).roomLabel, 'K02');
     // 都没有（订单没有包厢会话 / 资源服务不可达）→ 明确文案，不是空串
     expect(order({'orderId': 1}).roomLabel, '未关联包厢');
-    expect(order({'orderId': 1, 'roomName': '', 'roomCode': ''}).roomLabel, '未关联包厢');
+    expect(order({'orderId': 1, 'roomName': '', 'roomCode': ''}).roomLabel,
+        '未关联包厢');
   });
 
   test('单一币种时金额走唯一格式化入口（最小单位 -> 展示）', () {

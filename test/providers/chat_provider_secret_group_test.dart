@@ -114,7 +114,8 @@ void main() {
         ),
         peerPublicKeyBase64: senderPub,
       );
-      final decrypted200 = await E2eeCryptoBridge.decrypt(shared200, member200Cipher);
+      final decrypted200 =
+          await E2eeCryptoBridge.decrypt(shared200, member200Cipher);
       expect(decrypted200, contains('私密群聊机密内容'));
 
       // 成员 300 同理。
@@ -125,15 +126,16 @@ void main() {
         ),
         peerPublicKeyBase64: senderPub,
       );
-      final decrypted300 = await E2eeCryptoBridge.decrypt(shared300, member300Cipher);
-      expect(decrypted300, decrypted200,
-          reason: '同一份明文逐成员加密，各自解密应得到相同载荷');
+      final decrypted300 =
+          await E2eeCryptoBridge.decrypt(shared300, member300Cipher);
+      expect(decrypted300, decrypted200, reason: '同一份明文逐成员加密，各自解密应得到相同载荷');
     });
 
     test('成员未提交公钥时本地乐观展示并入队（不再返回 waitingForPeer）', () async {
       // 清空成员公钥 → 全员未握手。
       server.clearMemberPublicKeys();
-      final result = await provider.sendSecretGroupText(groupId: '1', text: 'hi');
+      final result =
+          await provider.sendSecretGroupText(groupId: '1', text: 'hi');
       expect(result, SecretSendResult.success);
     });
   });
@@ -222,7 +224,8 @@ void main() {
         },
       ];
 
-      provider.onSecretGroupStored({'secretGroupId': 1, 'senderId': 200, 'msgId': 'peer-msg-9'});
+      provider.onSecretGroupStored(
+          {'secretGroupId': 1, 'senderId': 200, 'msgId': 'peer-msg-9'});
       // pullSecretGroupMessages 异步执行，等待其完成。
       await Future<void>.delayed(const Duration(milliseconds: 200));
 
@@ -304,7 +307,8 @@ class _SecretGroupWireServer {
             }
             if (path.contains('secret-group-messages') &&
                 options.method.toUpperCase() == 'GET') {
-              final groupId = options.queryParameters['secretGroupId']?.toString();
+              final groupId =
+                  options.queryParameters['secretGroupId']?.toString();
               return messages[groupId] ?? const [];
             }
             return const {};
@@ -328,9 +332,17 @@ class _SecretGroupWireServer {
       'safeCode': '',
       'destroyPolicy': 'off',
       'members': [
-        {'userId': 100, 'devicePublicKey': ownerPublicKey, 'joinedAt': '2026-08-19T00:00:00'},
+        {
+          'userId': 100,
+          'devicePublicKey': ownerPublicKey,
+          'joinedAt': '2026-08-19T00:00:00'
+        },
         for (final e in memberPublicKeys.entries)
-          {'userId': e.key, 'devicePublicKey': e.value, 'joinedAt': '2026-08-19T00:00:00'},
+          {
+            'userId': e.key,
+            'devicePublicKey': e.value,
+            'joinedAt': '2026-08-19T00:00:00'
+          },
       ],
       'createdBy': 100,
       'createdAt': '2026-08-19T00:00:00',
@@ -472,7 +484,8 @@ class _FakeChatRepository implements ChatRepository {
       {'counted': 0};
 
   @override
-  Future<Map<String, dynamic>> secretChatDestroyStatus(int secretChatId) async =>
+  Future<Map<String, dynamic>> secretChatDestroyStatus(
+          int secretChatId) async =>
       {};
 
   @override
@@ -591,8 +604,8 @@ class _FakeChatRepository implements ChatRepository {
   Future<int> unreadCount() async => 0;
 
   @override
-  Future<List<({String conversationId, int count})>> unreadByConversation() async =>
-      const [];
+  Future<List<({String conversationId, int count})>>
+      unreadByConversation() async => const [];
 
   @override
   Future<Map<String, dynamic>> clearPrivateChat(String peerId) async => {};
@@ -633,7 +646,8 @@ class _FakeChatRepository implements ChatRepository {
   Future<void> deleteChannel(String id) async {}
 
   @override
-  Future<List<ChannelInfo>> searchChannels(String keyword, {int limit = 20}) async =>
+  Future<List<ChannelInfo>> searchChannels(String keyword,
+          {int limit = 20}) async =>
       const [];
 
   @override
@@ -824,7 +838,8 @@ class _FakeGroupRepository implements GroupRepository {
   Future<void> updateMyNickname(int groupId, String nickname) async {}
 
   @override
-  Future<void> muteMember(int groupId, int userId, int? durationMinutes) async {}
+  Future<void> muteMember(
+      int groupId, int userId, int? durationMinutes) async {}
 
   @override
   Future<void> setRole(int groupId, int userId, String role) async {}

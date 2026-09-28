@@ -80,8 +80,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     return InputDecoration(
       filled: true,
       fillColor: fill,
-      contentPadding:
-          const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(GvRadii.input),
         borderSide: BorderSide.none,

@@ -7,7 +7,9 @@ void main() {
 
     test('中文界面：服务端英文文案被翻译', () {
       setApiMessageZhLocale(true);
-      expect(localizeServerMessage('New password must differ from the current password'),
+      expect(
+          localizeServerMessage(
+              'New password must differ from the current password'),
           '新密码不能与当前密码相同');
       expect(localizeServerMessage('Password incorrect'), '当前密码错误');
       expect(localizeServerMessage('Not friends'), '对方不是你的好友');
@@ -17,7 +19,9 @@ void main() {
 
     test('英文界面：英文文案保持英文，不会被翻成中文', () {
       setApiMessageZhLocale(false);
-      expect(localizeServerMessage('New password must differ from the current password'),
+      expect(
+          localizeServerMessage(
+              'New password must differ from the current password'),
           'New password must differ from the current password');
       expect(localizeServerMessage('Password incorrect'), 'Password incorrect');
       expect(localizeServerMessage('Not friends'), 'Not friends');

@@ -318,8 +318,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           color: gvPageScaffoldBackground(context),
           border: Border(
             top: BorderSide(
-              color:
-                  AppColors.textHint.resolveFrom(context).withValues(alpha: 0.2),
+              color: AppColors.textHint
+                  .resolveFrom(context)
+                  .withValues(alpha: 0.2),
             ),
           ),
         ),
@@ -327,7 +328,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           children: [
             Expanded(
               child: OutlinedButton(
-                onPressed: _selectedMsgIds.length == 1 ? _forwardSelected : null,
+                onPressed:
+                    _selectedMsgIds.length == 1 ? _forwardSelected : null,
                 child: Text(l10n.chatActionForward),
               ),
             ),
@@ -362,7 +364,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           Text(
             text,
             style: GvTypography.caption(
-              AppColors.textSecondary.resolveFrom(context).withValues(alpha: 0.8),
+              AppColors.textSecondary
+                  .resolveFrom(context)
+                  .withValues(alpha: 0.8),
             ),
           ),
         ],

@@ -56,7 +56,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return at > 0 && dot > at + 1 && dot < v.length - 1;
   }
 
-  bool _validNewPassword(String value) => value.length >= 6 && value.length <= 128;
+  bool _validNewPassword(String value) =>
+      value.length >= 6 && value.length <= 128;
 
   Future<void> _sendSms() async {
     final l10n = AppLocalizations.of(context)!;

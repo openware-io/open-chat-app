@@ -120,10 +120,10 @@ class FavoriteBatchResult {
         }
       }
     }
-    final created = jsonInt(json['created']) ??
-        items.where((item) => item.created).length;
-    final skipped = jsonInt(json['skipped']) ??
-        items.where((item) => !item.created).length;
+    final created =
+        jsonInt(json['created']) ?? items.where((item) => item.created).length;
+    final skipped =
+        jsonInt(json['skipped']) ?? items.where((item) => !item.created).length;
     return FavoriteBatchResult(
       created: created,
       skipped: skipped,

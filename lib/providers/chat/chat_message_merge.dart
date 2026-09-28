@@ -140,9 +140,8 @@ List<ChatMessage> _unionByMsgId(
   }
   for (final m in newMsgs) {
     final existing = byId[m.msgId];
-    byId[m.msgId] = existing == null
-        ? m
-        : mergeByMsgIdPreferringEdit(existing, m);
+    byId[m.msgId] =
+        existing == null ? m : mergeByMsgIdPreferringEdit(existing, m);
   }
   return byId.values.toList();
 }

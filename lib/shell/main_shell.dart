@@ -18,8 +18,8 @@ class MainShell extends StatelessWidget {
     final chat = context.watch<ChatProvider>();
     final friend = context.watch<FriendProvider>();
     // 有新版本时「我」tab 显示小红点，避免用户必须进设置点一次才知道。
-    final updateAvailable =
-        context.select<ClientReleaseCoordinator, bool>((p) => p.updateAvailable);
+    final updateAvailable = context
+        .select<ClientReleaseCoordinator, bool>((p) => p.updateAvailable);
 
     final tabBar = GvTabBarShell(
       currentIndex: navigationShell.currentIndex,

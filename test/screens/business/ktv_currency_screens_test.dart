@@ -19,8 +19,7 @@ import 'package:provider/provider.dart';
 void main() {
   tearDown(Currency.resetCurrentCode);
 
-  testWidgets('开班 openingCash 跟随币种小数位：0 位小数币种不再 ×100',
-      (tester) async {
+  testWidgets('开班 openingCash 跟随币种小数位：0 位小数币种不再 ×100', (tester) async {
     // JPY 在币种小数位表里是 0 位；旧实现写死 ×100 会得到 50000。
     final captured = <RequestOptions>[];
     final client = _client(
@@ -187,8 +186,8 @@ void main() {
     await tester.tap(find.widgetWithText(FilledButton, '确认收款'));
     await tester.pumpAndSettle();
 
-    final collect =
-        captured.firstWhere((r) => r.path == '/business/orders/ord_002/collect');
+    final collect = captured
+        .firstWhere((r) => r.path == '/business/orders/ord_002/collect');
     final body = _requestJson(collect);
     final payments = (body['payments'] as List).cast<Map<String, dynamic>>();
     expect(payments, isNotEmpty);

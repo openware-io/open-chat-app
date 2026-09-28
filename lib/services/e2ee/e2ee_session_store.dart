@@ -35,8 +35,10 @@ class E2eeSessionStore {
     await _prefs.setString(_privateKeyKey, privateKeyBase64);
   }
 
-  Future<void> saveSharedSecret(String secretChatId, Uint8List sharedSecret) async {
-    await _prefs.setString(_sharedKeyPrefix + secretChatId, base64Encode(sharedSecret));
+  Future<void> saveSharedSecret(
+      String secretChatId, Uint8List sharedSecret) async {
+    await _prefs.setString(
+        _sharedKeyPrefix + secretChatId, base64Encode(sharedSecret));
   }
 
   Uint8List? sharedSecretFor(String secretChatId) {

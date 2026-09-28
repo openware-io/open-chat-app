@@ -133,14 +133,14 @@ class ImChatRepository implements ChatRepository {
   Future<ChannelInfo> channelInfo(String id) => _api.channelInfo(id);
 
   @override
-  Future<ChannelInfo> subscribeChannel(String id) =>
-      _api.subscribeChannel(id);
+  Future<ChannelInfo> subscribeChannel(String id) => _api.subscribeChannel(id);
 
   @override
   Future<void> unsubscribeChannel(String id) => _api.unsubscribeChannel(id);
 
   @override
-  Future<ChannelInfo> updateChannel(String id, {String? name, String? announcement}) =>
+  Future<ChannelInfo> updateChannel(String id,
+          {String? name, String? announcement}) =>
       _api.updateChannel(id, name: name, announcement: announcement);
 
   @override
@@ -482,7 +482,8 @@ class ImChatRepository implements ChatRepository {
     required int secretGroupId,
     required String msgId,
   }) {
-    return _api.recallSecretGroupMessage(secretGroupId: secretGroupId, msgId: msgId);
+    return _api.recallSecretGroupMessage(
+        secretGroupId: secretGroupId, msgId: msgId);
   }
 
   @override
@@ -490,7 +491,8 @@ class ImChatRepository implements ChatRepository {
     required int secretGroupId,
     required String msgId,
   }) {
-    return _api.deleteSecretGroupMessageForEveryone(secretGroupId: secretGroupId, msgId: msgId);
+    return _api.deleteSecretGroupMessageForEveryone(
+        secretGroupId: secretGroupId, msgId: msgId);
   }
 
   @override

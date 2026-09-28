@@ -15,8 +15,8 @@ class E2eeManager {
   E2eeManager({
     required ImApi imApi,
     required SharedPreferences preferences,
-  }) : _imApi = imApi,
-       _store = E2eeSessionStore(preferences);
+  })  : _imApi = imApi,
+        _store = E2eeSessionStore(preferences);
 
   final ImApi _imApi;
   final E2eeSessionStore _store;
@@ -46,9 +46,9 @@ class E2eeManager {
   /// 私密会话握手：提交本端公钥并拉取会话详情（含对端公钥/安全码）。
   ///
   /// 双方都提交后会话 ready，返回带双方公钥的会话信息。
-  Future<SecretChatInfo> handshake(String secretChatId, {required String deviceId}) async {
-    final myPublicKey =
-        await ensureDeviceKey(deviceId: deviceId);
+  Future<SecretChatInfo> handshake(String secretChatId,
+      {required String deviceId}) async {
+    final myPublicKey = await ensureDeviceKey(deviceId: deviceId);
     var info = await _imApi.submitSecretChatHandshake(
       id: secretChatId,
       publicKey: myPublicKey,
@@ -88,10 +88,12 @@ class E2eeManager {
   }
 
   /// 解密密文；失败（密钥不匹配/被篡改）返回 null。
-  Future<String?> decryptFromChat(String secretChatId, String ciphertext) async {
+  Future<String?> decryptFromChat(
+      String secretChatId, String ciphertext) async {
     final shared = _store.sharedSecretFor(secretChatId);
     if (shared == null) return null;
-    return E2eeCrypto.decrypt(sharedSecret: shared, ciphertextBase64: ciphertext);
+    return E2eeCrypto.decrypt(
+        sharedSecret: shared, ciphertextBase64: ciphertext);
   }
 
   bool hasSharedSecret(String secretChatId) =>
@@ -148,7 +150,8 @@ class E2eeManager {
   ) async {
     final shared = _store.groupSharedSecretFor(groupId, senderUserId);
     if (shared == null) return null;
-    return E2eeCrypto.decrypt(sharedSecret: shared, ciphertextBase64: ciphertext);
+    return E2eeCrypto.decrypt(
+        sharedSecret: shared, ciphertextBase64: ciphertext);
   }
 
   /// 群是否已完成全员握手（可发送/接收）。

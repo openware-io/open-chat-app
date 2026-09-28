@@ -203,8 +203,7 @@ class _AuthorizedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final textPrimary = AppColors.textPrimary.resolveFrom(context);
     final textSecondary = AppColors.textSecondary.resolveFrom(context);
-    final nickname =
-        userInfo.nickname.isEmpty ? 'KTV 用户' : userInfo.nickname;
+    final nickname = userInfo.nickname.isEmpty ? 'KTV 用户' : userInfo.nickname;
     final phone = userInfo.phone.isEmpty ? '-' : userInfo.phone;
 
     return DecoratedBox(

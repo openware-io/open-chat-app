@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:open_chat_app/core/api_failure.dart';
 import 'package:open_chat_app/models/ktv_models.dart';
@@ -27,14 +25,14 @@ class _FakeKtvApi extends KtvApiClient {
   Future<void> confirmPendingItem(String orderId, String itemId) async {
     final error = writeError;
     if (error != null) throw error;
-    confirmed.add(orderId + '/' + itemId);
+    confirmed.add('$orderId/$itemId');
   }
 
   @override
   Future<void> rejectPendingItem(String orderId, String itemId) async {
     final error = writeError;
     if (error != null) throw error;
-    rejected.add(orderId + '/' + itemId);
+    rejected.add('$orderId/$itemId');
   }
 }
 
@@ -62,8 +60,8 @@ KtvPendingApprovalView viewWith(
 Map<String, dynamic> order(int id, List<Map<String, dynamic>> items) =>
     <String, dynamic>{
       'orderId': id,
-      'orderNo': 'O' + id.toString(),
-      'roomName': '小包 S0' + id.toString(),
+      'orderNo': 'O$id',
+      'roomName': '小包 S0$id',
       'sessionStatus': 'OPEN',
       'pendingCount': items.length,
       'pendingAmount':
