@@ -201,7 +201,7 @@ class _ScanScreenState extends State<ScanScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('登录确认'),
-        content: const Text('确认在电脑端登录 GV Chat？'),
+        content: const Text('确认在电脑端登录 Open Chat？'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),

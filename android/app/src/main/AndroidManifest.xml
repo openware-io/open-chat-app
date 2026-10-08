@@ -39,7 +39,7 @@
         android:maxSdkVersion="29"
         tools:replace="android:maxSdkVersion" />
     <application
-        android:label="WV Chat"
+        android:label="Open Chat"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"

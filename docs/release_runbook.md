@@ -4,13 +4,13 @@
 
 **客户端发版（Android 直装 APK）请看唯一权威文档：**
 
-- 发版 Skill（一步步怎么做 + 快捷脚本）：`gv_im_server/docs/standards/15_CLIENT_RELEASE_SKILL.md`
+- 发版规范：`open-im-server/docs/standards/15_CLIENT_RELEASE_SKILL.md`
 - 打包命令权威来源：本仓库 `BUILD.md`
-- 后端/管理后台/官网部署：`gv_im_server/docs/RELEASE_RUNBOOK.md`
+- 后端/管理后台/官网部署：`open-im-server/docs/RELEASE_RUNBOOK.md`
 
 **快捷脚本**：
 
 ```powershell
-cd D:\projects\cnb\gv_chat_app
-.\tools\release.ps1 -ReleaseNotes "更新说明"
+cd open-chat-app
+.\tools\release.ps1 -ReleaseNotes "更新说明" -SigningPolicy AllowUnsigned
 ```

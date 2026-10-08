@@ -20,7 +20,7 @@ class ClientRemoteConfigProvider extends ChangeNotifier {
   /// 任务栏 / 多任务标题等。
   String get appDisplayName => _settings.app.name.trim().isNotEmpty
       ? _settings.app.name.trim()
-      : 'WV Chat';
+      : 'Open Chat';
 
   bool get privateChatEnabled => _settings.feature.privateChatEnabled;
 

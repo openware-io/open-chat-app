@@ -6,13 +6,16 @@ param(
   [string]$Channel = 'stable',
   [ValidateSet('ObjectStorage', 'Cms')]
   [string]$UploadMode = 'ObjectStorage',
-  [string]$AdminBaseUrl = 'https://api.dev.example.com/api/v1',
+  [string]$AdminBaseUrl = 'http://127.0.0.1:30080/api/v1',
   [string]$AdminUser = 'admin',
   [string]$AdminPassword = '',
-  [string]$CmsRepoPath = 'D:\projects\cnb\openware-cms',
+  [string]$CmsRepoPath = '',
   [string]$JPushAppKey = 'YOUR_JPUSH_APPKEY',
+  [ValidateSet('RequireRelease', 'AllowUnsigned')]
+  [string]$SigningPolicy = 'RequireRelease',
   [switch]$SkipBuild,
   [switch]$SkipPublish,
+  [switch]$ReuseCurrentVersion,
   [switch]$DryRun
 )
 
@@ -26,9 +29,30 @@ Set-StrictMode -Version Latest
 
 $root = Split-Path -Parent $PSScriptRoot
 $pubspec = Join-Path $root 'pubspec.yaml'
-$apk = Join-Path $root 'build\app\outputs\flutter-apk\app-release.apk'
+$apkDirectory = Join-Path $root 'build\app\outputs\flutter-apk'
 
 function Fail { param([string]$Msg) Write-Error $Msg; exit 1 }
+
+function Resolve-Apk {
+  foreach ($name in @('app-release.apk', 'app-release-unsigned.apk')) {
+    $candidate = Join-Path $apkDirectory $name
+    if (Test-Path -LiteralPath $candidate) { return $candidate }
+  }
+  Fail "Release APK not found under $apkDirectory"
+}
+
+function Get-SigningMetadata {
+  param([string]$ApkPath)
+  $keyProperties = Join-Path $root 'android\key.properties'
+  if (Test-Path -LiteralPath $keyProperties) {
+    return [ordered]@{ status = 'release-signed'; source = 'android/key.properties' }
+  }
+  if ($SigningPolicy -eq 'RequireRelease') {
+    Fail 'Release signing is required but android/key.properties is missing. Provide an operator-owned keystore or rerun with -SigningPolicy AllowUnsigned.'
+  }
+  Write-Warning 'Publishing an UNSIGNED Android release artifact. Users cannot install it until an operator signs it.'
+  return [ordered]@{ status = 'unsigned'; source = 'open-source-build'; installable = $false }
+}
 
 function Get-AdminToken {
   param([string]$BaseUrl, [string]$User, [string]$Password)
@@ -63,14 +87,21 @@ $curBuild = [int]$m.Groups[4].Value
 
 $newVersion = $Version
 $newBuild = $BuildNumber
-if (-not $newVersion) {
+if ($ReuseCurrentVersion) {
+  if (($Version -and $Version -ne "$curMajor.$curMinor.$curPatch") -or ($BuildNumber -and $BuildNumber -ne $curBuild)) {
+    Fail 'ReuseCurrentVersion cannot be combined with a different Version or BuildNumber.'
+  }
+  $newVersion = "$curMajor.$curMinor.$curPatch"
+  $newBuild = $curBuild
+}
+if (-not $ReuseCurrentVersion -and -not $newVersion) {
   if ($BuildNumber -gt 0 -and $BuildNumber -le $curBuild) { Fail "buildNumber must be greater than current $curBuild" }
   $newVersion = "$curMajor.$curMinor.$($curPatch + 1)"
 } elseif ($newVersion -notmatch '^\d+\.\d+\.\d+$') {
   Fail "Version must be X.Y.Z (got: $newVersion)"
 }
 if (-not $newBuild) { $newBuild = $curBuild + 1 }
-if ($newBuild -le $curBuild) { Fail "buildNumber must increase: current $curBuild, requested $newBuild" }
+if (-not $ReuseCurrentVersion -and $newBuild -le $curBuild) { Fail "buildNumber must increase: current $curBuild, requested $newBuild" }
 
 Write-Host "== version: $curMajor.$curMinor.$curPatch+$curBuild -> $newVersion+$newBuild"
 
@@ -78,7 +109,9 @@ Write-Host "== version: $curMajor.$curMinor.$curPatch+$curBuild -> $newVersion+$
 # Read as UTF-8 to preserve non-ASCII comments in pubspec.yaml.
 $content = [System.IO.File]::ReadAllText($pubspec, [System.Text.Encoding]::UTF8)
 $content = [regex]::Replace($content, '(?m)^version:\s*[^\r\n]*', "version: $newVersion+$newBuild")
-if ($DryRun) {
+if ($ReuseCurrentVersion) {
+  Write-Host '== reusing current pubspec version'
+} elseif ($DryRun) {
   Write-Host '[dry-run] would bump pubspec.yaml'
 } else {
   $utf8 = New-Object System.Text.UTF8Encoding($false)
@@ -100,8 +133,10 @@ if ($SkipBuild) {
   } finally { Pop-Location }
 }
 
-if (-not (Test-Path -LiteralPath $apk)) { Fail "APK not found: $apk" }
+$apk = Resolve-Apk
+$signingMetadata = Get-SigningMetadata -ApkPath $apk
 Write-Host "== APK: $apk"
+Write-Host "== signing: $($signingMetadata.status)"
 
 # ---- 4. Upload artifact / resolve downloadUrl + sha256 + sizeBytes ----
 $downloadUrl = ''
@@ -109,16 +144,17 @@ $sha256 = ''
 $sizeBytes = [long]0
 
 if ($UploadMode -eq 'Cms') {
+  if (-not $CmsRepoPath) { Fail 'CmsRepoPath is required when UploadMode=Cms' }
   $sha256 = (Get-FileHash -LiteralPath $apk -Algorithm SHA256).Hash.ToLowerInvariant()
   $sizeBytes = (Get-Item -LiteralPath $apk).Length
-  $target = Join-Path $CmsRepoPath "html\download\wv-chat-$newVersion.apk"
+  $target = Join-Path $CmsRepoPath "html\download\open-chat-$newVersion.apk"
   if ($DryRun) {
     Write-Host "[dry-run] would copy APK to $target"
   } else {
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $target) | Out-Null
     Copy-Item -LiteralPath $apk -Destination $target -Force
   }
-  $downloadUrl = "https://example.com/download/wv-chat-$newVersion.apk"
+  $downloadUrl = "download/open-chat-$newVersion.apk"
   Write-Host "== CMS artifact: $downloadUrl ($sizeBytes bytes, sha256=$sha256)"
 } else {
   if ($SkipPublish) {
@@ -132,7 +168,7 @@ if ($UploadMode -eq 'Cms') {
     } else {
       $token = Get-AdminToken -BaseUrl $AdminBaseUrl -User $AdminUser -Password $password
       Write-Host '== uploading APK via object storage (presigned) ...'
-      $artifactFileName = "wv-chat-$newVersion.apk"
+      $artifactFileName = "open-chat-$newVersion.apk"
       $contentType = 'application/vnd.android.package-archive'
       $headers = @{
         Authorization = "Bearer $token"
@@ -178,7 +214,9 @@ if ($SkipPublish) {
   # Build JSON explicitly so the single-element 'artifacts' is always a JSON array:
   # PowerShell ConvertTo-Json unwraps single-element arrays, which would break the
   # backend List<ArtifactRequest> deserialization.
-  $artifactJson = @{ architecture = 'universal'; packageType = 'apk'; downloadUrl = $downloadUrl; sha256 = $sha256; sizeBytes = $sizeBytes } | ConvertTo-Json -Depth 5
+  $signingJson = $signingMetadata | ConvertTo-Json -Compress
+  $signingJsonLiteral = $signingJson | ConvertTo-Json -Compress
+  $artifactJson = '{"architecture":"universal","packageType":"apk","downloadUrl":' + ($downloadUrl | ConvertTo-Json -Compress) + ',"sha256":' + ($sha256 | ConvertTo-Json -Compress) + ',"sizeBytes":' + $sizeBytes + ',"signingMetadata":' + $signingJsonLiteral + '}'
   $compatJson = @{ protocolVersion = 'v1'; minimumServerCapabilityVersion = 1 } | ConvertTo-Json -Depth 5
   $notesJson = $ReleaseNotes | ConvertTo-Json
   $reasonJson = '直接发布' | ConvertTo-Json
@@ -187,7 +225,17 @@ if ($SkipPublish) {
   $headers = New-AdminHeaders -Token $token -Ver $newVersion -WithIdempotency
   # Send releaseNotes/reason as UTF-8 bytes (PS 5.1 string bodies fall back to ANSI/ASCII and mangle non-ASCII).
   $createBytes = [System.Text.Encoding]::UTF8.GetBytes($createBody)
-  $created = Invoke-RestMethod -Method Post -Uri "$AdminBaseUrl/admin/client-releases" -Headers $headers -ContentType 'application/json; charset=utf-8' -Body $createBytes
+  try {
+    $created = Invoke-RestMethod -Method Post -Uri "$AdminBaseUrl/admin/client-releases" -Headers $headers -ContentType 'application/json; charset=utf-8' -Body $createBytes
+  } catch {
+    $response = $_.Exception.Response
+    if ($response -and $response.GetResponseStream()) {
+      $reader = New-Object System.IO.StreamReader($response.GetResponseStream())
+      $detail = $reader.ReadToEnd()
+      Fail "release record creation failed: $detail"
+    }
+    throw
+  }
   $releaseId = [long]$created.data.id
   $rowVersion = [long]$created.data.rowVersion
 

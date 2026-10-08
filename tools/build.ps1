@@ -26,6 +26,18 @@ param(
 # 配 Stop 会被误判为致命错误而中断构建；真正的失败由下方 exit $LASTEXITCODE 显式校验兜底。
 $ErrorActionPreference = "Continue"
 
+# Gradle and Flutter test runners normally use loopback IPC. Some Windows
+# installations have a broken loopback path while LAN networking remains healthy.
+# Gradle's documented OpenShift compatibility hook provides a scoped bind address
+# without restarting adapters, proxies, Docker, or other local services.
+if ($Target -eq 'android' -and -not $env:OPENSHIFT_OPEN_CHAT_GRADLE_IP) {
+    $lanAddress = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
+        Where-Object { $_.IPAddress -notmatch '^(127\.|169\.254\.)' -and $_.PrefixOrigin -ne 'WellKnown' } |
+        Sort-Object SkipAsSource, InterfaceMetric |
+        Select-Object -First 1 -ExpandProperty IPAddress
+    if ($lanAddress) { $env:OPENSHIFT_OPEN_CHAT_GRADLE_IP = $lanAddress }
+}
+
 function Add-DartDefine {
     param(
         [Parameter(Mandatory = $true)]

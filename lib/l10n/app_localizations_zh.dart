@@ -9,7 +9,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appTitle => 'WV Chat';
+  String get appTitle => 'Open Chat';
 
   @override
   String get appSubtitle => '安全、快速的即时通讯';

@@ -1,6 +1,6 @@
 # 各端打包命令
 
-> **发版（Android 直装 APK）不是只看这里，先读 [`gv_im_server/docs/standards/15_CLIENT_RELEASE_SKILL.md`](../gv_im_server/docs/standards/15_CLIENT_RELEASE_SKILL.md) 并运行 `tools/release.ps1`**；本文档是打包命令的权威来源，其中「发布 APK = `flutter build apk --release`」「AAB 仅用于 Google Play」。
+> **发版（Android 直装 APK）先读 [`open-im-server/docs/standards/15_CLIENT_RELEASE_SKILL.md`](../open-im-server/docs/standards/15_CLIENT_RELEASE_SKILL.md) 并运行 `tools/release.ps1`**；本文档是打包命令的权威来源，其中「发布 APK = `flutter build apk --release`」「AAB 仅用于 Google Play」。
 
 在项目根目录 `open_chat_app/` 下执行。默认使用 [AppConfig](lib/core/config.dart) 中的接口地址；若需指定其它服务端，在所有命令中追加相同的 `--dart-define` 即可。
 
@@ -35,6 +35,8 @@ flutter build apk --release
 ```
 
 输出目录：`build/app/outputs/flutter-apk/`
+
+默认要求通过 `android/key.properties` 配置运营方正式签名。开源首次部署尚未配置密钥时，可用 `tools/release.ps1 -SigningPolicy AllowUnsigned` 生成并发布明确标记为不可安装的 unsigned APK；不得静默使用 debug 签名冒充正式签名。
 
 **Google Play 上架用 AAB**
 

@@ -20,14 +20,14 @@ try {
 Write-Host '=== [2/3] unit + contract tests (exclude integration) ==='
 Push-Location $appRoot
 try {
-  & $flutter test --exclude-tags integration
+  & $flutter test --concurrency=1 --exclude-tags integration
   if ($LASTEXITCODE -ne 0) { throw 'unit/contract tests failed' }
 } finally { Pop-Location }
 
 Write-Host '=== [3/3] integration regression (production links) ==='
 Push-Location $appRoot
 try {
-  & $flutter test test/integration --tags integration --run-skipped
+  & $flutter test --concurrency=1 test/integration --tags integration --run-skipped
   if ($LASTEXITCODE -ne 0) { throw 'integration regression failed' }
 } finally { Pop-Location }
 

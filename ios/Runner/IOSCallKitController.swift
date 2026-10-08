@@ -21,7 +21,7 @@ final class IOSCallKitController: NSObject, CXProviderDelegate {
   override init() {
     let appName = (Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String)
       ?? (Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String)
-      ?? "GV Chat"
+      ?? "Open Chat"
     let configuration = CXProviderConfiguration(localizedName: appName)
     configuration.maximumCallGroups = 1
     configuration.maximumCallsPerCallGroup = 1
@@ -105,7 +105,7 @@ final class IOSCallKitController: NSObject, CXProviderDelegate {
     let update = CXCallUpdate()
     let name = remoteName.trimmingCharacters(in: .whitespacesAndNewlines)
     update.localizedCallerName = name.isEmpty ? "通话中" : name
-    update.remoteHandle = CXHandle(type: .generic, value: name.isEmpty ? "GV Chat" : name)
+    update.remoteHandle = CXHandle(type: .generic, value: name.isEmpty ? "Open Chat" : name)
     update.hasVideo = video
     update.supportsDTMF = false
     update.supportsHolding = false
