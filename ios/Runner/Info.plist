@@ -24,13 +24,13 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<!-- 注册 gvchat:// 自定义 scheme 用于 OAuth 回调（gvchat://oauth/callback） -->
+	<!-- 注册 openchat:// 自定义 scheme 用于 OAuth 回调 -->
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>gvchat</string>
+				<string>openchat</string>
 			</array>
 		</dict>
 	</array>

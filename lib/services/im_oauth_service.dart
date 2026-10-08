@@ -32,7 +32,7 @@ class ImOAuthService {
   /// 冻结契约：种子应用（Flyway/启动引导直接 APPROVED）。
   static const String appId = 'saas-ktv';
 
-  static const String redirectUri = 'gvchat://oauth/callback';
+  static const String redirectUri = 'openchat://oauth/callback';
   static const String scope = 'profile.basic';
 
   /// PKCE unreserved 字符集：A-Z a-z 0-9 - . _ ~。
@@ -82,7 +82,7 @@ class ImOAuthService {
     ).toString();
   }
 
-  /// 从回调地址（gvchat://oauth/callback?code=...&state=...）解析 code/state。
+  /// 从回调地址（openchat://oauth/callback?code=...&state=...）解析 code/state。
   ({String? code, String? state}) parseRedirect(String redirect) {
     final uri = Uri.tryParse(redirect);
     if (uri == null) return (code: null, state: null);

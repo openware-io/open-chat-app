@@ -14,7 +14,7 @@ import 'protocol_webview_screen.dart';
 ///
 /// 展示「授权进入 KTV 业务」；点击「授权」走 IM 开放平台 OAuth 2.0
 /// Authorization Code + PKCE：WebView 打开 /oauth/authorize，拦截自定义
-/// scheme gvchat://oauth/callback 拿到 code，再 POST /oauth/token 换取
+/// scheme openchat://oauth/callback 拿到 code，再 POST /oauth/token 换取
 /// access_token，最后 GET /oauth/userinfo 展示用户信息（昵称/头像/脱敏手机号）。
 ///
 /// 真实 SaaS KTV 业务 H5/深链尚未提供，「进入 KTV 业务」按钮暂以 toast 占位。
