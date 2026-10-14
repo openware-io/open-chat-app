@@ -52,7 +52,7 @@ GET    /secret-messages          cursor-pull ciphertext by secret chat
   (`readOnly` + hint); secret chat settings sheet shows the E2EE lock, safe-code
   view/copy, self-destruct options, and the "not synced to new devices" hint.
 - `contact_detail_screen.dart` — entry to start a secret chat with a contact.
-- `gv_chat_bottom_composer.dart` — `readOnly`/`readOnlyHint` for channel
+- `open-chat_bottom_composer.dart` — `readOnly`/`readOnlyHint` for channel
   subscribers.
 
 ## 5. Localization

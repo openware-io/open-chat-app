@@ -58,7 +58,7 @@ Google FCM 配置文件位于 `android/app/google-services.json`，包名必须�
 }
 ```
 
-服务端推送渠道与密钥说明见同工作区 **`gv_chat_server/push-channels-integration.md`**（若仓库分列，请指向对应路径）。
+服务端推送渠道与密钥说明见同工作区 **`open-chat_server/push-channels-integration.md`**（若仓库分列，请指向对应路径）。
 
 ---
 

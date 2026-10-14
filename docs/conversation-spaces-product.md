@@ -4,7 +4,7 @@
 > boundary in `open_chat_app`. This is the product-owned document for this repo;
 > implementation baseline lives in
 > [channel-secret-chat.md](channel-secret-chat.md). Server-side semantics are
-> documented in `gv_im_server/docs/business/CONVERSATION_TYPES_AND_PRIVACY.md`.
+> documented in `open-im-server/docs/business/CONVERSATION_TYPES_AND_PRIVACY.md`.
 
 ## 1. Core Product Principles
 

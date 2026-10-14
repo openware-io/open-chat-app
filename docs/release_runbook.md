@@ -1,6 +1,6 @@
 # 发版操作手册（已迁移）
 
-> 本文件曾与后端仓库 `gv_im_server/docs/RELEASE_RUNBOOK.md` 保持一致，但现已停用，避免两处内容漂移、互相矛盾。
+> 本文件曾与后端仓库 `open-im-server/docs/RELEASE_RUNBOOK.md` 保持一致，但现已停用，避免两处内容漂移、互相矛盾。
 
 **客户端发版（Android 直装 APK）请看唯一权威文档：**
 

@@ -247,7 +247,7 @@ class _ProfileQrDialogState extends State<_ProfileQrDialog> {
       await Gal.putImageBytes(
         data.buffer.asUint8List(),
         name:
-            'wv_chat_qr_${safeUsername.isEmpty ? 'user' : safeUsername}_${DateTime.now().millisecondsSinceEpoch}',
+            'open-chat_qr_${safeUsername.isEmpty ? 'user' : safeUsername}_${DateTime.now().millisecondsSinceEpoch}',
       );
       if (mounted) GvToast.show(context, l10n.toastSavedToGallery);
     } on GalException catch (e) {
