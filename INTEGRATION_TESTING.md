@@ -20,7 +20,7 @@ dart run tools/run_integration_tests.dart --device=设备ID
 需要指定测试环境时，可以把 Flutter 参数直接追加在后面：
 
 ```powershell
-dart run tools/run_integration_tests.dart --dart-define=GV_API_BASE=https://example.com
+dart run tools/run_integration_tests.dart --dart-define=OPEN_API_BASE=https://example.com
 ```
 
 ## 一键全量安全巡检
@@ -81,9 +81,9 @@ build/test-reports/integration-年月日-时分秒/
 ```powershell
 dart run tools/run_integration_tests.dart `
   --target=integration_test/reviewer_flow_test.dart `
-  "--dart-define=GV_TEST_USERNAME=测试账号" `
-  "--dart-define=GV_TEST_PASSWORD=测试密码" `
-  "--dart-define=GV_TEST_CONVERSATION_NAME=自动化测试群"
+  "--dart-define=OPEN_TEST_USERNAME=测试账号" `
+  "--dart-define=OPEN_TEST_PASSWORD=测试密码" `
+  "--dart-define=OPEN_TEST_CONVERSATION_NAME=自动化测试群"
 ```
 
 如果 App 已经保持登录状态，可以不传账号和密码。如果是全新安装或已退出登录，则必须传入测试账号。
@@ -93,7 +93,7 @@ dart run tools/run_integration_tests.dart `
 确认目标是专用测试群后，再增加下面的参数：
 
 ```powershell
-"--dart-define=GV_TEST_ALLOW_SEND=true"
+"--dart-define=OPEN_TEST_ALLOW_SEND=true"
 ```
 
 完整流程会发送一条带时间戳的文字消息，然后长按并仅从当前测试设备删除。这个“删除”不撤回服务端消息，因此不要对正式工作群开启真实发送。
@@ -101,8 +101,8 @@ dart run tools/run_integration_tests.dart `
 如果会话名称可能重复，也可以不用名称，改传：
 
 ```powershell
-"--dart-define=GV_TEST_CHAT_TYPE=group" `
-"--dart-define=GV_TEST_PEER_ID=群ID"
+"--dart-define=OPEN_TEST_CHAT_TYPE=group" `
+"--dart-define=OPEN_TEST_PEER_ID=群ID"
 ```
 
 测试报告中的命令会自动隐藏密码、Token 和密钥，并展示每一步自动操作及发生时间。

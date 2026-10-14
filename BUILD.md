@@ -9,11 +9,11 @@
 - **Flutter**：与本项目 `pubspec.yaml` 中 `environment.flutter` 要求一致（建议稳定版）。
 - **覆盖 API 基址**（不含末尾 `/`）：
   ```bash
-  --dart-define=GV_API_BASE=https://your-host.example.com
+  --dart-define=OPEN_API_BASE=https://your-host.example.com
   ```
 - **内网 HTTPS 自签名（仅建议内测）**：
   ```bash
-  --dart-define=GV_TRUST_SELF_SIGNED=true
+  --dart-define=OPEN_TRUST_SELF_SIGNED=true
   ```
 
 以下示例默认不写 `dart-define` 时，使用编译进工程的默认值（见 `lib/core/config.dart`）。
@@ -55,7 +55,7 @@ flutter build appbundle --release
 **命令行打 IPA**
 
 ```bash
-flutter build ipa --release --dart-define=GV_JPUSH_APPKEY=你的iOS极光AppKey --dart-define=GV_JPUSH_PRODUCTION=true
+flutter build ipa --release --dart-define=OPEN_JPUSH_APPKEY=你的iOS极光AppKey --dart-define=OPEN_JPUSH_PRODUCTION=true
 ```
 
 输出目录：`build/ios/ipa/`（具体文件名以生成为准）
@@ -141,7 +141,7 @@ flutter build hap --release --target-platform ohos-arm64
 **与 Android 相同，可附带 API 等 `dart-define`**
 
 ```bash
-flutter build hap --release --dart-define=GV_API_BASE=https://dv380.com
+flutter build hap --release --dart-define=OPEN_API_BASE=https://dv380.com
 ```
 
 **产物路径**（以工程 `ohos` 模块默认配置为准，常见如下）
@@ -192,10 +192,10 @@ flutter run -d <device_id>
 ## 带自定义 API 的发布示例
 
 ```bash
-flutter build apk --release --dart-define=GV_API_BASE=https://dv380.com
-flutter build ipa --release --dart-define=GV_API_BASE=https://dv380.com --dart-define=GV_JPUSH_APPKEY=你的iOS极光AppKey --dart-define=GV_JPUSH_PRODUCTION=true
-flutter build web --release --dart-define=GV_API_BASE=https://dv380.com --base-href /uploads/app-web/
-flutter build hap --release --dart-define=GV_API_BASE=https://dv380.com
+flutter build apk --release --dart-define=OPEN_API_BASE=https://dv380.com
+flutter build ipa --release --dart-define=OPEN_API_BASE=https://dv380.com --dart-define=OPEN_JPUSH_APPKEY=你的iOS极光AppKey --dart-define=OPEN_JPUSH_PRODUCTION=true
+flutter build web --release --dart-define=OPEN_API_BASE=https://dv380.com --base-href /uploads/app-web/
+flutter build hap --release --dart-define=OPEN_API_BASE=https://dv380.com
 ```
 
-（`GV_API_BASE` 请勿带末尾 `/`。）
+（`OPEN_API_BASE` 请勿带末尾 `/`。）

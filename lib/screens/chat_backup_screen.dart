@@ -71,7 +71,7 @@ class _ChatBackupScreenState extends State<ChatBackupScreen> {
             final data = await chat.buildChatBackup();
             final uid = (chat.myId ?? 0).toString();
             final stamp = _formatTimestamp(DateTime.now());
-            final fileName = 'wv-chat-backup-$uid-$stamp.json';
+            final fileName = 'open-chat-backup-$uid-$stamp.json';
             conversationCount = (data['conversations'] as List?)?.length ?? 0;
             messageCount = _countMessages(data['sessions']);
             if (conversationCount == 0 && messageCount == 0) {

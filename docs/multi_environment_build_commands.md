@@ -6,10 +6,10 @@
 
 - 使用 `APP_ENV` 选择环境：`dev`、`test`、`prod`。
 - 使用 `EnvConfig` 集中维护不同环境的默认服务地址。
-- 保留 `GV_API_BASE` 作为临时覆盖入口，方便本地联调。
-- 保留 `GV_WS_URI` 作为 WebSocket 完整地址覆盖入口。
-- 保留 `GV_JPUSH_APPKEY` 作为平台推送 AppKey 入口。
-- `GV_JPUSH_PRODUCTION` 不传时会按环境自动判断：`prod=true`，`dev/test=false`。
+- 保留 `OPEN_API_BASE` 作为临时覆盖入口，方便本地联调。
+- 保留 `OPEN_WS_URI` 作为 WebSocket 完整地址覆盖入口。
+- 保留 `OPEN_JPUSH_APPKEY` 作为平台推送 AppKey 入口。
+- `OPEN_JPUSH_PRODUCTION` 不传时会按环境自动判断：`prod=true`，`dev/test=false`。
 - 新增统一构建脚本 `tools/build.ps1`，日常打包不需要手写长命令。
 
 还没有完成的是原生平台级多环境：
@@ -123,9 +123,9 @@
 
 ```text
 --dart-define=APP_ENV=test
---dart-define=GV_API_BASE=https://staging-api.example.com
---dart-define=GV_WS_URI=wss://staging-api.example.com/ws/im/v1
---dart-define=GV_JPUSH_APPKEY=你的Android极光AppKey
+--dart-define=OPEN_API_BASE=https://staging-api.example.com
+--dart-define=OPEN_WS_URI=wss://staging-api.example.com/ws/im/v1
+--dart-define=OPEN_JPUSH_APPKEY=你的Android极光AppKey
 ```
 
 ## Android 注意事项
@@ -156,7 +156,7 @@ com.gv.chat.gvChatApp
 
 当前工程里已有 Debug/Release entitlements 和手动签名配置，但还没有 dev/test/prod 三套 Scheme。打 iOS 包时要确保：
 
-- `GV_JPUSH_APPKEY` 使用 iOS 极光应用的 AppKey。
+- `OPEN_JPUSH_APPKEY` 使用 iOS 极光应用的 AppKey。
 - `APP_ENV=dev/test` 默认使用开发推送环境。
 - `APP_ENV=prod` 默认使用生产推送环境。
 - Xcode 里的 Bundle ID、Team ID、Provisioning Profile、极光后台 iOS 应用配置保持一致。
@@ -187,15 +187,15 @@ APNs production/development
 4. iOS Schemes / Configurations：待做。
 5. CI/CD 自动打包：待做。
 
-flutter run --dart-define=GV_JPUSH_APPKEY=YOUR_JPUSH_APPKEY --dart-define=GV_JPUSH_PRODUCTION=false
+flutter run --dart-define=OPEN_JPUSH_APPKEY=YOUR_JPUSH_APPKEY --dart-define=OPEN_JPUSH_PRODUCTION=false
 flutter build ipa --release \
   --dart-define=APP_ENV=prod \
-  --dart-define=GV_API_BASE=https://api.dev.example.com \
-  --dart-define=GV_JPUSH_APPKEY=YOUR_JPUSH_APPKEY \
-  --dart-define=GV_JPUSH_PRODUCTION=true
+  --dart-define=OPEN_API_BASE=https://api.dev.example.com \
+  --dart-define=OPEN_JPUSH_APPKEY=YOUR_JPUSH_APPKEY \
+  --dart-define=OPEN_JPUSH_PRODUCTION=true
   flutter run --release `
   --dart-define=APP_ENV=prod `
-  --dart-define=GV_API_BASE=https://api.dev.example.com `
-  --dart-define=GV_JPUSH_APPKEY=YOUR_JPUSH_APPKEY `
-  --dart-define=GV_JPUSH_PRODUCTION=true
-flutter run --release --dart-define=APP_ENV=prod --dart-define=GV_API_BASE=https://api.dev.example.com --dart-define=GV_JPUSH_APPKEY=YOUR_JPUSH_APPKEY --dart-define=GV_JPUSH_PRODUCTION=true
+  --dart-define=OPEN_API_BASE=https://api.dev.example.com `
+  --dart-define=OPEN_JPUSH_APPKEY=YOUR_JPUSH_APPKEY `
+  --dart-define=OPEN_JPUSH_PRODUCTION=true
+flutter run --release --dart-define=APP_ENV=prod --dart-define=OPEN_API_BASE=https://api.dev.example.com --dart-define=OPEN_JPUSH_APPKEY=YOUR_JPUSH_APPKEY --dart-define=OPEN_JPUSH_PRODUCTION=true

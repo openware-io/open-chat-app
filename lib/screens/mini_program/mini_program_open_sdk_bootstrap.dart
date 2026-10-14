@@ -82,7 +82,7 @@ const String gvMiniProgramSdkBootstrap = '''
     };
   }
   try {
-    window.dispatchEvent(new CustomEvent('gv-sdk-ready', { detail: { v: 1 } }));
+    window.dispatchEvent(new CustomEvent('open-sdk-ready', { detail: { v: 1 } }));
   } catch (e) {}
 })();
 ''';

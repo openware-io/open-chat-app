@@ -12,7 +12,7 @@ class ChatBackup {
     required this.sessions,
   });
 
-  static const String format = 'wv-chat-backup';
+  static const String format = 'open-chat-backup';
   static const int version = 1;
 
   /// 导出该备份的账号 uid（仅作为元信息；导入时写入当前登录账号）。

@@ -7,7 +7,7 @@ Open IM Flutter 客户端，与 Open IM 服务端配套。
 本项目已移除 **Firebase Cloud Messaging**。移动端策略为：
 
 - **Android（当前默认）**：使用极光 JPush，并在支持 Google Play 服务的设备上启用 FCM 厂商通道；向服务端上报极光 Registration ID。
-- **Android（本地调试回退）**：显式传入 `--dart-define=GV_ANDROID_JPUSH_ENABLED=false` 时，使用前台服务保活现有 WebSocket，不初始化或注册极光。
+- **Android（本地调试回退）**：显式传入 `--dart-define=OPEN_ANDROID_JPUSH_ENABLED=false` 时，使用前台服务保活现有 WebSocket，不初始化或注册极光。
 - **iOS**：极光 JPush + APNs Token Authentication，向服务端上报 `pushProvider: "jpush"` 与极光 **Registration ID**。
 
 Android 本地调试回退依赖应用进程和 WebSocket 仍然存活，用户强制停止应用或系统彻底杀死进程后无法继续收消息；正式离线通知使用配置好 FCM 厂商通道的极光。
@@ -24,15 +24,15 @@ iOS 已接入 CallKit：App 仍能通过 WebSocket 收到来电时会显示系�
 jpush.appKey=你的极光AppKey
 ```
 
-2. Android 会从 Manifest 的 `JPUSH_APPKEY` 初始化极光；`GV_JPUSH_APPKEY` 可选。iOS 仍需传入极光控制台里 Bundle ID `com.gv.chat.gvChatApp` 对应的 iOS 应用 AppKey。显式指定 Android AppKey 的运行示例：
+2. Android 会从 Manifest 的 `JPUSH_APPKEY` 初始化极光；`OPEN_JPUSH_APPKEY` 可选。iOS 仍需传入极光控制台里 Bundle ID `com.gv.chat.gvChatApp` 对应的 iOS 应用 AppKey。显式指定 Android AppKey 的运行示例：
 
 ```bash
-flutter run --dart-define=GV_JPUSH_APPKEY=你的极光AppKey --dart-define=GV_ANDROID_JPUSH_ENABLED=true --dart-define=GV_JPUSH_PRODUCTION=false
+flutter run --dart-define=OPEN_JPUSH_APPKEY=你的极光AppKey --dart-define=OPEN_ANDROID_JPUSH_ENABLED=true --dart-define=OPEN_JPUSH_PRODUCTION=false
 ```
 
 Google FCM 配置文件位于 `android/app/google-services.json`，包名必须为 `com.csmimtbshop.com`。项目通过 Google Services Gradle 插件和极光 FCM 插件生成并注册 FCM 客户端配置。
 
-生产环境请将 `GV_JPUSH_PRODUCTION=true`（与极光控制台、「正式 / 开发」推送环境一致）。
+生产环境请将 `OPEN_JPUSH_PRODUCTION=true`（与极光控制台、「正式 / 开发」推送环境一致）。
 
 ### iOS
 
