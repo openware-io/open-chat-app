@@ -447,7 +447,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       result = await releaseRepository.checkRelease(
           platform: platform,
           channel: gvClientReleaseChannelKey(),
-          version: info.version,
+          releaseVersion: info.version,
           buildNumber: code,
           architecture: 'universal',
           protocolVersion: 'v1',

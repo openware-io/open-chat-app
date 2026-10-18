@@ -4,7 +4,7 @@ abstract interface class ClientReleaseRepository {
   Future<ClientReleaseCheckResult> checkRelease(
       {required String platform,
       required String channel,
-      required String version,
+      required String releaseVersion,
       required int buildNumber,
       required String architecture,
       required String protocolVersion,

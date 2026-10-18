@@ -1707,7 +1707,7 @@ class ImApi {
   Future<ClientReleaseCheckResult> checkClientRelease({
     required String platform,
     required String channel,
-    required String version,
+    required String releaseVersion,
     required int buildNumber,
     required String architecture,
     required String protocolVersion,
@@ -1718,7 +1718,7 @@ class ImApi {
       await _generated.checkClientRelease({
         'platform': platform,
         'channel': channel,
-        'version': version,
+        'releaseVersion': releaseVersion,
         'buildNumber': buildNumber,
         'architecture': architecture,
         'protocolVersion': protocolVersion,

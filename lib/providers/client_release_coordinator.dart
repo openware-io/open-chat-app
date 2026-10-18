@@ -57,7 +57,7 @@ class ClientReleaseCoordinator extends ChangeNotifier {
           .checkRelease(
             platform: platform,
             channel: gvClientReleaseChannelKey(),
-            version: package.version,
+            releaseVersion: package.version,
             buildNumber: buildNumber,
             architecture: 'universal',
             protocolVersion: 'v1',

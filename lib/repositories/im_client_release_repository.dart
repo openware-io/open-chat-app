@@ -9,7 +9,7 @@ class ImClientReleaseRepository implements ClientReleaseRepository {
   Future<ClientReleaseCheckResult> checkRelease(
           {required String platform,
           required String channel,
-          required String version,
+          required String releaseVersion,
           required int buildNumber,
           required String architecture,
           required String protocolVersion,
@@ -17,7 +17,7 @@ class ImClientReleaseRepository implements ClientReleaseRepository {
       _api.checkClientRelease(
           platform: platform,
           channel: channel,
-          version: version,
+          releaseVersion: releaseVersion,
           buildNumber: buildNumber,
           architecture: architecture,
           protocolVersion: protocolVersion,
