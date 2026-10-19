@@ -18,19 +18,26 @@ iOS 已接入 CallKit：App 仍能通过 WebSocket 收到来电时会显示系�
 
 ### 极光 AppKey 配置
 
-1. 在 **`android/local.properties`**（请勿把真实密钥提交到 Git）末尾增加 Android 极光应用 **AppKey**（须与控制台里该包名 `com.csmimtbshop.com` 一致）：
+1. 在 **`android/local.properties`**（请勿把真实密钥提交到 Git）末尾增加 Android 极光应用 **AppKey**（须与控制台里该包名 `io.openware.openchat` 一致）：
 
 ```properties
 jpush.appKey=你的极光AppKey
 ```
 
-2. Android 会从 Manifest 的 `JPUSH_APPKEY` 初始化极光；`OPEN_JPUSH_APPKEY` 可选。iOS 仍需传入极光控制台里 Bundle ID `com.gv.chat.gvChatApp` 对应的 iOS 应用 AppKey。显式指定 Android AppKey 的运行示例：
+2. Android 会从 Manifest 的 `JPUSH_APPKEY` 初始化极光；`OPEN_JPUSH_APPKEY` 可选。iOS 仍需传入极光控制台里 Bundle ID `io.openware.openchat` 对应的 iOS 应用 AppKey。显式指定 Android AppKey 的运行示例：
 
 ```bash
 flutter run --dart-define=OPEN_JPUSH_APPKEY=你的极光AppKey --dart-define=OPEN_ANDROID_JPUSH_ENABLED=true --dart-define=OPEN_JPUSH_PRODUCTION=false
 ```
 
-Google FCM 配置文件位于 `android/app/google-services.json`，包名必须为 `com.csmimtbshop.com`。项目通过 Google Services Gradle 插件和极光 FCM 插件生成并注册 FCM 客户端配置。
+Google FCM 配置文件位于 `android/app/google-services.json`，包名必须为 `io.openware.openchat`。项目通过 Google Services Gradle 插件和极光 FCM 插件生成并注册 FCM 客户端配置。
+
+### 本地调试签名与包名
+
+- Android applicationId 为 `io.openware.openchat`，与旧的 `com.csmimtbshop.com` 完全独立，可同时安装。
+- Debug 构建固定使用仓库内 `android/openchat-debug.jks`（alias `openchat-debug`），不读取旧 WV 的 release keystore，也不依赖本机全局 `debug.keystore`。
+- `release` 仍只在 `android/key.properties` 存在时使用其中的签名；本地调试不需要配置 release 签名。
+- 更换包名后，极光/Firebase 控制台需要为 `io.openware.openchat` 新建应用并更新对应配置。
 
 生产环境请将 `OPEN_JPUSH_PRODUCTION=true`（与极光控制台、「正式 / 开发」推送环境一致）。
 

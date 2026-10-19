@@ -60,7 +60,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.csmimtbshop.com"
+        applicationId = "io.openware.openchat"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         // record_android (and typical camera/mic stacks) require API 23+.
@@ -82,6 +82,12 @@ android {
     }
 
     signingConfigs {
+        openchatDebug {
+            storeFile = rootProject.file('openchat-debug.jks')
+            storePassword = 'openchatdebug'
+            keyAlias = 'openchat-debug'
+            keyPassword = 'openchatdebug'
+        }
         release {
             if (keystorePropertiesFile.exists()) {
                 keyAlias = keystoreProperties["keyAlias"]
@@ -93,6 +99,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.openchatDebug
+        }
         release {
             if (keystorePropertiesFile.exists()) {
                 signingConfig = signingConfigs.release

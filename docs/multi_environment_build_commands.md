@@ -16,7 +16,7 @@
 
 - Android 还没有 `productFlavors`。
 - iOS 还没有 `Runner-Dev`、`Runner-Test`、`Runner-Prod` 等 Scheme。
-- 不同环境还没有独立包名、Bundle ID、图标、应用名和签名配置。
+- 已从旧 WV 应用拆出独立包名/Bundle ID、图标和本地调试签名，但还没有 dev/test/prod 分环境的包名与签名配置。
 - 还没有 CI/CD 自动打包流水线。
 
 所以目前是第一阶段：Flutter 环境配置和本地构建脚本已经规范化，原生 flavor / scheme 后续再接。

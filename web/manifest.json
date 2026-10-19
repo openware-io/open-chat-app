@@ -1,11 +1,11 @@
 {
-    "name": "WV Chat",
-    "short_name": "WV Chat",
+    "name": "Open Chat",
+    "short_name": "OpenChat",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "WV Chat messaging app.",
+    "background_color": "#071A2B",
+    "theme_color": "#071A2B",
+    "description": "Open Chat secure messaging app.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

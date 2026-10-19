@@ -97,6 +97,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/app_icon.png
     - assets/sounds/incoming_call.mp3
     - assets/service_image/bar/
     - assets/service_image/hotel/

@@ -53,6 +53,7 @@ app.*.map.json
 # Android release signing — never commit
 /android/key.properties
 /android/*.jks
+!android/openchat-debug.jks
 # Firebase 项目配置由本机或 CI 安全注入；不可提交真实项目标识/API key。
 /android/app/google-services.json
 

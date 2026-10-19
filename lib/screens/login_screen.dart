@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
-import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -112,8 +111,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(height: 24),
-                    Icon(LucideIcons.messages_square,
-                        size: 56, color: Colors.white.withValues(alpha: 0.95)),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(18),
+                      child: Image.asset(
+                        'assets/app_icon.png',
+                        width: 72,
+                        height: 72,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     Text(
                       l10n.appTitle,
