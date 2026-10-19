@@ -13,6 +13,8 @@ class EnvConfig {
 
   static const _mediaBaseOverride =
       String.fromEnvironment('OPEN_MEDIA_BASE', defaultValue: '');
+  static const _serviceBaseOverride =
+      String.fromEnvironment('OPEN_SERVICE_BASE', defaultValue: '');
   static const _jpushProductionOverride =
       String.fromEnvironment('OPEN_JPUSH_PRODUCTION', defaultValue: '');
 
@@ -36,6 +38,20 @@ class EnvConfig {
 
   static const apiBase =
       _apiBaseOverride == '' ? defaultApiBase : _apiBaseOverride;
+
+  /// Origin used to resolve relative service-board links.
+  ///
+  /// Local Kind serves `/a380/` through the same ingress as the API, while
+  /// production keeps the SaaS H5 on its own host. `OPEN_SERVICE_BASE` can
+  /// override this independently from the API origin.
+  static const _prodServiceBase = 'https://miniservice.dev.example.com';
+  static const _testServiceBase = 'https://test-miniservice.example.com';
+  static String get serviceBase {
+    if (_serviceBaseOverride.isNotEmpty) return _serviceBaseOverride;
+    if (appEnv == 'prod') return _prodServiceBase;
+    if (appEnv == 'test') return _testServiceBase;
+    return apiBase;
+  }
 
   static const wsUri = _wsUriOverride == '' ? defaultWsUri : _wsUriOverride;
 

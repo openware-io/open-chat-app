@@ -101,7 +101,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
 
   /// 打开小程序服务项：operator / consumer 统一按 item.link（外部链接）用 WebView 打开。
   void _openSearchResult(MiniAppServiceItem item) {
-    const baseUrl = AppConfig.apiBase;
+    final baseUrl = AppConfig.serviceBase;
     final authHdrs = gvBearerHeaders(context.read<LocalStorage>());
     _openMiniProgram(context, item, baseUrl, authHdrs);
   }
@@ -294,7 +294,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
     final pageBackground = gvPageScaffoldBackground(context);
     final bgCard = AppColors.bgWhite.resolveFrom(context);
     final secondary = AppColors.textSecondary.resolveFrom(context);
-    const baseUrl = AppConfig.apiBase;
+    final baseUrl = AppConfig.serviceBase;
     final authHdrs = gvBearerHeaders(context.read<LocalStorage>());
 
     final visible = prov.categories

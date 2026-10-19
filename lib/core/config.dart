@@ -21,6 +21,9 @@ class AppConfig {
 
   static const String apiBase = EnvConfig.apiBase;
 
+  /// Origin for relative service-board links (SaaS H5 in prod, API ingress in dev).
+  static String get serviceBase => EnvConfig.serviceBase;
+
   static String get apiPrefix {
     final normalized = apiBase.endsWith('/')
         ? apiBase.substring(0, apiBase.length - 1)
