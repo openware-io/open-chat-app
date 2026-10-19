@@ -25,7 +25,7 @@
 
 | 环境 | APP_ENV | 默认 API 地址 | 默认 WebSocket 地址 | JPush production |
 | --- | --- | --- | --- | --- |
-| 开发 | `dev` | `http://192.168.1.3:3000` | `ws://192.168.1.3:3000/ws/im/v1` | `false` |
+| 开发 | `dev` | `http://<开发机IP>:3000` | `ws://<开发机IP>:3000/ws/im/v1` | `false` |
 | 测试 | `test` | `https://test-api.example.com` | `wss://test-api.example.com/ws/im/v1` | `false` |
 | 生产 | `prod` | `https://api.dev.example.com` | `wss://api.dev.example.com/ws/im/v1` | `true` |
 
@@ -47,12 +47,12 @@
 .\tools\build.ps1 android test apk -JPushAppKey "你的Android极光AppKey"
 ```
 
-**USB 真机联调 A380（仅 dev/test）**
+**USB 真机联调 SaaS C 端（仅 dev/test）**
 
 当测试 H5 使用局域网 HTTP 地址时，必须显式登记 origin；脚本会拒绝在 `prod` 包中传入该参数：
 
 ```powershell
-.\tools\build.ps1 android test apk -HybridTestOrigin "http://192.168.31.91:30082"
+.\tools\build.ps1 android test apk -HybridTestOrigin "http://<Kind主机IP>:30080"
 ```
 
 该开关仅让已登记的 `/a380/` 和 `/b/` 页面获得原生 OAuth 桥接。它不会更改 C 端 `saas-a380-c`、B 端 `saas-a380-h5` 的 appId、redirect 白名单或运营角色校验。
