@@ -1,5 +1,7 @@
 # open_chat_app
 
+[中文](README.md) | [English](README.en.md)
+
 Open IM Flutter 客户端，与 Open IM 服务端配套。
 
 ## 消息通知（极光 JPush + Google FCM）
