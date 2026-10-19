@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "WVLaunchLogo.png",
+      "filename" : "OpenChatLaunchLogo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "WVLaunchLogo@2x.png",
+      "filename" : "OpenChatLaunchLogo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "WVLaunchLogo@3x.png",
+      "filename" : "OpenChatLaunchLogo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
