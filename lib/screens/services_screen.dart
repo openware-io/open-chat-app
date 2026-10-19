@@ -423,9 +423,12 @@ void _openMiniProgram(
     GvToast.show(context, l10n.toastServiceNoUrl);
     return;
   }
-  final url = normalizeMiniProgramUrl(
-    entry.startsWith('http') ? entry : resolveMediaUrl(baseUrl, entry),
-  );
+  final resolvedEntry = resolveServiceEntryUrl(entry, baseUrl);
+  if (resolvedEntry.isEmpty) {
+    GvToast.show(context, l10n.toastServiceNoUrl);
+    return;
+  }
+  final url = normalizeMiniProgramUrl(resolvedEntry);
   // 通过原生 GVBridge.login() 出授权码：JWT 只留在 App，不拼进 URL、不进 H5 JS。
   final token = _bearerToken(authHdrs);
   ProtocolWebViewScreen.open(
@@ -435,6 +438,29 @@ void _openMiniProgram(
     imToken: token,
     useRootNavigator: true,
   );
+}
+
+/// Resolves a service entry against the API origin.
+///
+/// Service rows are configuration, so they must work across local Kind and
+/// production without hard-coding a host. Absolute http(s) URLs and custom
+/// schemes are preserved; a path or hash route is resolved against [baseUrl].
+String resolveServiceEntryUrl(String entry, String baseUrl) {
+  final value = entry.trim();
+  if (value.isEmpty) return '';
+  final parsed = Uri.tryParse(value);
+  if (parsed != null && parsed.hasScheme) {
+    return value;
+  }
+  final base = Uri.tryParse(baseUrl);
+  if (base == null || !base.hasScheme || base.host.isEmpty) {
+    return value;
+  }
+  final path = value.startsWith('/') ? value : '/$value';
+  return base
+      .replace(path: '', query: '', fragment: '')
+      .resolve(path)
+      .toString();
 }
 
 String normalizeMiniProgramUrl(String url) {
