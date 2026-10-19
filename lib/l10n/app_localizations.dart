@@ -2291,13 +2291,13 @@ abstract class AppLocalizations {
   /// No description provided for @servicesWalletCompanyName.
   ///
   /// In en, this message translates to:
-  /// **'A380'**
+  /// **'OpenChat'**
   String get servicesWalletCompanyName;
 
   /// No description provided for @servicesWalletA380Coin.
   ///
   /// In en, this message translates to:
-  /// **'A380 Coin'**
+  /// **'OpenChat Coin'**
   String get servicesWalletA380Coin;
 
   /// No description provided for @servicesWalletPoints.

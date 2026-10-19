@@ -1552,11 +1552,11 @@ List<_MockVenue> _buildVenueCatalog(
     MockServiceCategory.massage => _footBathAssets,
     _ => _poolHallAssets,
   };
-  // These are frontend-only demo merchants. Use neutral A380 names so the
+  // These are frontend-only demo merchants. Use neutral OpenChat names so the
   // mock catalog does not resemble real businesses.
   final names = List.generate(
     4,
-    (index) => 'A380${_categoryTitle(l10n, category)}${index + 1}',
+    (index) => 'OpenChat${_categoryTitle(l10n, category)}${index + 1}',
     growable: false,
   );
   final addresses = [

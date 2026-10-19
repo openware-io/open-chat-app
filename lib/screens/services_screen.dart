@@ -1006,7 +1006,9 @@ IconData _serviceIconFor(String categoryName, String itemName) {
   if (value.contains('购物') || value.contains('商城')) {
     return LucideIcons.shopping_bag;
   }
-  if (value.contains('a380') || value.contains('小程序')) {
+  if (value.contains('a380') ||
+      value.contains('openchat') ||
+      value.contains('小程序')) {
     return LucideIcons.grid_2x2;
   }
   if (value.contains('出行') || value.contains('交通')) {

@@ -1190,10 +1190,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get servicesMoreTitle => 'More services';
 
   @override
-  String get servicesWalletCompanyName => 'A380';
+  String get servicesWalletCompanyName => 'OpenChat';
 
   @override
-  String get servicesWalletA380Coin => 'A380 Coin';
+  String get servicesWalletA380Coin => 'OpenChat Coin';
 
   @override
   String get servicesWalletPoints => 'Points';
