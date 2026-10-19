@@ -1,4 +1,6 @@
-# A380 更多服务 H5
+# OpenChat 更多服务 H5（兼容路径 `/a380/`）
+
+> Status: historical demo。当前线上 C 端由 `open-saas-mobile` 提供；本目录仅保留静态演示和路径兼容说明。
 
 这是可直接部署的纯静态前端，入口文件为 `index.html`，不依赖 Node、接口或数据库。
 
@@ -6,7 +8,7 @@
 
 将整个 `a380` 目录上传到站点根目录，使线上入口为：
 
-`https://www.miniservice.dev.example.com/a380/`
+`http://<host>:30080/a380/`（本地/测试 Kind）或生产站点的 `/a380/`。
 
 App 当前填写的 `/a380` 地址通常会由 Web 服务器自动跳转至 `/a380/`。如果服务器关闭了目录跳转，请将 `/a380` 和 `/a380/` 都指向 `a380/index.html`。
 
