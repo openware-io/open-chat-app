@@ -69,6 +69,14 @@ Google FCM 配置文件位于 `android/app/google-services.json`，包名必须�
 
 服务端推送渠道与密钥说明见同工作区 **`open-chat_server/push-channels-integration.md`**（若仓库分列，请指向对应路径）。
 
+## VS Code 的 Gradle 导入提示
+
+Android 工程固定使用 Gradle `8.14` 以匹配 AGP `8.11.1`。Java 25 + Gradle 8.14 会让 VS Code Java 扩展提示“Can't use Java 25 and Gradle 8.14”，这是 **IDE 的 Gradle 项目导入告警，不影响 Flutter/Android 构建**。
+
+- 不要把 Gradle 直接升到 9.7.1；AGP/Flutter 兼容性需要单独验证。
+- 本仓库的 `.vscode/settings.json` 已关闭 Java 扩展的 Gradle 导入；Flutter/Dart 不受影响。
+- 如果确实需要 Android Java 代码补全，安装 JDK 21，并将 `java.import.gradle.java.home` 指向该 JDK 后再启用导入。
+
 ---
 
 ## Flutter 入门

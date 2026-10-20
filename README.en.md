@@ -57,6 +57,14 @@ For notification tap routing, the server should include:
 
 Use `"chatType": "group"` for group chats.
 
+## VS Code Gradle import warning
+
+The Android project pins Gradle `8.14` for AGP `8.11.1`. Java 25 + Gradle 8.14 makes the VS Code Java extension report "Can't use Java 25 and Gradle 8.14"; this is an **IDE Gradle import warning, not a Flutter/Android build failure**.
+
+- Do not jump to Gradle 9.7.1 without validating AGP/Flutter compatibility.
+- This repository's `.vscode/settings.json` disables the Java extension's Gradle import; Flutter/Dart is unaffected.
+- For Android Java completion, install JDK 21 and point `java.import.gradle.java.home` at it before re-enabling import.
+
 ## Flutter
 
 - [Flutter getting started](https://docs.flutter.dev/get-started/codelab)
