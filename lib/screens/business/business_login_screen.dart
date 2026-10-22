@@ -114,6 +114,11 @@ class _BusinessLoginScreenState extends State<BusinessLoginScreen> {
               onPressed: () => context.go(AppRoutes.hotelFrontdesk),
               child: const Text('酒店前台原型'),
             ),
+            const SizedBox(height: 8),
+            OutlinedButton(
+              onPressed: () => context.go(AppRoutes.businessRoleHome),
+              child: const Text('角色工作台原型'),
+            ),
             TextButton(
               onPressed: () => context.go(AppRoutes.login),
               child: Text('返回 C端登录', style: GvTypography.caption(accent)),
