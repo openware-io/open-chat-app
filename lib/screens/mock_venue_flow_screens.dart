@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:open_ui/open_ui.dart';
 
 import '../core/app_colors.dart';
+import '../core/currency.dart';
 import '../core/app_theme.dart';
 import '../l10n/app_localizations.dart';
 import '../models/mock_service_category.dart';
@@ -290,7 +291,7 @@ class _VenueListCard extends StatelessWidget {
                           Text(
                             deal.priceYuan == 0
                                 ? l10n.serviceDemoFree
-                                : l10n.serviceBookingPrice(deal.priceYuan),
+                                : formatMoney(deal.priceYuan * 100),
                             style: GvTypography.body(primary)
                                 .copyWith(fontWeight: FontWeight.w700),
                           ),
