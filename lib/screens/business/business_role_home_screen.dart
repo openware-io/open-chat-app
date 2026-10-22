@@ -3,11 +3,10 @@ import 'package:open_ui/open_ui.dart' show GvTypography;
 
 import '../../core/app_colors.dart';
 import '../../core/app_theme.dart';
+import '../../repositories/business/admin_api_client.dart';
 import '../../widgets/open_nav_bar.dart';
 
-/// 移动端角色工作台原型：与 Web 端使用同一套“角色 → 工作区 → 任务”语义。
-///
-/// 数据为本地 mock；正式接入后由登录角色和 BFF 返回任务列表。
+/// 移动端角色工作台：登录角色决定初始工作台，酒店任务优先读取 BFF，失败回退 mock。
 class BusinessRoleHomeScreen extends StatefulWidget {
   const BusinessRoleHomeScreen({super.key});
 
@@ -16,13 +15,48 @@ class BusinessRoleHomeScreen extends StatefulWidget {
 }
 
 class _BusinessRoleHomeScreenState extends State<BusinessRoleHomeScreen> {
-  String _role = 'manager';
+  late String _role;
+  List<_Task>? _remoteTasks;
 
   static const _roles = <({String key, String label, String hint})>[
     (key: 'manager', label: '店长', hint: '经营与异常'),
     (key: 'frontdesk', label: '前台', hint: '入住与退房'),
     (key: 'cashier', label: '收银', hint: '收款与结账'),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _role = AdminApiClient.instance.role ?? 'manager';
+    _loadRemoteTasks();
+  }
+
+  Future<void> _loadRemoteTasks() async {
+    try {
+      final rows = await AdminApiClient.instance.hotelTasks();
+      if (!mounted || rows.isEmpty) return;
+      setState(() {
+        _remoteTasks = rows.map((row) {
+          final status = row['status'] as String? ?? '';
+          final label = switch (status) {
+            'ARRIVAL' => '待入住',
+            'DUE_OUT' => '待退房',
+            'IN_HOUSE' => '在住',
+            _ => status,
+          };
+          return _Task(
+            label,
+            '${row['guestName'] ?? ''} · ${row['roomNo'] ?? ''}',
+            row['checkInDate'] as String? ?? '',
+            status == 'DUE_OUT' ? '高' : '中',
+            status == 'ARRIVAL' ? Icons.login : Icons.meeting_room_outlined,
+          );
+        }).toList();
+      });
+    } catch (_) {
+      // 原型回退：未登录/网络不可用时保留本地任务。
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +77,12 @@ class _BusinessRoleHomeScreenState extends State<BusinessRoleHomeScreen> {
         children: [
           Text('当前工作区', style: GvTypography.caption(secondary)),
           const SizedBox(height: 4),
-          Text('OpenChat 生活服务 / 西湖店', style: GvTypography.title(primary)),
+          Text(
+            AdminApiClient.instance.storeName == null
+                ? '本地原型门店'
+                : 'OpenChat 生活服务 / ${AdminApiClient.instance.storeName}',
+            style: GvTypography.title(primary),
+          ),
           const SizedBox(height: GvSpacing.sm),
           Wrap(
             spacing: 8,
@@ -86,6 +125,7 @@ class _BusinessRoleHomeScreenState extends State<BusinessRoleHomeScreen> {
   }
 
   List<_Task> _tasksFor(String role) {
+    if (_remoteTasks != null && role != 'cashier') return _remoteTasks!;
     switch (role) {
       case 'frontdesk':
         return const [

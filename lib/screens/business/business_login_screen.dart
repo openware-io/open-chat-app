@@ -5,6 +5,7 @@ import 'package:open_ui/open_ui.dart' show GvTypography;
 import '../../app/app_routes.dart';
 import '../../core/app_colors.dart';
 import '../../core/app_theme.dart';
+import '../../repositories/business/admin_api_client.dart';
 import '../../widgets/open_nav_bar.dart';
 
 /// B端（商家 / 门店）登录占位页。
@@ -20,6 +21,7 @@ class BusinessLoginScreen extends StatefulWidget {
 class _BusinessLoginScreenState extends State<BusinessLoginScreen> {
   final _account = TextEditingController();
   final _password = TextEditingController();
+  bool _loading = false;
 
   @override
   void dispose() {
@@ -28,14 +30,26 @@ class _BusinessLoginScreenState extends State<BusinessLoginScreen> {
     super.dispose();
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (_account.text.trim().isEmpty || _password.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('请输入门店号 / 手机号和密码')),
       );
       return;
     }
-    context.go(AppRoutes.ktvDashboard);
+    setState(() => _loading = true);
+    try {
+      await AdminApiClient.instance.login(_account.text.trim(), _password.text);
+      if (!mounted) return;
+      context.go(AppRoutes.businessRoleHome);
+    } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('登录失败：$error')),
+      );
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
   }
 
   InputDecoration _decoration(String hint) {
@@ -104,9 +118,15 @@ class _BusinessLoginScreenState extends State<BusinessLoginScreen> {
             SizedBox(
               height: 50,
               child: FilledButton(
-                onPressed: _submit,
+                onPressed: _loading ? null : _submit,
                 style: FilledButton.styleFrom(backgroundColor: accent),
-                child: const Text('登录'),
+                child: _loading
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('登录'),
               ),
             ),
             const SizedBox(height: 8),
