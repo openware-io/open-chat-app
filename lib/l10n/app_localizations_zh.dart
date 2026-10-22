@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1406,6 +1407,21 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get serviceBookingHotelTimeLabel => '入住时间';
+
+  @override
+  String get serviceBookingHotelCheckOutLabel => '离店日期';
+
+  @override
+  String get serviceBookingHotelRoomsLabel => '房间数';
+
+  @override
+  String get serviceBookingHotelGuestsLabel => '住客人数';
+
+  @override
+  String get serviceBookingHotelSelectDate => '选择日期';
+
+  @override
+  String get serviceBookingHotelInvalidDates => '离店日期必须晚于入住日期';
 
   @override
   String get serviceBookingKtvTimeLabel => '到场时间';
@@ -3254,7 +3270,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String chatBackupExportSuccessBody(
-      int conversations, int messages, String path) {
+    int conversations,
+    int messages,
+    String path,
+  ) {
     return '已备份 $conversations 个会话、$messages 条消息，保存位置：$path';
   }
 

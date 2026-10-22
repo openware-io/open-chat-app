@@ -95,7 +95,7 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
-    Locale('zh')
+    Locale('zh'),
   ];
 
   /// No description provided for @appTitle.
@@ -2707,6 +2707,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check-in time'**
   String get serviceBookingHotelTimeLabel;
+
+  /// No description provided for @serviceBookingHotelCheckOutLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-out date'**
+  String get serviceBookingHotelCheckOutLabel;
+
+  /// No description provided for @serviceBookingHotelRoomsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms'**
+  String get serviceBookingHotelRoomsLabel;
+
+  /// No description provided for @serviceBookingHotelGuestsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Guests'**
+  String get serviceBookingHotelGuestsLabel;
+
+  /// No description provided for @serviceBookingHotelSelectDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose date'**
+  String get serviceBookingHotelSelectDate;
+
+  /// No description provided for @serviceBookingHotelInvalidDates.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-out must be after check-in'**
+  String get serviceBookingHotelInvalidDates;
 
   /// No description provided for @serviceBookingKtvTimeLabel.
   ///
@@ -6307,7 +6337,10 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Backed up {conversations} conversations and {messages} messages. Saved to: {path}'**
   String chatBackupExportSuccessBody(
-      int conversations, int messages, String path);
+    int conversations,
+    int messages,
+    String path,
+  );
 
   /// No description provided for @chatBackupExportFailed.
   ///
@@ -6685,8 +6718,9 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
 }

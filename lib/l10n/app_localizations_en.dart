@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -1440,6 +1441,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get serviceBookingHotelTimeLabel => 'Check-in time';
+
+  @override
+  String get serviceBookingHotelCheckOutLabel => 'Check-out date';
+
+  @override
+  String get serviceBookingHotelRoomsLabel => 'Rooms';
+
+  @override
+  String get serviceBookingHotelGuestsLabel => 'Guests';
+
+  @override
+  String get serviceBookingHotelSelectDate => 'Choose date';
+
+  @override
+  String get serviceBookingHotelInvalidDates =>
+      'Check-out must be after check-in';
 
   @override
   String get serviceBookingKtvTimeLabel => 'Arrival time';
@@ -3361,7 +3378,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String chatBackupExportSuccessBody(
-      int conversations, int messages, String path) {
+    int conversations,
+    int messages,
+    String path,
+  ) {
     return 'Backed up $conversations conversations and $messages messages. Saved to: $path';
   }
 

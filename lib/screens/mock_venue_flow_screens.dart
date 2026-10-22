@@ -101,7 +101,9 @@ class _MockVenueListScreenState extends State<MockVenueListScreen> {
                     l10n.serviceVenueFilter,
                   ].asMap().entries.map((entry) {
                     return Padding(
-                      padding: const EdgeInsets.only(right: GvSpacing.sm),
+                      padding: const EdgeInsets.only(
+                        right: GvSpacing.sm,
+                      ),
                       child: ChoiceChip(
                         label: Text(entry.value),
                         selected: _sortIndex == entry.key,
@@ -133,8 +135,9 @@ class _MockVenueListScreenState extends State<MockVenueListScreen> {
                         itemBuilder: (context, index) {
                           final venue = venues[index];
                           return Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: GvSpacing.sm),
+                            padding: const EdgeInsets.only(
+                              bottom: GvSpacing.sm,
+                            ),
                             child: _VenueListCard(
                               venue: venue,
                               onTap: () => _openVenue(context, venue),
@@ -225,9 +228,8 @@ class _VenueListCard extends StatelessWidget {
                           venue.name,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: GvTypography.body(textPrimary).copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: GvTypography.body(textPrimary)
+                              .copyWith(fontWeight: FontWeight.w700),
                         ),
                         const SizedBox(height: GvSpacing.xs),
                         Row(
@@ -236,9 +238,8 @@ class _VenueListCard extends StatelessWidget {
                             const SizedBox(width: 2),
                             Text(
                               venue.rating.toStringAsFixed(1),
-                              style: GvTypography.caption(primary).copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: GvTypography.caption(primary)
+                                  .copyWith(fontWeight: FontWeight.w600),
                             ),
                             const SizedBox(width: GvSpacing.sm),
                             Expanded(
@@ -290,9 +291,8 @@ class _VenueListCard extends StatelessWidget {
                             deal.priceYuan == 0
                                 ? l10n.serviceDemoFree
                                 : l10n.serviceBookingPrice(deal.priceYuan),
-                            style: GvTypography.body(primary).copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
+                            style: GvTypography.body(primary)
+                                .copyWith(fontWeight: FontWeight.w700),
                           ),
                           const SizedBox(width: GvSpacing.sm),
                           Expanded(
@@ -333,6 +333,9 @@ class _MockBookableVenueDetailScreenState
     extends State<_MockBookableVenueDetailScreen> {
   int? _selectedIndex;
   DateTime? _bookingTime;
+  DateTime? _checkOutTime;
+  int _rooms = 1;
+  int _guests = 2;
 
   bool get _isHotel => widget.category == MockServiceCategory.hotel;
 
@@ -374,9 +377,8 @@ class _MockBookableVenueDetailScreenState
                           children: [
                             Text(
                               widget.venue.name,
-                              style: GvTypography.title(textPrimary).copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: GvTypography.title(textPrimary)
+                                  .copyWith(fontWeight: FontWeight.w700),
                             ),
                             const SizedBox(height: GvSpacing.sm),
                             Row(
@@ -410,9 +412,8 @@ class _MockBookableVenueDetailScreenState
                         _isHotel
                             ? l10n.serviceBookingHotelOptionsTitle
                             : l10n.serviceBookingKtvOptionsTitle,
-                        style: GvTypography.title(textPrimary).copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: GvTypography.title(textPrimary)
+                            .copyWith(fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: GvSpacing.sm),
                       ListView.builder(
@@ -422,8 +423,9 @@ class _MockBookableVenueDetailScreenState
                         itemBuilder: (context, index) {
                           final deal = widget.venue.deals[index];
                           return Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: GvSpacing.sm),
+                            padding: const EdgeInsets.only(
+                              bottom: GvSpacing.sm,
+                            ),
                             child: _BookingOptionCard(
                               deal: deal,
                               selected: _selectedIndex == index,
@@ -443,25 +445,22 @@ class _MockBookableVenueDetailScreenState
                             children: [
                               Text(
                                 l10n.serviceBookingPayment,
-                                style: GvTypography.body(textPrimary).copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                                style: GvTypography.body(textPrimary)
+                                    .copyWith(fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(height: GvSpacing.sm),
                               Text(
                                 l10n.serviceDemoFree,
-                                style: GvTypography.title(primary).copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                                style: GvTypography.title(primary)
+                                    .copyWith(fontWeight: FontWeight.w700),
                               ),
                               const Divider(height: GvSpacing.lg * 2),
                               Text(
                                 _isHotel
                                     ? l10n.serviceBookingHotelTimeLabel
                                     : l10n.serviceBookingKtvTimeLabel,
-                                style: GvTypography.body(textPrimary).copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                                style: GvTypography.body(textPrimary)
+                                    .copyWith(fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(height: GvSpacing.sm),
                               OutlinedButton.icon(
@@ -473,6 +472,53 @@ class _MockBookableVenueDetailScreenState
                                       : _formatBookingTime(context),
                                 ),
                               ),
+                              if (_isHotel) ...[
+                                const SizedBox(height: GvSpacing.sm),
+                                OutlinedButton.icon(
+                                  onPressed: _chooseCheckOutDate,
+                                  icon: const Icon(
+                                    Icons.event_available_outlined,
+                                  ),
+                                  label: Text(
+                                    _checkOutTime == null
+                                        ? l10n.serviceBookingHotelCheckOutLabel
+                                        : '${l10n.serviceBookingHotelCheckOutLabel}: '
+                                            '${_formatCheckOutDate(context)}',
+                                  ),
+                                ),
+                                const SizedBox(height: GvSpacing.sm),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: _HotelCounter(
+                                        label:
+                                            l10n.serviceBookingHotelRoomsLabel,
+                                        value: _rooms,
+                                        onDecrease: _rooms > 1
+                                            ? () => setState(() => _rooms--)
+                                            : null,
+                                        onIncrease: _rooms < 5
+                                            ? () => setState(() => _rooms++)
+                                            : null,
+                                      ),
+                                    ),
+                                    const SizedBox(width: GvSpacing.sm),
+                                    Expanded(
+                                      child: _HotelCounter(
+                                        label:
+                                            l10n.serviceBookingHotelGuestsLabel,
+                                        value: _guests,
+                                        onDecrease: _guests > 1
+                                            ? () => setState(() => _guests--)
+                                            : null,
+                                        onIncrease: _guests < _rooms * 3
+                                            ? () => setState(() => _guests++)
+                                            : null,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ],
                           ),
                         ),
@@ -495,7 +541,9 @@ class _MockBookableVenueDetailScreenState
         child: Padding(
           padding: const EdgeInsets.all(GvSpacing.page),
           child: FilledButton(
-            onPressed: _selectedDeal != null && _bookingTime != null
+            onPressed: _selectedDeal != null &&
+                    _bookingTime != null &&
+                    (!_isHotel || _checkOutTime != null)
                 ? _submitReservation
                 : null,
             child: Text(l10n.serviceBookingReserve),
@@ -529,7 +577,43 @@ class _MockBookableVenueDetailScreenState
         time.hour,
         time.minute,
       );
+      if (_isHotel &&
+          (_checkOutTime == null || !_checkOutTime!.isAfter(_bookingTime!))) {
+        _checkOutTime = DateTime(date.year, date.month, date.day + 1, 12);
+      }
     });
+  }
+
+  Future<void> _chooseCheckOutDate() async {
+    final now = DateTime.now();
+    final firstDate = _bookingTime ?? DateTime(now.year, now.month, now.day);
+    final initialDate = _checkOutTime ?? firstDate.add(const Duration(days: 1));
+    final date = await showDatePicker(
+      context: context,
+      initialDate: initialDate.isBefore(firstDate) ? firstDate : initialDate,
+      firstDate: firstDate,
+      lastDate: DateTime(now.year + 1, now.month, now.day),
+    );
+    if (date == null || !mounted) return;
+    final checkIn = _bookingTime ?? firstDate;
+    if (!date.isAfter(checkIn)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.serviceBookingHotelInvalidDates,
+          ),
+        ),
+      );
+      return;
+    }
+    setState(() {
+      _checkOutTime = DateTime(date.year, date.month, date.day, 12);
+    });
+  }
+
+  String _formatCheckOutDate(BuildContext context) {
+    final localizations = MaterialLocalizations.of(context);
+    return localizations.formatMediumDate(_checkOutTime!);
   }
 
   String _formatBookingTime(BuildContext context) {
@@ -547,6 +631,9 @@ class _MockBookableVenueDetailScreenState
           venue: widget.venue,
           deal: _selectedDeal!,
           bookingTime: _bookingTime!,
+          checkOutTime: _isHotel ? _checkOutTime : null,
+          rooms: _isHotel ? _rooms : null,
+          guests: _isHotel ? _guests : null,
         ),
       ),
     );
@@ -601,9 +688,8 @@ class _BookingOptionCard extends StatelessWidget {
                   children: [
                     Text(
                       deal.title,
-                      style: GvTypography.body(textPrimary).copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: GvTypography.body(textPrimary)
+                          .copyWith(fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: GvSpacing.xs),
                     Text(
@@ -615,9 +701,8 @@ class _BookingOptionCard extends StatelessWidget {
                     const SizedBox(height: GvSpacing.sm),
                     Text(
                       l10n.serviceDemoFree,
-                      style: GvTypography.body(primary).copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: GvTypography.body(primary)
+                          .copyWith(fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),
@@ -634,18 +719,78 @@ class _BookingOptionCard extends StatelessWidget {
   }
 }
 
+class _HotelCounter extends StatelessWidget {
+  const _HotelCounter({
+    required this.label,
+    required this.value,
+    this.onDecrease,
+    this.onIncrease,
+  });
+
+  final String label;
+  final int value;
+  final VoidCallback? onDecrease;
+  final VoidCallback? onIncrease;
+
+  @override
+  Widget build(BuildContext context) {
+    final textPrimary = AppColors.textPrimary.resolveFrom(context);
+    final textSecondary = AppColors.textSecondary.resolveFrom(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: GvSpacing.sm,
+        vertical: GvSpacing.xs,
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.border.resolveFrom(context)),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(label, style: GvTypography.small(textSecondary)),
+          ),
+          IconButton(
+            onPressed: onDecrease,
+            icon: const Icon(Icons.remove_circle_outline, size: 20),
+            visualDensity: VisualDensity.compact,
+            tooltip: '减少$label',
+          ),
+          Text(
+            '$value',
+            style: GvTypography.body(textPrimary)
+                .copyWith(fontWeight: FontWeight.w700),
+          ),
+          IconButton(
+            onPressed: onIncrease,
+            icon: const Icon(Icons.add_circle_outline, size: 20),
+            visualDensity: VisualDensity.compact,
+            tooltip: '增加$label',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _MockReservationSuccessScreen extends StatelessWidget {
   const _MockReservationSuccessScreen({
     required this.category,
     required this.venue,
     required this.deal,
     required this.bookingTime,
+    this.checkOutTime,
+    this.rooms,
+    this.guests,
   });
 
   final MockServiceCategory category;
   final _MockVenue venue;
   final _MockVenueDeal deal;
   final DateTime bookingTime;
+  final DateTime? checkOutTime;
+  final int? rooms;
+  final int? guests;
 
   @override
   Widget build(BuildContext context) {
@@ -658,10 +803,7 @@ class _MockReservationSuccessScreen extends StatelessWidget {
         '${localizations.formatTimeOfDay(TimeOfDay.fromDateTime(bookingTime))}';
     return Scaffold(
       backgroundColor: gvPageScaffoldBackground(context),
-      appBar: GvNavBar(
-        title: l10n.serviceBookingSuccessTitle,
-        showBack: true,
-      ),
+      appBar: GvNavBar(title: l10n.serviceBookingSuccessTitle, showBack: true),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(
@@ -706,6 +848,21 @@ class _MockReservationSuccessScreen extends StatelessWidget {
                             : l10n.serviceBookingKtvTimeLabel,
                         value: time,
                       ),
+                      if (checkOutTime != null)
+                        _DetailRow(
+                          label: l10n.serviceBookingHotelCheckOutLabel,
+                          value: localizations.formatMediumDate(checkOutTime!),
+                        ),
+                      if (rooms != null)
+                        _DetailRow(
+                          label: l10n.serviceBookingHotelRoomsLabel,
+                          value: '$rooms',
+                        ),
+                      if (guests != null)
+                        _DetailRow(
+                          label: l10n.serviceBookingHotelGuestsLabel,
+                          value: '$guests',
+                        ),
                       _DetailRow(
                         label: l10n.serviceBookingPayment,
                         value: l10n.serviceDemoFree,
@@ -774,9 +931,8 @@ class _MockVenueDetailScreen extends StatelessWidget {
                           children: [
                             Text(
                               venue.name,
-                              style: GvTypography.title(textPrimary).copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: GvTypography.title(textPrimary)
+                                  .copyWith(fontWeight: FontWeight.w700),
                             ),
                             const SizedBox(height: GvSpacing.sm),
                             Row(
@@ -821,12 +977,9 @@ class _MockVenueDetailScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: GvSpacing.lg),
                       Text(
-                        l10n.serviceVenueDealsTitle(
-                          venue.deals.length,
-                        ),
-                        style: GvTypography.title(textPrimary).copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
+                        l10n.serviceVenueDealsTitle(venue.deals.length),
+                        style: GvTypography.title(textPrimary)
+                            .copyWith(fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: GvSpacing.sm),
                       ListView.builder(
@@ -836,8 +989,9 @@ class _MockVenueDetailScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final deal = venue.deals[index];
                           return Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: GvSpacing.sm),
+                            padding: const EdgeInsets.only(
+                              bottom: GvSpacing.sm,
+                            ),
                             child: _DealCard(
                               deal: deal,
                               onTap: () => _openDeal(context, deal),
@@ -896,9 +1050,8 @@ class _DealCard extends StatelessWidget {
                   deal.title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: GvTypography.body(textPrimary).copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: GvTypography.body(textPrimary)
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: GvSpacing.xs),
                 Text(
@@ -947,10 +1100,7 @@ class _MockDealDetailScreen extends StatelessWidget {
     final textSecondary = AppColors.textSecondary.resolveFrom(context);
     return Scaffold(
       backgroundColor: gvPageScaffoldBackground(context),
-      appBar: GvNavBar(
-        title: l10n.serviceVenueDealDetailTitle,
-        showBack: true,
-      ),
+      appBar: GvNavBar(title: l10n.serviceVenueDealDetailTitle, showBack: true),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(
@@ -974,16 +1124,14 @@ class _MockDealDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             l10n.serviceDemoFree,
-                            style: GvTypography.headline(primary).copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
+                            style: GvTypography.headline(primary)
+                                .copyWith(fontWeight: FontWeight.w700),
                           ),
                           const SizedBox(height: GvSpacing.sm),
                           Text(
                             deal.title,
-                            style: GvTypography.title(textPrimary).copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
+                            style: GvTypography.title(textPrimary)
+                                .copyWith(fontWeight: FontWeight.w700),
                           ),
                           const SizedBox(height: GvSpacing.sm),
                           Wrap(
@@ -1010,9 +1158,8 @@ class _MockDealDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             l10n.serviceVenuePackageDetails,
-                            style: GvTypography.title(textPrimary).copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
+                            style: GvTypography.title(textPrimary)
+                                .copyWith(fontWeight: FontWeight.w700),
                           ),
                           const SizedBox(height: GvSpacing.lg),
                           _DetailRow(
@@ -1037,9 +1184,8 @@ class _MockDealDetailScreen extends StatelessWidget {
                         children: [
                           Text(
                             l10n.serviceVenueAdditionalInfo,
-                            style: GvTypography.title(textPrimary).copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
+                            style: GvTypography.title(textPrimary)
+                                .copyWith(fontWeight: FontWeight.w700),
                           ),
                           const SizedBox(height: GvSpacing.sm),
                           Text(
@@ -1062,10 +1208,7 @@ class _MockDealDetailScreen extends StatelessWidget {
           child: FilledButton(
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
-                builder: (_) => _MockCheckoutScreen(
-                  venue: venue,
-                  deal: deal,
-                ),
+                builder: (_) => _MockCheckoutScreen(venue: venue, deal: deal),
               ),
             ),
             child: Text(l10n.serviceVenueOrderNow),
@@ -1096,10 +1239,7 @@ class _MockCheckoutScreenState extends State<_MockCheckoutScreen> {
     final textSecondary = AppColors.textSecondary.resolveFrom(context);
     return Scaffold(
       backgroundColor: gvPageScaffoldBackground(context),
-      appBar: GvNavBar(
-        title: l10n.serviceVenueCheckoutTitle,
-        showBack: true,
-      ),
+      appBar: GvNavBar(title: l10n.serviceVenueCheckoutTitle, showBack: true),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(
@@ -1128,9 +1268,8 @@ class _MockCheckoutScreenState extends State<_MockCheckoutScreen> {
                             widget.deal.title,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: GvTypography.body(textPrimary).copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: GvTypography.body(textPrimary)
+                                .copyWith(fontWeight: FontWeight.w600),
                           ),
                           const SizedBox(height: GvSpacing.sm),
                           Text(
@@ -1198,9 +1337,8 @@ class _MockCheckoutScreenState extends State<_MockCheckoutScreen> {
                   children: [
                     Text(
                       l10n.serviceVenuePurchaseNotice,
-                      style: GvTypography.title(textPrimary).copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: GvTypography.title(textPrimary)
+                          .copyWith(fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: GvSpacing.sm),
                     Text(
@@ -1312,9 +1450,8 @@ class _MockOrderSuccessScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: GvSpacing.lg),
                 FilledButton(
-                  onPressed: () => Navigator.of(context).popUntil(
-                    (route) => route.isFirst,
-                  ),
+                  onPressed: () =>
+                      Navigator.of(context).popUntil((route) => route.isFirst),
                   child: Text(l10n.serviceVenueBackToList),
                 ),
               ],
@@ -1346,9 +1483,8 @@ class _VenueGalleryState extends State<_VenueGallery> {
         PageView.builder(
           itemCount: widget.paths.length,
           onPageChanged: (index) => setState(() => _index = index),
-          itemBuilder: (context, index) => _VenueAssetImage(
-            path: widget.paths[index],
-          ),
+          itemBuilder: (context, index) =>
+              _VenueAssetImage(path: widget.paths[index]),
         ),
         Positioned(
           right: GvSpacing.page,
@@ -1376,11 +1512,7 @@ class _VenueGalleryState extends State<_VenueGallery> {
 }
 
 class _VenueAssetImage extends StatelessWidget {
-  const _VenueAssetImage({
-    required this.path,
-    this.width,
-    this.height,
-  });
+  const _VenueAssetImage({required this.path, this.width, this.height});
 
   final String path;
   final double? width;
@@ -1421,10 +1553,7 @@ class _SurfaceCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(GvRadii.card),
         boxShadow: GvShadows.card,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(GvSpacing.lg),
-        child: child,
-      ),
+      child: Padding(padding: const EdgeInsets.all(GvSpacing.lg), child: child),
     );
   }
 }
@@ -1473,9 +1602,8 @@ class _InfoRow extends StatelessWidget {
         const SizedBox(width: GvSpacing.sm),
         Text(
           title,
-          style: GvTypography.body(
-            AppColors.textPrimary.resolveFrom(context),
-          ).copyWith(fontWeight: FontWeight.w600),
+          style: GvTypography.body(AppColors.textPrimary.resolveFrom(context))
+              .copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(width: GvSpacing.sm),
         Expanded(
@@ -1528,10 +1656,7 @@ class _DetailRow extends StatelessWidget {
   }
 }
 
-String _categoryTitle(
-  AppLocalizations l10n,
-  MockServiceCategory category,
-) {
+String _categoryTitle(AppLocalizations l10n, MockServiceCategory category) {
   return switch (category) {
     MockServiceCategory.hotel => l10n.servicesHotel,
     MockServiceCategory.ktv => l10n.servicesKtv,
