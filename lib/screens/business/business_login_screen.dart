@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:open_ui/open_ui.dart' show GvTypography;
@@ -35,12 +34,6 @@ class _BusinessLoginScreenState extends State<BusinessLoginScreen> {
     if (_account.text.trim().isEmpty || _password.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('请输入门店号 / 手机号和密码')),
-      );
-      return;
-    }
-    if (!kDebugMode) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('B端独立认证尚未接入，当前仅支持调试环境预览')),
       );
       return;
     }
