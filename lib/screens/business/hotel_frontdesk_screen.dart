@@ -83,6 +83,78 @@ class _HotelFrontdeskScreenState extends State<HotelFrontdeskScreen> {
     }
   }
 
+  Future<void> _openFolio(_HotelBooking booking) async {
+    try {
+      final data = await _client.hotelFolio(booking.id);
+      if (!mounted) return;
+      final folio = (data['folio'] as Map?)?.cast<String, dynamic>() ?? const {};
+      final items = (data['items'] as List?) ?? const [];
+      final paid = (folio['paidMinor'] as num?)?.toInt() ?? 0;
+      final charge = (folio['chargeMinor'] as num?)?.toInt() ?? 0;
+      await showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('账单 · ${booking.guest}'),
+          content: SizedBox(
+            width: 360,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('应收 ${(charge / 100).toStringAsFixed(2)} ${booking.currency}'),
+                Text('已收 ${(paid / 100).toStringAsFixed(2)} ${booking.currency}'),
+                const SizedBox(height: 8),
+                ...items.map((item) {
+                  final row = (item as Map).cast<String, dynamic>();
+                  final amount = (row['amountMinor'] as num?)?.toInt() ?? 0;
+                  return Text(
+                    '${row['type']} ${row['description'] ?? ''} ${(amount / 100).toStringAsFixed(2)}',
+                  );
+                }),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('关闭')),
+            FilledButton(
+              onPressed: () async {
+                await _client.collectHotelDeposit(booking.id, 100000);
+                if (!mounted || !context.mounted) return;
+                Navigator.pop(context);
+                _toast('已收押金 1000.00');
+                await _load();
+              },
+              child: const Text('收押金 1000'),
+            ),
+          ],
+        ),
+      );
+    } catch (error) {
+      _toast('加载账单失败：$error');
+    }
+  }
+
+  Future<void> _extend(_HotelBooking booking) async {
+    final base = DateTime.tryParse(booking.checkOutDate) ?? DateTime.now();
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: base.add(const Duration(days: 1)),
+      firstDate: base.add(const Duration(days: 1)),
+      lastDate: base.add(const Duration(days: 30)),
+    );
+    if (picked == null) return;
+    try {
+      final text = '${picked.year.toString().padLeft(4, '0')}-'
+          '${picked.month.toString().padLeft(2, '0')}-'
+          '${picked.day.toString().padLeft(2, '0')}';
+      await _client.extendHotelBooking(booking.id, text);
+      _toast('已续住至 $text');
+      await _load();
+    } catch (error) {
+      _toast('续住失败：$error');
+    }
+  }
+
   Future<bool> _confirm(String title, String message, String action) async {
     final result = await showDialog<bool>(
       context: context,
@@ -155,6 +227,8 @@ class _HotelFrontdeskScreenState extends State<HotelFrontdeskScreen> {
                     booking: booking,
                     onCheckIn: () => _checkIn(booking),
                     onCheckOut: () => _checkOut(booking),
+                    onFolio: () => _openFolio(booking),
+                    onExtend: () => _extend(booking),
                   ),
                 ),
               ),
@@ -274,11 +348,19 @@ class _ErrorCard extends StatelessWidget {
 }
 
 class _BookingCard extends StatelessWidget {
-  const _BookingCard({required this.booking, required this.onCheckIn, required this.onCheckOut});
+  const _BookingCard({
+    required this.booking,
+    required this.onCheckIn,
+    required this.onCheckOut,
+    required this.onFolio,
+    required this.onExtend,
+  });
 
   final _HotelBooking booking;
   final VoidCallback onCheckIn;
   final VoidCallback onCheckOut;
+  final VoidCallback onFolio;
+  final VoidCallback onExtend;
 
   @override
   Widget build(BuildContext context) {
@@ -288,6 +370,7 @@ class _BookingCard extends StatelessWidget {
     final (label, color) = _statusStyle(context, booking.status);
     final canCheckIn = booking.status == _HotelStatus.arrival;
     final canCheckOut = booking.status == _HotelStatus.inHouse || booking.status == _HotelStatus.dueOut;
+    final canManage = booking.status == _HotelStatus.inHouse || booking.status == _HotelStatus.dueOut;
 
     return Container(
       padding: const EdgeInsets.all(GvSpacing.lg),
@@ -323,13 +406,16 @@ class _BookingCard extends StatelessWidget {
             '${booking.bookingNo} · 应收 ${booking.amountText}',
             style: GvTypography.small(secondary),
           ),
-          if (canCheckIn || canCheckOut) ...[
+          if (canCheckIn || canCheckOut || canManage) ...[
             const SizedBox(height: GvSpacing.sm),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            Wrap(
+              alignment: WrapAlignment.end,
+              spacing: 8,
               children: [
                 if (canCheckIn) FilledButton(onPressed: onCheckIn, child: const Text('办理入住')),
                 if (canCheckOut) FilledButton(onPressed: onCheckOut, child: const Text('办理退房')),
+                if (canManage) TextButton(onPressed: onFolio, child: const Text('账单/押金')),
+                if (canManage) TextButton(onPressed: onExtend, child: const Text('续住')),
               ],
             ),
           ],
@@ -350,6 +436,8 @@ class _HotelBooking {
     required this.dates,
     required this.rooms,
     required this.amountText,
+    required this.currency,
+    required this.checkOutDate,
     required this.status,
     required this.roomNo,
   });
@@ -361,6 +449,8 @@ class _HotelBooking {
   final String dates;
   final int rooms;
   final String amountText;
+  final String currency;
+  final String checkOutDate;
   final _HotelStatus status;
   final String roomNo;
 
@@ -383,6 +473,8 @@ class _HotelBooking {
       dates: '${json['checkInDate'] ?? ''} → ${json['checkOutDate'] ?? ''}',
       rooms: (json['rooms'] as num?)?.toInt() ?? 1,
       amountText: '${(amountMinor / 100).toStringAsFixed(2)} $currency',
+      currency: currency,
+      checkOutDate: (json['checkOutDate'] as String?) ?? '',
       status: status,
       roomNo: (json['roomNo'] as String?) ?? '',
     );

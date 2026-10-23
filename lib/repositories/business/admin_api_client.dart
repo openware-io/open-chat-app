@@ -117,6 +117,32 @@ class AdminApiClient {
     return response.data ?? const {};
   }
 
+  Future<Map<String, dynamic>> hotelFolio(int id) async {
+    final response = await _dio.get<Map<String, dynamic>>(
+      '/business/hotel/frontdesk/bookings/$id/folio',
+      options: Options(headers: _headers()),
+    );
+    return response.data ?? const {};
+  }
+
+  Future<Map<String, dynamic>> collectHotelDeposit(int id, int amountMinor) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      '/business/hotel/frontdesk/bookings/$id/deposit',
+      data: {'amountMinor': amountMinor, 'note': '移动前台押金'},
+      options: Options(headers: _csrfHeaders()),
+    );
+    return response.data ?? const {};
+  }
+
+  Future<Map<String, dynamic>> extendHotelBooking(int id, String newCheckOutDate) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      '/business/hotel/frontdesk/bookings/$id/extend',
+      data: {'newCheckOutDate': newCheckOutDate},
+      options: Options(headers: _csrfHeaders()),
+    );
+    return response.data ?? const {};
+  }
+
   Map<String, String> _csrfHeaders() {
     return {
       ..._headers(),
