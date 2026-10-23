@@ -101,6 +101,29 @@ class AdminApiClient {
         .toList();
   }
 
+  Future<Map<String, dynamic>> checkInHotelBooking(int id) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      '/business/hotel/frontdesk/bookings/$id/checkin',
+      options: Options(headers: _csrfHeaders()),
+    );
+    return response.data ?? const {};
+  }
+
+  Future<Map<String, dynamic>> checkOutHotelBooking(int id) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      '/business/hotel/frontdesk/bookings/$id/checkout',
+      options: Options(headers: _csrfHeaders()),
+    );
+    return response.data ?? const {};
+  }
+
+  Map<String, String> _csrfHeaders() {
+    return {
+      ..._headers(),
+      if (_csrfToken != null) 'X-CSRF-Token': _csrfToken!,
+    };
+  }
+
   Map<String, String> _headers() {
     return {
       if (_cookie != null) 'Cookie': _cookie!,
