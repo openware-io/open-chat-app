@@ -437,6 +437,7 @@ void _openMiniProgram(
     url: url,
     imToken: token,
     useRootNavigator: true,
+    showAppBar: false,
   );
 }
 
