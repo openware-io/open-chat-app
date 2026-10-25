@@ -2,6 +2,7 @@ package com.csmimtbshop.com
 
 import android.app.PictureInPictureParams
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.res.Configuration
 import android.graphics.Color
 import android.net.Uri
@@ -14,6 +15,7 @@ import android.provider.Settings
 import android.util.Log
 import android.util.Rational
 import android.view.View
+import android.webkit.WebView
 import android.view.WindowManager
 import com.cloudwebrtc.webrtc.FlutterWebRTCPlugin
 import com.cloudwebrtc.webrtc.video.LocalVideoTrack
@@ -33,6 +35,9 @@ class MainActivity : FlutterActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if ((applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0) {
+            WebView.setWebContentsDebuggingEnabled(true)
+        }
         configureEdgeToEdge()
     }
 
