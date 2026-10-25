@@ -10,7 +10,7 @@ class AdminApiClient {
 
   static final AdminApiClient instance = AdminApiClient._();
 
-  static const _appId = 'saas-a380-h5';
+  static const _appId = 'saas-b';
 
   final Dio _dio = Dio(
     BaseOptions(

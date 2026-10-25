@@ -7,7 +7,7 @@ void main() {
       HybridBridgePolicy.forPage(
         Uri.parse('https://miniservice.dev.example.com/c/'),
       )?.appId,
-      'saas-a380-c',
+      'saas-c',
     );
     expect(
       HybridBridgePolicy.forPage(
@@ -29,7 +29,7 @@ void main() {
     )!;
     expect(
       policy.accepts(
-        requestedAppId: 'saas-a380-c',
+        requestedAppId: 'saas-c',
         scope: 'profile.basic',
         redirectUri: Uri.parse(
           'https://miniservice.dev.example.com/c/',
@@ -39,7 +39,7 @@ void main() {
     );
     expect(
       policy.accepts(
-        requestedAppId: 'saas-a380-h5',
+        requestedAppId: 'saas-b',
         scope: 'profile.basic',
         redirectUri: Uri.parse(
           'https://miniservice.dev.example.com/c/',
@@ -49,7 +49,7 @@ void main() {
     );
     expect(
       policy.accepts(
-        requestedAppId: 'saas-a380-c',
+        requestedAppId: 'saas-c',
         scope: 'profile.phone',
         redirectUri: Uri.parse(
           'https://miniservice.dev.example.com/c/',
@@ -59,7 +59,7 @@ void main() {
     );
     expect(
       policy.accepts(
-        requestedAppId: 'saas-a380-c',
+        requestedAppId: 'saas-c',
         scope: 'profile.basic',
         redirectUri: Uri.parse(
           'https://miniservice.dev.example.com:444/c/',

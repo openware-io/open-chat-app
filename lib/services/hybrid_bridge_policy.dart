@@ -18,14 +18,14 @@ class HybridBridgePolicy {
   static Map<String, HybridBridgePolicy> get _policies {
     final origin = _debugTestOrigin ?? 'https://miniservice.dev.example.com';
     return <String, HybridBridgePolicy>{
-      'saas-a380-c': HybridBridgePolicy._(
-        appId: 'saas-a380-c',
+      'saas-c': HybridBridgePolicy._(
+        appId: 'saas-c',
         origin: origin,
         redirectPath: '/c/',
         scopes: {'profile.basic'},
       ),
-      'saas-a380-h5': HybridBridgePolicy._(
-        appId: 'saas-a380-h5',
+      'saas-b': HybridBridgePolicy._(
+        appId: 'saas-b',
         origin: origin,
         redirectPath: '/b/',
         scopes: {'profile.basic'},
