@@ -14,19 +14,19 @@ void main() {
   test('normalizes the A380 directory URL for WebView relative assets', () {
     expect(
       normalizeMiniProgramUrl('https://miniservice.dev.example.com/a380'),
-      'https://miniservice.dev.example.com/a380/',
+      'https://miniservice.dev.example.com/c/',
     );
     expect(
-      normalizeMiniProgramUrl('https://miniservice.dev.example.com/a380/'),
-      'https://miniservice.dev.example.com/a380/',
+      normalizeMiniProgramUrl('https://miniservice.dev.example.com/c/'),
+      'https://miniservice.dev.example.com/c/',
     );
     expect(
       normalizeMiniProgramUrl('https://www.miniservice.dev.example.com/a380'),
-      'https://miniservice.dev.example.com/a380/',
+      'https://miniservice.dev.example.com/c/',
     );
     expect(
       normalizeMiniProgramUrl('https://admin.dev.example.com/a380'),
-      'https://miniservice.dev.example.com/a380/',
+      'https://miniservice.dev.example.com/c/',
     );
     expect(
       normalizeMiniProgramUrl('https://admin.dev.example.com/b'),

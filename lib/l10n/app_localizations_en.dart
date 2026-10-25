@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -3378,10 +3377,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String chatBackupExportSuccessBody(
-    int conversations,
-    int messages,
-    String path,
-  ) {
+      int conversations, int messages, String path) {
     return 'Backed up $conversations conversations and $messages messages. Saved to: $path';
   }
 

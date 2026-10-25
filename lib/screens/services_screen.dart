@@ -467,14 +467,14 @@ String resolveServiceEntryUrl(String entry, String baseUrl) {
 String normalizeMiniProgramUrl(String url) {
   final uri = Uri.tryParse(url);
   if (uri == null ||
-      !(uri.path == '/a380' ||
-          uri.path == '/a380/' ||
+      !(uri.path == '/c' ||
+          uri.path == '/c/' ||
           uri.path == '/b' ||
           uri.path == '/b/')) {
     return url;
   }
   const testOrigin = String.fromEnvironment('OPEN_HYBRID_TEST_ORIGIN');
-  final debugPath = uri.path.startsWith('/b') ? '/b/' : '/a380/';
+  final debugPath = uri.path.startsWith('/b') ? '/b/' : '/c/';
   if (!AppEnvironment.isProduction && testOrigin.isNotEmpty) {
     final local = Uri.tryParse(testOrigin);
     if (local != null && local.hasAuthority && local.host.isNotEmpty) {

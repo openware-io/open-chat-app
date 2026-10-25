@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -3270,10 +3269,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String chatBackupExportSuccessBody(
-    int conversations,
-    int messages,
-    String path,
-  ) {
+      int conversations, int messages, String path) {
     return '已备份 $conversations 个会话、$messages 条消息，保存位置：$path';
   }
 

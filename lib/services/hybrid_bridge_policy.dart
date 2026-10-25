@@ -21,7 +21,7 @@ class HybridBridgePolicy {
       'saas-a380-c': HybridBridgePolicy._(
         appId: 'saas-a380-c',
         origin: origin,
-        redirectPath: '/a380/',
+        redirectPath: '/c/',
         scopes: {'profile.basic'},
       ),
       'saas-a380-h5': HybridBridgePolicy._(

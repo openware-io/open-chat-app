@@ -5,19 +5,19 @@ void main() {
   test('resolves only registered HTTPS page origins and paths', () {
     expect(
       HybridBridgePolicy.forPage(
-        Uri.parse('https://miniservice.dev.example.com/a380/'),
+        Uri.parse('https://miniservice.dev.example.com/c/'),
       )?.appId,
       'saas-a380-c',
     );
     expect(
       HybridBridgePolicy.forPage(
-        Uri.parse('https://evil.example/a380/'),
+        Uri.parse('https://evil.example/c/'),
       ),
       isNull,
     );
     expect(
       HybridBridgePolicy.forPage(
-        Uri.parse('http://miniservice.dev.example.com/a380/'),
+        Uri.parse('http://miniservice.dev.example.com/c/'),
       ),
       isNull,
     );
@@ -25,14 +25,14 @@ void main() {
 
   test('accepts exact app, scope, and redirect transaction only', () {
     final policy = HybridBridgePolicy.forPage(
-      Uri.parse('https://miniservice.dev.example.com/a380/'),
+      Uri.parse('https://miniservice.dev.example.com/c/'),
     )!;
     expect(
       policy.accepts(
         requestedAppId: 'saas-a380-c',
         scope: 'profile.basic',
         redirectUri: Uri.parse(
-          'https://miniservice.dev.example.com/a380/',
+          'https://miniservice.dev.example.com/c/',
         ),
       ),
       isTrue,
@@ -42,7 +42,7 @@ void main() {
         requestedAppId: 'saas-a380-h5',
         scope: 'profile.basic',
         redirectUri: Uri.parse(
-          'https://miniservice.dev.example.com/a380/',
+          'https://miniservice.dev.example.com/c/',
         ),
       ),
       isFalse,
@@ -52,7 +52,7 @@ void main() {
         requestedAppId: 'saas-a380-c',
         scope: 'profile.phone',
         redirectUri: Uri.parse(
-          'https://miniservice.dev.example.com/a380/',
+          'https://miniservice.dev.example.com/c/',
         ),
       ),
       isFalse,
@@ -62,7 +62,7 @@ void main() {
         requestedAppId: 'saas-a380-c',
         scope: 'profile.basic',
         redirectUri: Uri.parse(
-          'https://miniservice.dev.example.com:444/a380/',
+          'https://miniservice.dev.example.com:444/c/',
         ),
       ),
       isFalse,

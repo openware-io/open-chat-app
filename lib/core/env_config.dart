@@ -41,7 +41,7 @@ class EnvConfig {
 
   /// Origin used to resolve relative service-board links.
   ///
-  /// Local Kind serves `/a380/` through the same ingress as the API, while
+  /// Local Kind serves `/c/` through the same ingress as the API, while
   /// production keeps the SaaS H5 on its own host. `OPEN_SERVICE_BASE` can
   /// override this independently from the API origin.
   static const _prodServiceBase = 'https://miniservice.dev.example.com';
