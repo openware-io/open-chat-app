@@ -218,7 +218,7 @@ int parseMoneyInput(String text, [String? currencyCode]) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /// 储值币品牌名缺失时的**唯一**回退（租户未配置 `wallet_brand_name`）。
-const String defaultTokenBrandName = 'OpenChat币';
+const String defaultTokenBrandName = 'SaaS 币';
 
 /// 租户未配置 `wallet_ratio` 时的缺省比例：1 个主单位 = 100 个代币。
 /// 取不到/非法一律按此值处理，**不抛错**。

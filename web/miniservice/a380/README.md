@@ -1,4 +1,4 @@
-# OpenChat 更多服务 H5（兼容路径 `/a380/`）
+# SaaS 生活服务 H5（兼容路径 `/a380/`）
 
 > Status: historical demo。当前线上 C 端由 `open-saas-mobile` 提供；本目录仅保留静态演示和路径兼容说明。
 

@@ -138,8 +138,8 @@ void main() {
     });
 
     test('品牌名只做标签兜底（不再出现在值里）', () {
-      expect(defaultTokenBrandName, 'OpenChat币');
-      expect(tokenBrandOrDefault(null), 'OpenChat币');
+      expect(defaultTokenBrandName, 'SaaS 币');
+      expect(tokenBrandOrDefault(null), 'SaaS 币');
       expect(tokenBrandOrDefault(' 皇冠币 '), '皇冠币');
       // 值是纯数字：品牌名 / 「积分」/「个」都不参与拼接
       for (final text in <String>[formatTokens(1000), formatPoints(300)]) {

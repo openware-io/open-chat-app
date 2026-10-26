@@ -80,7 +80,7 @@ class _BusinessRoleHomeScreenState extends State<BusinessRoleHomeScreen> {
           Text(
             AdminApiClient.instance.storeName == null
                 ? '本地原型门店'
-                : 'OpenChat 生活服务 / ${AdminApiClient.instance.storeName}',
+                : 'SaaS 生活服务 / ${AdminApiClient.instance.storeName}',
             style: GvTypography.title(primary),
           ),
           const SizedBox(height: GvSpacing.sm),
