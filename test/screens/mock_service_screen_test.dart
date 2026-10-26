@@ -64,8 +64,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('A380Bar1'), findsOneWidget);
-    await tester.tap(find.text('A380Bar1'));
+    expect(find.text('SaaSBar1'), findsOneWidget);
+    await tester.tap(find.text('SaaSBar1'));
     await tester.pumpAndSettle();
 
     final buyNow = find.text('Buy now').first;
@@ -103,8 +103,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('A380足浴1'), findsOneWidget);
-    await tester.tap(find.text('A380足浴1'));
+    expect(find.text('SaaS足浴1'), findsOneWidget);
+    await tester.tap(find.text('SaaS足浴1'));
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('抢购').first);

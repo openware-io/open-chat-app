@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// 客户「待确认加项」提醒的**接线守卫**（A380 收银端）。
+/// 客户「待确认加项」提醒的**接线守卫**（SaaS 收银端）。
 ///
 /// 背景：C 端客户自助加项落 `PENDING_APPROVAL`，门店运营不确认就不计应收。
 /// 提醒链路由四处组成：唯一聚合接口 + 全局轮询状态 + 三处提示 + 一个集中处理页。

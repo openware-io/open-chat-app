@@ -123,7 +123,7 @@ class AppDependencies {
     );
 
     // 客户待确认加项：单一数据源（/business/orders/pending-approval）+ 15s 轮询，
-    // 由 A380 收银端各页共用；不随登录态自动启动，进入工作台时 start()。
+    // 由 SaaS 收银端各页共用；不随登录态自动启动，进入工作台时 start()。
     final pendingApproval = PendingApprovalController(locator<KtvApiClient>());
     locator.registerSingleton<PendingApprovalController>(pendingApproval);
 

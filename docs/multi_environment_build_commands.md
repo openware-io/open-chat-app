@@ -55,7 +55,7 @@
 .\tools\build.ps1 android test apk -HybridTestOrigin "http://<Kind主机IP>:30080"
 ```
 
-该开关仅让已登记的 `/a380/` 和 `/b/` 页面获得原生 OAuth 桥接。它不会更改 C 端 `saas-c`、B 端 `saas-b` 的 appId、redirect 白名单或运营角色校验。
+该开关仅让已登记的 `/saas/` 和 `/b/` 页面获得原生 OAuth 桥接。它不会更改 C 端 `saas-c`、B 端 `saas-b` 的 appId、redirect 白名单或运营角色校验。
 
 ### Android 正式 AAB
 

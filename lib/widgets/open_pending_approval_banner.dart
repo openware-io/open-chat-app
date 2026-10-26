@@ -8,7 +8,7 @@ import '../core/app_colors.dart';
 import '../providers/pending_approval_provider.dart';
 import '../screens/business/ktv_pending_approval_screen.dart';
 
-/// 客户「待确认加项」横幅（B 端 / A380 收银端）。
+/// 客户「待确认加项」横幅（B 端 / SaaS 收银端）。
 ///
 /// 数据来自全局 [PendingApprovalController]（唯一数据源 = 待确认加项聚合接口），
 /// 本组件不自己发请求。没有待确认项时**不占位**（返回零尺寸），避免无谓的视觉噪音。

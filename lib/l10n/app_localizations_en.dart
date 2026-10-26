@@ -1193,7 +1193,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get servicesWalletCompanyName => 'OpenChat';
 
   @override
-  String get servicesWalletA380Coin => 'OpenChat Coin';
+  String get servicesWalletSaaSCoin => 'SaaS Coin';
 
   @override
   String get servicesWalletPoints => 'Points';

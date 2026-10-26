@@ -1163,7 +1163,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get servicesWalletCompanyName => 'OpenChat';
 
   @override
-  String get servicesWalletA380Coin => 'SaaS 币';
+  String get servicesWalletSaaSCoin => 'SaaS 币';
 
   @override
   String get servicesWalletPoints => '积分';

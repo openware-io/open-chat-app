@@ -163,13 +163,13 @@ Future<void> _verifyServices(GvE2eDriver driver) async {
     reason: '无法打开服务页面。',
   );
 
-  final service = find.text('A380 更多服务');
+  final service = find.text('SaaS 更多服务');
   final serviceDeadline = DateTime.now().add(const Duration(seconds: 12));
   while (service.evaluate().isEmpty && DateTime.now().isBefore(serviceDeadline)) {
     await driver.tester.pump(const Duration(milliseconds: 250));
   }
   if (service.evaluate().isNotEmpty) {
-    driver.step('服务：打开真实 A380 H5 并等待 Bridge 初始化');
+    driver.step('服务：打开真实 SaaS H5 并等待 Bridge 初始化');
     await driver.tester.tap(service.first);
     await driver.waitForKey(
       GvAutomationKeys.protocolWebViewScreen,
@@ -180,7 +180,7 @@ Future<void> _verifyServices(GvE2eDriver driver) async {
     expect(driver.tester.takeException(), isNull);
     await driver.backTo(GvAutomationKeys.servicesScreen);
   } else {
-    driver.step('服务：A380 H5 服务未在目录返回，跳过真实 Bridge 入口');
+    driver.step('服务：SaaS H5 服务未在目录返回，跳过真实 Bridge 入口');
   }
 }
 

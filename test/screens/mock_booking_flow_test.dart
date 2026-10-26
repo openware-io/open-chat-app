@@ -14,8 +14,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('A380酒店1'), findsOneWidget);
-    await tester.tap(find.text('A380酒店1'));
+    expect(find.text('SaaS酒店1'), findsOneWidget);
+    await tester.tap(find.text('SaaS酒店1'));
     await tester.pumpAndSettle();
 
     expect(find.text('房型与价格'), findsOneWidget);
@@ -41,8 +41,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('A380KTV1'), findsOneWidget);
-    await tester.tap(find.text('A380KTV1'));
+    expect(find.text('SaaSKTV1'), findsOneWidget);
+    await tester.tap(find.text('SaaSKTV1'));
     await tester.pumpAndSettle();
 
     expect(find.text('套餐与价格'), findsOneWidget);

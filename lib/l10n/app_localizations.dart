@@ -2294,11 +2294,11 @@ abstract class AppLocalizations {
   /// **'OpenChat'**
   String get servicesWalletCompanyName;
 
-  /// No description provided for @servicesWalletA380Coin.
+  /// No description provided for @servicesWalletSaaSCoin.
   ///
   /// In en, this message translates to:
   /// **'OpenChat Coin'**
-  String get servicesWalletA380Coin;
+  String get servicesWalletSaaSCoin;
 
   /// No description provided for @servicesWalletPoints.
   ///

@@ -13,7 +13,7 @@ import 'package:open_chat_app/repositories/business/ktv_api_client.dart';
 import 'package:open_chat_app/screens/business/ktv_timing_screen.dart';
 import 'package:provider/provider.dart';
 
-/// 「确认/拒绝之后，订单数据必须重拉」的守卫（A380 收银端）。
+/// 「确认/拒绝之后，订单数据必须重拉」的守卫（SaaS 收银端）。
 ///
 /// 背景（Web 后台同形状的线上问题）：确认/拒绝改的不只是待确认清单，更是订单本身的
 /// 金额与明细。只刷新清单的话，看板房态卡片 / 收银应收 / 结台账单会停在旧值——

@@ -63,7 +63,7 @@ class HybridBridgePolicy {
   ///
   /// 此前用的是**完全相等**（`page.path == redirectPath`），于是 `/b`（缺尾斜杠）、
   /// `/b/index.html`（静态托管默认文档）都匹配不上 → 策略返回 null → 不给桥 →
-  /// H5 侧一直停在「登录授权中」（A380 运营后台进不去的典型现象）。
+  /// H5 侧一直停在「登录授权中」（SaaS 运营后台进不去的典型现象）。
   static bool pathMatches(String path, String redirectPath) {
     if (path == redirectPath) return true;
     final normalized = path.endsWith('/') ? path : '$path/';
