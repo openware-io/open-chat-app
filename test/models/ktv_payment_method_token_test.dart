@@ -5,7 +5,7 @@ import 'package:open_chat_app/models/ktv_models.dart';
 /// 规范 16 §9：可用支付方式里数量腿（WALLET / POINT）的**数量**口径。
 ///
 /// 覆盖：服务端 `tokenAmount` / `tokenBrandName` / `walletRatio` 优先，
-/// 字段缺失时按缺省品牌名 `A380币` + 缺省比例 `100` 降级且**不抛错**；
+/// 字段缺失时按缺省品牌名 `OpenChat币` + 缺省比例 `100` 降级且**不抛错**；
 /// 金额字段（`balance`）仍是货币语义，只有展示层才转成数量。
 void main() {
   tearDown(Currency.resetCurrentCode);
@@ -37,7 +37,7 @@ void main() {
       final method = KtvPaymentMethod.fromJson(const {
         'method': 'WALLET',
         'enabled': true,
-        'displayName': 'A380币',
+        'displayName': 'OpenChat币',
         'balance': '100000',
         'currency': 'USD',
         'walletRatio': 50,
@@ -56,7 +56,7 @@ void main() {
         final method = KtvPaymentMethod.fromJson(<String, dynamic>{
           'method': 'WALLET',
           'enabled': true,
-          'displayName': 'A380币',
+          'displayName': 'OpenChat币',
           'balance': '100000',
           if (raw != null) 'walletRatio': raw,
         });
@@ -65,12 +65,12 @@ void main() {
       }
     });
 
-    test('品牌名：tokenBrandName > displayName > 缺省 A380币', () {
+    test('品牌名：tokenBrandName > displayName > 缺省 OpenChat币', () {
       expect(
         KtvPaymentMethod.fromJson(const {
           'method': 'WALLET',
           'enabled': true,
-          'displayName': 'A380币',
+          'displayName': 'OpenChat币',
           'tokenBrandName': '皇冠币',
         }).tokenBrand,
         '皇冠币',
@@ -88,7 +88,7 @@ void main() {
             .tokenBrand,
         defaultTokenBrandName,
       );
-      expect(defaultTokenBrandName, 'A380币');
+      expect(defaultTokenBrandName, 'OpenChat币');
     });
   });
 
@@ -142,7 +142,7 @@ void main() {
       final wallet = KtvPaymentMethod.fromJson(const {
         'method': 'WALLET',
         'enabled': true,
-        'displayName': 'A380币',
+        'displayName': 'OpenChat币',
         'balance': '100000',
         'currency': 'USD',
       });

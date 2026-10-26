@@ -64,7 +64,7 @@ function renderHome() {
     <section class="wallet">
       <h1 class="brand">A380</h1>
       <div class="balances">
-        <button class="balance" data-route="ledger/coin"><span class="balance-label">A380币：</span><strong>8,880</strong></button>
+        <button class="balance" data-route="ledger/coin"><span class="balance-label">OpenChat币：</span><strong>8,880</strong></button>
         <button class="balance" data-route="ledger/points"><span class="balance-label">积分：</span><strong>12,680</strong></button>
       </div>
       <nav class="service-grid" aria-label="更多服务">
