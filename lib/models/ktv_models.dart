@@ -161,32 +161,6 @@ String settlementStatusLabel(String? status) =>
 String orderRefundStatusLabel(String? status) =>
     _statusLabel(ktvOrderRefundStatusText, status);
 
-/// 旧 `ord_order.status` → 交易状态（只用于旧后端/历史行兜底，不用于新写入）。
-String tradeStatusFromLegacy(String? legacyStatus) {
-  switch ((legacyStatus ?? '').trim().toUpperCase()) {
-    case 'COMPLETED':
-    case 'REFUNDED':
-    case 'PARTIAL_REFUNDED':
-      return 'COMPLETED';
-    case 'CANCELLED':
-      return 'CANCELLED';
-    case 'VOIDED':
-      return 'VOIDED';
-    case 'WAITING_SETTLEMENT':
-    case 'WAITING_PAYMENT':
-      return 'PENDING_PAYMENT';
-    case 'PAID':
-      return 'PAID';
-    default:
-      // DRAFT / SERVING / WAITING_ARRIVAL / 空 = 已建单未结算
-      return 'DRAFT';
-  }
-}
-
-/// 兼容旧调用点：把 `ord_order.status` 当交易状态渲染（收口后删除）。
-@Deprecated('ord_order.status 收口后删除；改用 tradeStatusLabel(tradeStatus)')
-String orderStatusLabel(String status) => tradeStatusLabel(tradeStatusFromLegacy(status));
-
 /// 包厢/服务人员资源看板条目（GET /api/v1/business/resources）。
 class KtvRoom {
   const KtvRoom({
@@ -255,7 +229,6 @@ class KtvOrder {
   const KtvOrder({
     required this.id,
     required this.orderNo,
-    required this.status,
     this.tradeStatus,
     this.refundStatus,
     this.settlementStatus,
@@ -277,13 +250,10 @@ class KtvOrder {
     // 「可直接展示总额」：服务端订单投影给 liveTotalAmount（也已见 live_total_amount
     // 的 snake_case 契约）。老后端 / 字段为空时回退 totalAmount，展示口径恒定。
     final liveRaw = json['liveTotalAmount'] ?? json['live_total_amount'];
-    final legacyStatus = _jsonString(json['status']);
     final trade = _jsonStringOrNull(json['tradeStatus'] ?? json['trade_status']);
     return KtvOrder(
       id: _jsonString(json['id'] ?? json['orderId']),
       orderNo: _jsonString(json['orderNo']),
-      // status 是收口前的兼容列（后端最终迁移会删除）；新字段缺失时由它兜底推导交易状态。
-      status: legacyStatus,
       tradeStatus: trade,
       refundStatus: _jsonStringOrNull(json['refundStatus'] ?? json['refund_status']),
       settlementStatus:
@@ -309,10 +279,7 @@ class KtvOrder {
   final String id;
   final String orderNo;
 
-  /// 收口前兼容列（`ord_order.status`）：不得作为业务判据，新字段缺失时才兜底。
-  final String status;
-
-  /// 交易状态：DRAFT/PENDING_PAYMENT/PAID/COMPLETED/CANCELLED（订单主表事实）。
+  /// 交易状态：DRAFT/PENDING_PAYMENT/PAID/COMPLETED/CANCELLED/VOIDED（订单主表事实）。
   final String? tradeStatus;
 
   /// 退款状态：NONE/PARTIAL/FULL。
@@ -354,13 +321,10 @@ class KtvOrder {
   bool can(String action) =>
       allowedActions.map((a) => a.toLowerCase()).contains(action.toLowerCase());
 
-  /// 交易状态（服务端优先；旧后端缺字段时由兼容列 `status` 推导）。
-  String get effectiveTradeStatus =>
-      (tradeStatus == null || tradeStatus!.isEmpty)
-          ? tradeStatusFromLegacy(status)
-          : tradeStatus!.toUpperCase();
+  /// 交易状态（订单主表唯一状态来源；列缺失时为空串，不猜状态）。
+  String get effectiveTradeStatus => (tradeStatus ?? '').trim().toUpperCase();
 
-  /// 交易状态中文（DRAFT=开台中 / PENDING_PAYMENT=待收款 / PAID=已收款 / COMPLETED=已完成 / CANCELLED=已作废）。
+  /// 交易状态中文（DRAFT=开台中 / PENDING_PAYMENT=待收款 / PAID=已收款 / COMPLETED=已完成 / CANCELLED=已取消 / VOIDED=已作废）。
   String get tradeLabel => tradeStatusLabel(effectiveTradeStatus);
 
   /// 会话状态中文（无会话时为空串：非 KTV 单/未选包厢）。
@@ -502,7 +466,6 @@ class KtvBill {
   const KtvBill({
     required this.orderId,
     required this.orderNo,
-    this.status,
     this.tradeStatus,
     this.sessionStatus,
     this.settlementStatus,
@@ -527,7 +490,6 @@ class KtvBill {
     return KtvBill(
       orderId: _jsonString(json['orderId']),
       orderNo: _jsonString(json['orderNo']),
-      status: _jsonStringOrNull(json['status']),
       tradeStatus: _jsonStringOrNull(json['tradeStatus'] ?? json['trade_status']),
       sessionStatus:
           _jsonStringOrNull(json['sessionStatus'] ?? json['session_status']),
@@ -556,10 +518,7 @@ class KtvBill {
   final String orderId;
   final String orderNo;
 
-  /// 收口前兼容列（`ord_order.status`），新字段缺失时兜底。
-  final String? status;
-
-  /// 交易状态（DRAFT/PENDING_PAYMENT/PAID/COMPLETED/CANCELLED）。
+  /// 交易状态（DRAFT/PENDING_PAYMENT/PAID/COMPLETED/CANCELLED/VOIDED）。
   final String? tradeStatus;
 
   /// KTV 会话状态（RESERVED/OPEN/PAUSED/CLOSED/CANCELLED）。
@@ -584,11 +543,8 @@ class KtvBill {
   final KtvMoney paidByMethod;
   final KtvMoney changeAmount;
 
-  /// 交易状态中文（服务端优先；旧后端缺字段时由兼容列 status 推导）。
-  String get tradeLabel => tradeStatusLabel(
-      (tradeStatus == null || tradeStatus!.isEmpty)
-          ? tradeStatusFromLegacy(status)
-          : tradeStatus);
+  /// 交易状态中文（订单主表唯一状态来源）。
+  String get tradeLabel => tradeStatusLabel(tradeStatus);
 
   /// 结算派生状态中文。
   String get settlementLabel {

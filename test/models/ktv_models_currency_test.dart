@@ -66,7 +66,7 @@ void main() {
     final order = KtvOrder.fromJson(<String, dynamic>{
       'id': 'ord_1',
       'orderNo': 'KT1',
-      'status': 'WAITING_SETTLEMENT',
+      'tradeStatus': 'PENDING_PAYMENT',
       'currencyCode': 'USD',
       'totalAmount': '51200',
       'paidAmount': '0',

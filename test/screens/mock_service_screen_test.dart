@@ -50,6 +50,10 @@ void main() {
   testWidgets('bar mock follows list, venue, deal, checkout and success', (
     tester,
   ) async {
+    // Mock 目录已统一为中性演示商户名（OpenChat + 品类 + 序号，见
+    // `_buildVenueCatalog`）；跟随 l10n 品类名，避免文案调整后断言过期。
+    final l10n = lookupAppLocalizations(const Locale('en'));
+    final barName = 'OpenChat${l10n.servicesBar}1';
     tester.view.physicalSize = const Size(430, 900);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -64,8 +68,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('SaaSBar1'), findsOneWidget);
-    await tester.tap(find.text('SaaSBar1'));
+    expect(find.text(barName), findsOneWidget);
+    await tester.tap(find.text(barName));
     await tester.pumpAndSettle();
 
     final buyNow = find.text('Buy now').first;
@@ -88,6 +92,8 @@ void main() {
   testWidgets('foot bath mock uses the bar venue flow and assets', (
     tester,
   ) async {
+    final l10n = lookupAppLocalizations(const Locale('zh'));
+    final footBathName = 'OpenChat${l10n.servicesMassage}1';
     tester.view.physicalSize = const Size(430, 900);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -103,8 +109,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('SaaS足浴1'), findsOneWidget);
-    await tester.tap(find.text('SaaS足浴1'));
+    expect(find.text(footBathName), findsOneWidget);
+    await tester.tap(find.text(footBathName));
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('抢购').first);

@@ -75,31 +75,35 @@ void main() {
     expect(tradeStatusLabel('VOIDED'), '已作废');
   });
 
-  test('旧 ord_order.status 只在新字段缺失时兜底推导交易状态', () {
-    expect(tradeStatusFromLegacy('SERVING'), 'DRAFT');
-    expect(tradeStatusFromLegacy('WAITING_SETTLEMENT'), 'PENDING_PAYMENT');
-    expect(tradeStatusFromLegacy('WAITING_PAYMENT'), 'PENDING_PAYMENT');
-    expect(tradeStatusFromLegacy('VOIDED'), 'VOIDED');
-    expect(tradeStatusFromLegacy('CANCELLED'), 'CANCELLED');
-    expect(tradeStatusFromLegacy('COMPLETED'), 'COMPLETED');
-
+  test('订单只认 tradeStatus：缺字段时不猜、不再从旧 ord_order.status 兜底', () {
     final order = KtvOrder.fromJson(<String, dynamic>{
       'id': 'ord_1',
       'orderNo': 'KT1',
-      'status': 'WAITING_SETTLEMENT',
+      'tradeStatus': 'PENDING_PAYMENT',
       'totalAmount': '100',
       'paidAmount': '0',
       'currency': 'CNY',
     });
     expect(order.effectiveTradeStatus, 'PENDING_PAYMENT');
     expect(order.displayStatusText, '待收款');
+
+    final legacyOnly = KtvOrder.fromJson(<String, dynamic>{
+      'id': 'ord_2',
+      'orderNo': 'KT2',
+      // 旧兼容列已删除：即使响应里出现同名 key，模型也不再读取/推导
+      'status': 'WAITING_SETTLEMENT',
+      'totalAmount': '100',
+      'paidAmount': '0',
+      'currency': 'CNY',
+    });
+    expect(legacyOnly.effectiveTradeStatus, isEmpty, reason: '不得从旧 status 推导交易状态');
+    expect(legacyOnly.tradeLabel, isEmpty);
   });
 
   test('列表展示状态：优先会话业务状态，结台/无会话回落交易状态', () {
     Map<String, dynamic> json(String trade, String? session) => {
           'id': 'ord_1',
           'orderNo': 'KT1',
-          'status': 'SERVING',
           'tradeStatus': trade,
           if (session != null) 'sessionStatus': session,
           'totalAmount': '100',
@@ -145,7 +149,6 @@ void main() {
       'orderId': '1',
       'orderNo': 'KT1',
       'currency': 'CNY',
-      'status': 'WAITING_PAYMENT',
       'tradeStatus': 'PENDING_PAYMENT',
       'sessionStatus': 'CLOSED',
       'settlementStatus': 'PENDING_PAYMENT',
@@ -180,9 +183,13 @@ void main() {
       expect(source.contains('SERVING'), isFalse,
           reason: '$path 仍把 SERVING 当订单状态（开台中是会话状态）');
     }
-    // 模型层保留旧状态映射是**兼容**：只在旧后端缺 tradeStatus/sessionStatus 时兜底，页面不得直接用。
+    // 模型层不得再保留旧订单状态映射：页面只认 tradeStatus/sessionStatus。
     final models = File('lib/models/ktv_models.dart').readAsStringSync();
     expect(models.contains('已预留'), isFalse);
+    expect(models.contains('tradeStatusFromLegacy'), isFalse,
+        reason: '旧 ord_order.status 兼容层必须删除');
+    expect(models.contains('orderStatusLabel'), isFalse,
+        reason: '旧订单状态渲染入口必须删除');
   });
 
   test('收银页不再自带局部状态 switch（统一走模型层 displayStatusText）', () {

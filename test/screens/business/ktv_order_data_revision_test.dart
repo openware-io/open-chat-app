@@ -292,7 +292,7 @@ KtvApiClient _client({
       body = <String, dynamic>{
         'id': 'ord_002',
         'orderNo': 'KT20260817-0001',
-        'status': 'SERVING',
+        'tradeStatus': 'DRAFT',
         'roomName': 'A02',
         'sessionId': 'ses_002',
         'sessionStatus': 'OPEN',

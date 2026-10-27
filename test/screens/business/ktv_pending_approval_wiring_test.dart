@@ -113,7 +113,15 @@ void main() {
   test('集中处理页把包厢作为第一识别信息，缺失时给「未关联包厢」', () {
     final screen =
         read('lib/screens/business/ktv_pending_approval_screen.dart');
-    expect(screen.contains("Text('包厢 ' + order.roomLabel"), isTrue,
+    // 不绑定具体写法（字符串插值/拼接都行），只钉住两件不可回退的事：
+    // ① 订单卡片标题是「包厢 + 模型 roomLabel」；② 它排在订单号之前（第一识别信息）。
+    final roomHeadline = screen.indexOf("Text('包厢 ");
+    final orderNo = screen.indexOf('order.orderNo');
+    expect(roomHeadline, isNonNegative,
+        reason: '处理页必须用「包厢 + roomLabel」作为订单卡片标题');
+    expect(screen.contains('order.roomLabel'), isTrue,
+        reason: '标题必须取模型统一兜底后的 roomLabel');
+    expect(orderNo, greaterThan(roomHeadline),
         reason: '收银员必须先看清是「哪间包厢」的需求，订单号只是次要定位');
     final model = read('lib/models/ktv_models.dart');
     expect(model.contains('未关联包厢'), isTrue,

@@ -669,8 +669,7 @@ class KtvApiClient {
     return KtvOrder(
       id: id,
       orderNo: 'KT20260817-${id.hashCode.toString().substring(0, 4)}',
-      // status 是收口前兼容列：mock 与真实响应用同一套 tradeStatus + sessionStatus。
-      status: 'SERVING',
+      // mock 与真实响应用同一套 tradeStatus + sessionStatus。
       tradeStatus: tradeStatus,
       refundStatus: 'NONE',
       settlementStatus: tradeStatus,
@@ -696,8 +695,7 @@ class KtvApiClient {
     KtvOrder order(String id, String room, int amount) => KtvOrder(
           id: id,
           orderNo: 'KT20260817-${room.hashCode.toString().substring(0, 4)}',
-          status: 'WAITING_PAYMENT',
-          // 已结台/待收款：交易状态 PENDING_PAYMENT + 会话状态 CLOSED（不再用 WAITING_SETTLEMENT 表达订单状态）。
+          // 已结台/待收款：交易状态 PENDING_PAYMENT + 会话状态 CLOSED。
           tradeStatus: 'PENDING_PAYMENT',
           refundStatus: 'NONE',
           settlementStatus: 'PENDING_PAYMENT',
@@ -772,7 +770,6 @@ class KtvApiClient {
     return KtvBill(
       orderId: orderId,
       orderNo: 'KT20260817-0001',
-      status: 'WAITING_PAYMENT',
       tradeStatus: 'PENDING_PAYMENT',
       sessionStatus: 'CLOSED',
       settlementStatus: 'PENDING_PAYMENT',

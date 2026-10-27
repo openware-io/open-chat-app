@@ -3,6 +3,7 @@ import 'package:open_ui/open_ui.dart' show GvTypography;
 
 import '../../core/app_colors.dart';
 import '../../core/app_theme.dart';
+import '../../core/currency.dart' show formatMoney;
 import '../../repositories/business/admin_api_client.dart';
 import '../../widgets/open_nav_bar.dart';
 
@@ -134,10 +135,14 @@ class _BusinessRoleHomeScreenState extends State<BusinessRoleHomeScreen> {
           _Task('待收款', '李女士 · 1506', '14:20', '中', Icons.payments_outlined),
         ];
       case 'cashier':
-        return const [
-          _Task('待结账', 'A05 · 包厢', '¥428', '高', Icons.receipt_long),
-          _Task('待退款', '订单 H20261022', '¥120', '中', Icons.undo),
-          _Task('交班盘点', '早班 · 小票', '15:30', '中', Icons.point_of_sale),
+        // 金额只走 lib/core/currency.dart 的唯一格式化入口（最小单位 + 租户币种），
+        // 这里不得硬编码币种符号：currency_source_guard_test 会拦。
+        return [
+          _Task('待结账', 'A05 · 包厢', formatMoney(42800), '高',
+              Icons.receipt_long),
+          _Task('待退款', '订单 H20261022', formatMoney(12000), '中', Icons.undo),
+          const _Task('交班盘点', '早班 · 小票', '15:30', '中',
+              Icons.point_of_sale),
         ];
       default:
         return const [
@@ -158,7 +163,11 @@ class _RoleMetricGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final metrics = switch (role) {
       'frontdesk' => const [('待入住', '8'), ('待退房', '5'), ('待收款', '3')],
-      'cashier' => const [('待结账', '4'), ('待退款', '2'), ('当班营收', '¥18.6k')],
+      'cashier' => [
+          ('待结账', '4'),
+          ('待退款', '2'),
+          ('当班营收', formatMoney(1860000)),
+        ],
       _ => const [('今日到店', '18'), ('在住', '76'), ('出租率', '82%')],
     };
     return Row(
