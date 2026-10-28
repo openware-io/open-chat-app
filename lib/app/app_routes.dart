@@ -51,8 +51,10 @@ class AppRoutes {
   static const ktvSettle = '/business/ktv/settle';
   static const ktvCashier = '/business/ktv/cashier';
   static const ktvShift = '/business/ktv/shift';
+  static const hotelFrontdesk = '/business/hotel/dashboard';
+  static const businessRoleHome = '/business/role-home';
 
-  /// 客户「待确认加项」集中处理页（B 端 / A380 收银端）。
+  /// 客户「待确认加项」集中处理页（B 端 / SaaS 收银端）。
   static const ktvPendingApproval = '/business/ktv/pending-approval';
 
   static const chatHistorySegment = 'chat-history';

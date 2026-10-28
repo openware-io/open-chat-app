@@ -112,7 +112,7 @@ void main() {
       // 数量腿不挂任何单位后缀（既没有「个」，也没有品牌名 / 「积分」）
       expect(fields[1].decoration!.suffixText, isNull);
       expect(fields[2].decoration!.suffixText, isNull);
-      expect(fields[1].decoration!.labelText, 'A380币（可用 100,000）');
+      expect(fields[1].decoration!.labelText, 'SaaS 币（可用 100,000）');
       expect(fields[2].decoration!.labelText, '积分（可用 5,000）');
 
       for (final field in fields.sublist(1)) {
@@ -222,7 +222,7 @@ Object? _route(String path) => switch (path) {
       '/business/orders/ord_002' => {
           'id': 'ord_002',
           'orderNo': 'KT20260817-0001',
-          'status': 'WAITING_SETTLEMENT',
+          'tradeStatus': 'PENDING_PAYMENT',
           'roomName': 'A02',
           'totalAmount': '32400',
           'paidAmount': '0',
@@ -250,7 +250,7 @@ Object? _route(String path) => switch (path) {
           {
             'method': 'WALLET',
             'enabled': true,
-            'displayName': 'A380币',
+            'displayName': 'SaaS 币',
             'balance': '100000',
             'currency': 'USD',
           },

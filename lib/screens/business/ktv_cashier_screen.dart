@@ -282,7 +282,9 @@ class _KtvCashierScreenState extends State<KtvCashierScreen>
   // ── 现金按金额（lib/core/currency.dart，小数位跟随币种）；
   //    储值币/积分按数量（个数），换算/展示同样只走 lib/core/currency.dart。 ──
 
-  String _orderStatusText(String status) => orderStatusLabel(status);
+  // 状态文案统一走模型层（交易状态 + 会话状态三字段），页面不再自带状态 switch：
+  // 收银列表既要看出「开台中/挂单中」（sessionStatus），也要看出「待收款/已完成」（tradeStatus）。
+  String _orderStatusText(KtvOrder order) => order.displayStatusText;
 
   @override
   Widget build(BuildContext context) {
@@ -361,7 +363,7 @@ class _KtvCashierScreenState extends State<KtvCashierScreen>
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '${bill.orderNo} · ${_orderStatusText(bill.status)}',
+                          '${bill.orderNo} · ${_orderStatusText(bill)}',
                           style: GvTypography.caption(secondary),
                         ),
                         if (pendingCount > 0) ...[

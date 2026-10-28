@@ -5,19 +5,19 @@ void main() {
   test('resolves only registered HTTPS page origins and paths', () {
     expect(
       HybridBridgePolicy.forPage(
-        Uri.parse('https://miniservice.dev.example.com/a380/'),
+        Uri.parse('https://miniservice.dev.example.com/c/'),
       )?.appId,
-      'saas-a380-c',
+      'saas-c',
     );
     expect(
       HybridBridgePolicy.forPage(
-        Uri.parse('https://evil.example/a380/'),
+        Uri.parse('https://evil.example/c/'),
       ),
       isNull,
     );
     expect(
       HybridBridgePolicy.forPage(
-        Uri.parse('http://miniservice.dev.example.com/a380/'),
+        Uri.parse('http://miniservice.dev.example.com/c/'),
       ),
       isNull,
     );
@@ -25,44 +25,44 @@ void main() {
 
   test('accepts exact app, scope, and redirect transaction only', () {
     final policy = HybridBridgePolicy.forPage(
-      Uri.parse('https://miniservice.dev.example.com/a380/'),
+      Uri.parse('https://miniservice.dev.example.com/c/'),
     )!;
     expect(
       policy.accepts(
-        requestedAppId: 'saas-a380-c',
+        requestedAppId: 'saas-c',
         scope: 'profile.basic',
         redirectUri: Uri.parse(
-          'https://miniservice.dev.example.com/a380/',
+          'https://miniservice.dev.example.com/c/',
         ),
       ),
       isTrue,
     );
     expect(
       policy.accepts(
-        requestedAppId: 'saas-a380-h5',
+        requestedAppId: 'saas-b',
         scope: 'profile.basic',
         redirectUri: Uri.parse(
-          'https://miniservice.dev.example.com/a380/',
+          'https://miniservice.dev.example.com/c/',
         ),
       ),
       isFalse,
     );
     expect(
       policy.accepts(
-        requestedAppId: 'saas-a380-c',
+        requestedAppId: 'saas-c',
         scope: 'profile.phone',
         redirectUri: Uri.parse(
-          'https://miniservice.dev.example.com/a380/',
+          'https://miniservice.dev.example.com/c/',
         ),
       ),
       isFalse,
     );
     expect(
       policy.accepts(
-        requestedAppId: 'saas-a380-c',
+        requestedAppId: 'saas-c',
         scope: 'profile.basic',
         redirectUri: Uri.parse(
-          'https://miniservice.dev.example.com:444/a380/',
+          'https://miniservice.dev.example.com:444/c/',
         ),
       ),
       isFalse,

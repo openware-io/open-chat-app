@@ -437,6 +437,7 @@ void _openMiniProgram(
     url: url,
     imToken: token,
     useRootNavigator: true,
+    showAppBar: false,
   );
 }
 
@@ -466,14 +467,14 @@ String resolveServiceEntryUrl(String entry, String baseUrl) {
 String normalizeMiniProgramUrl(String url) {
   final uri = Uri.tryParse(url);
   if (uri == null ||
-      !(uri.path == '/a380' ||
-          uri.path == '/a380/' ||
+      !(uri.path == '/c' ||
+          uri.path == '/c/' ||
           uri.path == '/b' ||
           uri.path == '/b/')) {
     return url;
   }
   const testOrigin = String.fromEnvironment('OPEN_HYBRID_TEST_ORIGIN');
-  final debugPath = uri.path.startsWith('/b') ? '/b/' : '/a380/';
+  final debugPath = uri.path.startsWith('/b') ? '/b/' : '/c/';
   if (!AppEnvironment.isProduction && testOrigin.isNotEmpty) {
     final local = Uri.tryParse(testOrigin);
     if (local != null && local.hasAuthority && local.host.isNotEmpty) {
@@ -1006,7 +1007,7 @@ IconData _serviceIconFor(String categoryName, String itemName) {
   if (value.contains('购物') || value.contains('商城')) {
     return LucideIcons.shopping_bag;
   }
-  if (value.contains('a380') ||
+  if (value.contains('saas') ||
       value.contains('openchat') ||
       value.contains('小程序')) {
     return LucideIcons.grid_2x2;

@@ -2294,11 +2294,11 @@ abstract class AppLocalizations {
   /// **'OpenChat'**
   String get servicesWalletCompanyName;
 
-  /// No description provided for @servicesWalletA380Coin.
+  /// No description provided for @servicesWalletSaaSCoin.
   ///
   /// In en, this message translates to:
   /// **'OpenChat Coin'**
-  String get servicesWalletA380Coin;
+  String get servicesWalletSaaSCoin;
 
   /// No description provided for @servicesWalletPoints.
   ///
@@ -2707,6 +2707,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check-in time'**
   String get serviceBookingHotelTimeLabel;
+
+  /// No description provided for @serviceBookingHotelCheckOutLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-out date'**
+  String get serviceBookingHotelCheckOutLabel;
+
+  /// No description provided for @serviceBookingHotelRoomsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms'**
+  String get serviceBookingHotelRoomsLabel;
+
+  /// No description provided for @serviceBookingHotelGuestsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Guests'**
+  String get serviceBookingHotelGuestsLabel;
+
+  /// No description provided for @serviceBookingHotelSelectDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose date'**
+  String get serviceBookingHotelSelectDate;
+
+  /// No description provided for @serviceBookingHotelInvalidDates.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-out must be after check-in'**
+  String get serviceBookingHotelInvalidDates;
 
   /// No description provided for @serviceBookingKtvTimeLabel.
   ///

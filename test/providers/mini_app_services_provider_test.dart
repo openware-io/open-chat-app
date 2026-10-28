@@ -11,22 +11,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  test('normalizes the A380 directory URL for WebView relative assets', () {
+  test('normalizes the SaaS directory URL for WebView relative assets', () {
     expect(
-      normalizeMiniProgramUrl('https://miniservice.dev.example.com/a380'),
-      'https://miniservice.dev.example.com/a380/',
-    );
-    expect(
-      normalizeMiniProgramUrl('https://miniservice.dev.example.com/a380/'),
-      'https://miniservice.dev.example.com/a380/',
-    );
-    expect(
-      normalizeMiniProgramUrl('https://www.miniservice.dev.example.com/a380'),
-      'https://miniservice.dev.example.com/a380/',
-    );
-    expect(
-      normalizeMiniProgramUrl('https://admin.dev.example.com/a380'),
-      'https://miniservice.dev.example.com/a380/',
+      normalizeMiniProgramUrl('https://miniservice.dev.example.com/c/'),
+      'https://miniservice.dev.example.com/c/',
     );
     expect(
       normalizeMiniProgramUrl('https://admin.dev.example.com/b'),

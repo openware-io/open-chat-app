@@ -49,6 +49,8 @@ import 'screens/chat_backup_screen.dart';
 import 'screens/forgot_password_screen.dart';
 import 'screens/reset_password_screen.dart';
 import 'screens/business/business_login_screen.dart';
+import 'screens/business/hotel_frontdesk_screen.dart';
+import 'screens/business/business_role_home_screen.dart';
 import 'screens/business/ktv_cashier_screen.dart';
 import 'screens/business/ktv_dashboard_screen.dart';
 import 'screens/business/ktv_quick_open_screen.dart';
@@ -194,6 +196,22 @@ GoRouter createAppRouter(AuthProvider auth) {
         pageBuilder: (context, state) => gvTransitionPage(
           state,
           const KtvShiftScreen(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.hotelFrontdesk,
+        parentNavigatorKey: gvRootNavigatorKey,
+        pageBuilder: (context, state) => gvTransitionPage(
+          state,
+          const HotelFrontdeskScreen(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.businessRoleHome,
+        parentNavigatorKey: gvRootNavigatorKey,
+        pageBuilder: (context, state) => gvTransitionPage(
+          state,
+          const BusinessRoleHomeScreen(),
         ),
       ),
       GoRoute(

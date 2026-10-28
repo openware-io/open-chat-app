@@ -12,11 +12,11 @@ void main() {
       jsonEncode({
         'id': '1',
         'method': 'profile.read',
-        'params': {'appId': 'saas-a380-c'},
+        'params': {'appId': 'saas-c'},
         'nonce': 'n1',
       }),
     );
-    expect(response, {'id': '1', 'ok': true, 'result': 'saas-a380-c'});
+    expect(response, {'id': '1', 'ok': true, 'result': 'saas-c'});
   });
 
   test('rejects unknown methods and duplicate nonces', () async {

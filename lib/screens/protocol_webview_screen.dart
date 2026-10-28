@@ -87,6 +87,7 @@ class ProtocolWebViewScreen extends StatefulWidget {
     required this.url,
     this.interceptScheme,
     this.imToken,
+    this.showAppBar = true,
   });
 
   final String title;
@@ -99,6 +100,9 @@ class ProtocolWebViewScreen extends StatefulWidget {
   /// IM 登录 JWT：供 GVBridge.login() 原生调用 /oauth/authorize 出授权码，绝不进入 H5 的 JS。
   final String? imToken;
 
+  /// 服务 H5 自带 page-head 时隐藏原生标题栏，避免双层标题。
+  final bool showAppBar;
+
   static Future<String?> open(
     BuildContext context, {
     required String title,
@@ -106,6 +110,7 @@ class ProtocolWebViewScreen extends StatefulWidget {
     String? interceptScheme,
     String? imToken,
     bool useRootNavigator = false,
+    bool showAppBar = true,
   }) async {
     if (_platformSupportsProtocolWebView()) {
       if (!context.mounted) return null;
@@ -117,6 +122,7 @@ class ProtocolWebViewScreen extends StatefulWidget {
             url: url,
             interceptScheme: interceptScheme,
             imToken: imToken,
+            showAppBar: showAppBar,
           ),
         ),
       );
@@ -411,19 +417,23 @@ class _ProtocolWebViewScreenState extends State<ProtocolWebViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        key: GvAutomationKeys.protocolWebViewScreen,
-        children: [
-          GvNavBar(title: widget.title, showBack: true),
-          Expanded(
-            child: Stack(
-              children: [
-                WebViewWidget(controller: _controller),
-                if (_loading) const Center(child: CircularProgressIndicator()),
-              ],
+      body: SafeArea(
+        top: !widget.showAppBar,
+        bottom: false,
+        child: Column(
+          key: GvAutomationKeys.protocolWebViewScreen,
+          children: [
+            if (widget.showAppBar) GvNavBar(title: widget.title, showBack: true),
+            Expanded(
+              child: Stack(
+                children: [
+                  WebViewWidget(controller: _controller),
+                  if (_loading) const Center(child: CircularProgressIndicator()),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

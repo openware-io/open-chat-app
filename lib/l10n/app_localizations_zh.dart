@@ -1163,7 +1163,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get servicesWalletCompanyName => 'OpenChat';
 
   @override
-  String get servicesWalletA380Coin => 'OpenChat币';
+  String get servicesWalletSaaSCoin => 'SaaS 币';
 
   @override
   String get servicesWalletPoints => '积分';
@@ -1406,6 +1406,21 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get serviceBookingHotelTimeLabel => '入住时间';
+
+  @override
+  String get serviceBookingHotelCheckOutLabel => '离店日期';
+
+  @override
+  String get serviceBookingHotelRoomsLabel => '房间数';
+
+  @override
+  String get serviceBookingHotelGuestsLabel => '住客人数';
+
+  @override
+  String get serviceBookingHotelSelectDate => '选择日期';
+
+  @override
+  String get serviceBookingHotelInvalidDates => '离店日期必须晚于入住日期';
 
   @override
   String get serviceBookingKtvTimeLabel => '到场时间';

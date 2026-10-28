@@ -125,7 +125,7 @@ void main() {
         '/business/orders/ord_002' => {
             'id': 'ord_002',
             'orderNo': 'KT20260817-0001',
-            'status': 'WAITING_SETTLEMENT',
+            'tradeStatus': 'PENDING_PAYMENT',
             'roomName': 'A02',
             'totalAmount': '32400',
             'paidAmount': '0',

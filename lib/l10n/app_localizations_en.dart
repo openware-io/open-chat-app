@@ -1193,7 +1193,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get servicesWalletCompanyName => 'OpenChat';
 
   @override
-  String get servicesWalletA380Coin => 'OpenChat Coin';
+  String get servicesWalletSaaSCoin => 'SaaS Coin';
 
   @override
   String get servicesWalletPoints => 'Points';
@@ -1440,6 +1440,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get serviceBookingHotelTimeLabel => 'Check-in time';
+
+  @override
+  String get serviceBookingHotelCheckOutLabel => 'Check-out date';
+
+  @override
+  String get serviceBookingHotelRoomsLabel => 'Rooms';
+
+  @override
+  String get serviceBookingHotelGuestsLabel => 'Guests';
+
+  @override
+  String get serviceBookingHotelSelectDate => 'Choose date';
+
+  @override
+  String get serviceBookingHotelInvalidDates =>
+      'Check-out must be after check-in';
 
   @override
   String get serviceBookingKtvTimeLabel => 'Arrival time';

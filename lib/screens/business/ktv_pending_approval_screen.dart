@@ -8,7 +8,7 @@ import '../../models/ktv_models.dart';
 import '../../providers/pending_approval_provider.dart';
 import '../../widgets/open_nav_bar.dart';
 
-/// 「客户待确认加项」集中处理页（B 端 / A380 收银端）。
+/// 「客户待确认加项」集中处理页（B 端 / SaaS 收银端）。
 ///
 /// 数据源唯一：`GET /business/orders/pending-approval`（见 [PendingApprovalController]）。
 /// 处理动作走既有 `POST /business/orders/{orderId}/items/{itemId}/confirm|reject`：

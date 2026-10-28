@@ -196,7 +196,7 @@ class KtvApiClient {
         );
         return KtvOrder.fromJson(_asMap(resp.data));
       },
-      mock: () => _mockOrder(orderId: orderId, status: 'SERVING'),
+      mock: () => _mockOrder(orderId: orderId),
     );
   }
 
@@ -294,7 +294,7 @@ class KtvApiClient {
         );
         return KtvOrder.fromJson(_asMap(resp.data));
       },
-      mock: () => _mockOrder(orderId: orderId, status: 'SERVING'),
+      mock: () => _mockOrder(orderId: orderId),
     );
   }
 
@@ -357,7 +357,7 @@ class KtvApiClient {
   }
 
   /// 结台：POST /api/v1/business/ktv/sessions/{id}/close。
-  /// 结算并释放包厢，订单进入 WAITING_SETTLEMENT。
+  /// 结算并释放包厢，订单交易状态进入待收款（tradeStatus=PENDING_PAYMENT）。
   Future<KtvSession> closeSession(String sessionId, {int? expectedVersion}) {
     return _guard(
       op: 'closeSession',
@@ -662,14 +662,17 @@ class KtvApiClient {
   KtvOrder _mockOrder({
     String? orderId,
     String? resourceId,
-    String status = 'DRAFT',
+    String tradeStatus = 'DRAFT',
     String sessionStatus = 'RESERVED',
   }) {
     final id = orderId ?? 'ord_001';
     return KtvOrder(
       id: id,
       orderNo: 'KT20260817-${id.hashCode.toString().substring(0, 4)}',
-      status: status,
+      // mock 与真实响应用同一套 tradeStatus + sessionStatus。
+      tradeStatus: tradeStatus,
+      refundStatus: 'NONE',
+      settlementStatus: tradeStatus,
       roomId: resourceId ?? 'res_002',
       roomName: 'A02',
       customerMasked: '138****0001',
@@ -692,7 +695,10 @@ class KtvApiClient {
     KtvOrder order(String id, String room, int amount) => KtvOrder(
           id: id,
           orderNo: 'KT20260817-${room.hashCode.toString().substring(0, 4)}',
-          status: 'WAITING_SETTLEMENT',
+          // 已结台/待收款：交易状态 PENDING_PAYMENT + 会话状态 CLOSED。
+          tradeStatus: 'PENDING_PAYMENT',
+          refundStatus: 'NONE',
+          settlementStatus: 'PENDING_PAYMENT',
           roomName: room,
           customerMasked: '139****0002',
           sessionId: 'ses_$room',
@@ -764,6 +770,10 @@ class KtvApiClient {
     return KtvBill(
       orderId: orderId,
       orderNo: 'KT20260817-0001',
+      tradeStatus: 'PENDING_PAYMENT',
+      sessionStatus: 'CLOSED',
+      settlementStatus: 'PENDING_PAYMENT',
+      refundStatus: 'NONE',
       currency: currency,
       roomFee: KtvBillLine(
         itemType: 'ROOM_FEE',

@@ -7,6 +7,11 @@ import 'package:open_chat_app/screens/mock_service_screen.dart';
 
 void main() {
   testWidgets('hotel flow shows free rooms and check-in time', (tester) async {
+    // Mock 目录已统一为中性演示商户名（OpenChat + 品类 + 序号，见
+    // `_buildVenueCatalog`），不再使用 SaaS* 命名；这里跟随 l10n 品类名，
+    // 避免文案调整后测试再次过期。
+    final l10n = lookupAppLocalizations(const Locale('zh'));
+    final hotelName = 'OpenChat${l10n.servicesHotel}1';
     await tester.pumpWidget(
       _testApp(
         const MockServiceScreen(category: MockServiceCategory.hotel),
@@ -14,8 +19,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('A380酒店1'), findsOneWidget);
-    await tester.tap(find.text('A380酒店1'));
+    expect(find.text(hotelName), findsOneWidget);
+    await tester.tap(find.text(hotelName));
     await tester.pumpAndSettle();
 
     expect(find.text('房型与价格'), findsOneWidget);
@@ -34,6 +39,8 @@ void main() {
 
   testWidgets('ktv flow shows packages and reveals arrival time after choice',
       (tester) async {
+    final l10n = lookupAppLocalizations(const Locale('zh'));
+    final ktvName = 'OpenChat${l10n.servicesKtv}1';
     await tester.pumpWidget(
       _testApp(
         const MockServiceScreen(category: MockServiceCategory.ktv),
@@ -41,8 +48,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('A380KTV1'), findsOneWidget);
-    await tester.tap(find.text('A380KTV1'));
+    expect(find.text(ktvName), findsOneWidget);
+    await tester.tap(find.text(ktvName));
     await tester.pumpAndSettle();
 
     expect(find.text('套餐与价格'), findsOneWidget);

@@ -12,7 +12,6 @@ import 'package:open_chat_app/models/ktv_models.dart';
 Map<String, dynamic> orderJson(Map<String, dynamic> extra) => <String, dynamic>{
       'id': 'ord_002',
       'orderNo': 'KT20260817-0001',
-      'status': 'SERVING',
       'roomName': 'A02',
       'sessionId': 'ses_002',
       'sessionStatus': 'OPEN',
@@ -65,7 +64,6 @@ void main() {
     const order = KtvOrder(
       id: 'ord_002',
       orderNo: 'KT1',
-      status: 'SERVING',
       totalAmount: KtvMoney(minorUnits: 51200, currency: 'CNY'),
       paidAmount: KtvMoney(minorUnits: 0, currency: 'CNY'),
       currency: 'CNY',
