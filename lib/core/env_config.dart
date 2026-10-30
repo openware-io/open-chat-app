@@ -5,6 +5,9 @@ class EnvConfig {
 
   static const appEnv = AppEnvironment.rawName;
 
+  /// Debug-only shared preference key for the local server override.
+  static const runtimeApiBaseKey = 'dev_api_base_override';
+
   static const _apiBaseOverride =
       String.fromEnvironment('OPEN_API_BASE', defaultValue: '');
 
@@ -36,8 +39,14 @@ class EnvConfig {
           ? 'https://test-media.example.com'
           : 'http://192.168.1.3:9000';
 
-  static const apiBase =
-      _apiBaseOverride == '' ? defaultApiBase : _apiBaseOverride;
+  static String? _runtimeApiBase;
+
+  /// Debug-only, persisted server override. The value is applied before the
+  /// dependency graph is created, so every client sees the same origin.
+  static String? get runtimeApiBase => _runtimeApiBase;
+
+  static String get apiBase =>
+      _runtimeApiBase ?? (_apiBaseOverride == '' ? defaultApiBase : _apiBaseOverride);
 
   /// Origin used to resolve relative service-board links.
   ///
@@ -47,16 +56,34 @@ class EnvConfig {
   static const _prodServiceBase = 'https://miniservice.dev.example.com';
   static const _testServiceBase = 'https://test-miniservice.example.com';
   static String get serviceBase {
+    if (_runtimeApiBase != null) return _runtimeApiBase!;
     if (_serviceBaseOverride.isNotEmpty) return _serviceBaseOverride;
     if (appEnv == 'prod') return _prodServiceBase;
     if (appEnv == 'test') return _testServiceBase;
     return apiBase;
   }
 
-  static const wsUri = _wsUriOverride == '' ? defaultWsUri : _wsUriOverride;
+  static String get wsUri {
+    if (_runtimeApiBase != null) {
+      final scheme = _runtimeApiBase!.startsWith('https://') ? 'wss' : 'ws';
+      final host = _runtimeApiBase!.replaceFirst(RegExp(r'^https?://'), '');
+      return '$scheme://$host/ws/im/v1';
+    }
+    return _wsUriOverride == '' ? defaultWsUri : _wsUriOverride;
+  }
 
-  static const mediaBase =
-      _mediaBaseOverride == '' ? defaultMediaBase : _mediaBaseOverride;
+  static String get mediaBase =>
+      _runtimeApiBase ??
+      (_mediaBaseOverride == '' ? defaultMediaBase : _mediaBaseOverride);
+
+  /// Applies a runtime API origin. Callers must persist it separately and
+  /// restart the app; existing Dio clients are not hot-reconfigured.
+  static void applyRuntimeApiBase(String? value) {
+    final normalized = value?.trim().replaceFirst(RegExp(r'/+$'), '');
+    _runtimeApiBase =
+        normalized == null || normalized.isEmpty ? null : normalized;
+  }
+
   static const isProduction = appEnv == 'prod';
 
   static const jpushProduction = _jpushProductionOverride == ''

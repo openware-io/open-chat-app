@@ -14,11 +14,11 @@ Map<String, String>? gvBearerHeaders(LocalStorage storage) {
 Map<String, String>? gvMediaRequestHeaders(
   String url,
   Map<String, String>? appHeaders, {
-  String managedMediaBase = AppConfig.mediaBase,
+  String? managedMediaBase,
 }) {
   if (appHeaders == null || appHeaders.isEmpty) return null;
   final target = Uri.tryParse(url);
-  final managed = Uri.tryParse(managedMediaBase);
+  final managed = Uri.tryParse(managedMediaBase ?? AppConfig.mediaBase);
   if (target == null || managed == null) return appHeaders;
   final isManagedOrigin = target.hasScheme &&
       target.scheme.toLowerCase() == managed.scheme.toLowerCase() &&

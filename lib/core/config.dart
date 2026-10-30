@@ -19,7 +19,7 @@ class AppConfig {
 
   static const String appEnv = EnvConfig.appEnv;
 
-  static const String apiBase = EnvConfig.apiBase;
+  static String get apiBase => EnvConfig.apiBase;
 
   /// Origin for relative service-board links (SaaS H5 in prod, API ingress in dev).
   static String get serviceBase => EnvConfig.serviceBase;
@@ -31,11 +31,11 @@ class AppConfig {
     return '$normalized/api/v1';
   }
 
-  static const String wsUri = EnvConfig.wsUri;
+  static String get wsUri => EnvConfig.wsUri;
 
-  static const String socketUri = EnvConfig.wsUri;
+  static String get socketUri => EnvConfig.wsUri;
 
-  static const String mediaBase = EnvConfig.mediaBase;
+  static String get mediaBase => EnvConfig.mediaBase;
 
   /// 极光：`flutter run --dart-define=OPEN_JPUSH_APPKEY=...`。
   /// Android 需与 `android/local.properties` 的 `jpush.appKey` 保持一致；

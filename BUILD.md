@@ -34,7 +34,8 @@ Kind 入口默认是 `http://<主机IP>:30080`，不要使用手机自身的 `12
 
 - `-DebugBuild` 使用仓库 debug keystore，可通过 `adb install -r` 覆盖本地调试安装。
 - `-MediaBase`/`-ServiceBase` 未传时仍使用 `EnvConfig` 默认值，局域网真机通常需要显式传入。
-- B 端原生登录会携带 `Referer: <ApiBase>/b/`，满足 identity 服务的来源校验。
+- Debug 登录页底部显示当前服务器，并可打开“服务器设置”修改地址；修改后需重启 App，所有客户端在启动时读取同一 origin。
+- B 端原生登录会携带 `Referer: <ApiBase>/b/`，满足 identity 服务的来源校验；多门店账号登录后必须选择门店，不再默认第一个门店。
 - 发布包仍必须使用 `flutter build apk --release` 和正式签名。
 
 ---
