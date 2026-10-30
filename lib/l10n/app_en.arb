@@ -82,6 +82,8 @@
   "loginUsernamePasswordRequired": "Please enter username and password",
   "loginButton": "Log in",
   "loginLoading": "Signing in...",
+  "loginWelcomeBack": "Sign in to continue",
+  "loginRememberUsername": "Remember username",
   "loginNoAccount": "No account yet?",
   "loginRegister": "Sign up",
   "authAgreementPrefix": "I have read and agree to the ",

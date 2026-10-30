@@ -82,6 +82,8 @@
   "loginUsernamePasswordRequired": "请输入用户名和密码",
   "loginButton": "登录",
   "loginLoading": "登录中...",
+  "loginWelcomeBack": "登录后继续使用",
+  "loginRememberUsername": "记住用户名",
   "loginNoAccount": "还没有账号？",
   "loginRegister": "注册",
   "authAgreementPrefix": "已阅读并同意",

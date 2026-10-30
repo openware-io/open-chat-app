@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:open_chat_app/core/open_automation_keys.dart';
 import 'package:open_chat_app/l10n/app_localizations.dart';
 import 'package:open_chat_app/screens/login_screen.dart';
 
@@ -33,7 +34,7 @@ void main() {
     expect(find.text('请输入用户名'), findsWidgets);
     expect(find.text('请输入密码'), findsWidgets);
 
-    await tester.tap(find.byType(Checkbox));
+    await tester.tap(find.byKey(GvAutomationKeys.loginAgreement));
     await tester.tap(find.widgetWithText(FilledButton, '登录'));
     await tester.pump();
 

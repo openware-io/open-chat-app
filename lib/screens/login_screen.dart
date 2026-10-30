@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/app_colors.dart';
 import '../core/config.dart';
@@ -31,15 +32,45 @@ class _LoginScreenState extends State<LoginScreen> {
   late final TextEditingController _user;
   final _pass = TextEditingController();
   final _passFocus = FocusNode();
+  static const _rememberUsernameKey = 'im_remember_username';
+  static const _lastUsernameKey = 'im_last_username';
   String? _error;
   bool _loading = false;
   bool _agreed = false;
+  bool _rememberUsername = true;
   bool _obscurePassword = true;
 
   @override
   void initState() {
     super.initState();
     _user = TextEditingController(text: widget.initialUsername);
+    _restoreLoginPreferences();
+  }
+
+  Future<void> _restoreLoginPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    final remember = prefs.getBool(_rememberUsernameKey) ?? true;
+    final last = prefs.getString(_lastUsernameKey);
+    if (!mounted) return;
+    setState(() {
+      _rememberUsername = remember;
+      if (widget.initialUsername == null &&
+          last != null &&
+          last.isNotEmpty &&
+          _user.text.isEmpty) {
+        _user.text = last;
+      }
+    });
+  }
+
+  Future<void> _saveLoginPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_rememberUsernameKey, _rememberUsername);
+    if (_rememberUsername) {
+      await prefs.setString(_lastUsernameKey, _user.text.trim());
+    } else {
+      await prefs.remove(_lastUsernameKey);
+    }
   }
 
   @override
@@ -73,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await auth.login(_user.text.trim(), _pass.text);
       authenticated = true;
       TextInput.finishAutofillContext();
+      await _saveLoginPreferences();
 
       if (!mounted) return;
       final call = context.read<CallProvider>();
@@ -154,7 +186,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: GvTypography.body(
                           Colors.white.withValues(alpha: 0.55)),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 18),
+                    Text(
+                      l10n.loginWelcomeBack,
+                      style: GvTypography.caption(
+                          Colors.white.withValues(alpha: 0.75)),
+                    ),
+                    const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: GvSpacing.page + GvSpacing.page,
@@ -200,17 +238,70 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (_error != null)
                             Semantics(
                               liveRegion: true,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Text(
-                                  _error!,
-                                  textAlign: TextAlign.center,
-                                  style:
-                                      GvTypography.caption(AppColors.danger),
+                              child: Container(
+                                width: double.infinity,
+                                margin: const EdgeInsets.only(top: 12),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: AppColors.danger
+                                      .withValues(alpha: 0.10),
+                                  borderRadius:
+                                      BorderRadius.circular(GvRadii.input),
+                                  border: Border.all(
+                                      color: AppColors.danger
+                                          .withValues(alpha: 0.45)),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    const Icon(Icons.error_outline,
+                                        size: 18,
+                                        color: AppColors.danger),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        _error!,
+                                        style: GvTypography.caption(
+                                            AppColors.danger),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: _rememberUsername,
+                                onChanged: _loading
+                                    ? null
+                                    : (value) => setState(() =>
+                                        _rememberUsername = value ?? false),
+                                side: BorderSide(
+                                    color: Colors.white
+                                        .withValues(alpha: 0.75)),
+                                checkColor: Colors.white,
+                                fillColor:
+                                    WidgetStateProperty.resolveWith((states) {
+                                  if (states
+                                      .contains(WidgetState.selected)) {
+                                    return AppColors.primary;
+                                  }
+                                  return Colors.transparent;
+                                }),
+                                visualDensity: VisualDensity.compact,
+                              ),
+                              Text(
+                                l10n.loginRememberUsername,
+                                style: GvTypography.caption(
+                                    Colors.white.withValues(alpha: 0.75)),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
                           SizedBox(
                             width: double.infinity,
                             height: 50,
