@@ -207,6 +207,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginPasswordHint => 'Password';
 
   @override
+  String get loginUsernameRequired => 'Username is required';
+
+  @override
+  String get loginPasswordRequired => 'Password is required';
+
+  @override
   String get loginUsernamePasswordRequired =>
       'Please enter username and password';
 
@@ -237,6 +243,39 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get authAgreementRequired =>
       'Please read and agree to the User Agreement and Privacy Policy';
+
+  @override
+  String get loginServerLabel => 'Server';
+
+  @override
+  String get loginServerSettings => 'Server settings';
+
+  @override
+  String get loginServerHint => 'http://host:port';
+
+  @override
+  String get loginServerInvalid => 'Enter an http(s) origin without a path.';
+
+  @override
+  String get loginServerSaved => 'Saved. Restart the app to apply.';
+
+  @override
+  String get loginServerTest => 'Test connection';
+
+  @override
+  String get loginServerReachable => 'Server reachable';
+
+  @override
+  String get loginServerUnreachable => 'Cannot reach server';
+
+  @override
+  String get loginServerReset => 'Reset';
+
+  @override
+  String get loginShowPassword => 'Show password';
+
+  @override
+  String get loginHidePassword => 'Hide password';
 
   @override
   String get updateChecking => 'Checking for updates…';

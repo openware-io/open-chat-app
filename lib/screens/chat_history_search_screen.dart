@@ -376,7 +376,7 @@ class _ChatHistorySearchScreenState extends State<ChatHistorySearchScreen>
     final gp = context.watch<GroupProvider>();
     final fr = _friendForPeer(f.friends);
     final myId = auth.user?.id;
-    const baseUrl = AppConfig.mediaBase;
+    final baseUrl = AppConfig.mediaBase;
     final storage = context.read<LocalStorage>();
     final authHdrs = gvBearerHeaders(storage);
 

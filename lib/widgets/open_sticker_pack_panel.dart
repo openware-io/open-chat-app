@@ -165,7 +165,7 @@ class GvStickerPackPanelState extends State<GvStickerPackPanel> {
 
   @override
   Widget build(BuildContext context) {
-    const baseUrl = AppConfig.mediaBase;
+    final baseUrl = AppConfig.mediaBase;
     final authHdrs =
         gvBearerHeaders(widget.storage) ?? const <String, String>{};
 

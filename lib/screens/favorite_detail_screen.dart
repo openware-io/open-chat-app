@@ -311,7 +311,7 @@ class _FavoriteDetailScreenState extends State<FavoriteDetailScreen> {
 
   Widget _buildContent(BuildContext context, AppLocalizations l10n) {
     final m = widget.message;
-    const baseUrl = AppConfig.mediaBase;
+    final baseUrl = AppConfig.mediaBase;
     final authHdrs = gvBearerHeaders(context.read<LocalStorage>()) ??
         const <String, String>{};
     switch (m.msgType) {
