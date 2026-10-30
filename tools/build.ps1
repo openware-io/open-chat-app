@@ -14,9 +14,17 @@ param(
 
     [string] $WsUri = "",
 
+    [string] $MediaBase = "",
+
+    [string] $ServiceBase = "",
+
     [string] $JPushAppKey = "",
 
     [string] $BaseHref = "",
+
+    # Local USB debugging only: build a debug APK signed with the repository
+    # debug keystore so it can replace an existing debug install.
+    [switch] $DebugBuild,
 
     # 仅开发/测试真机联调使用；生产构建禁止携带 HTTP Hybrid Bridge 白名单。
     [string] $HybridTestOrigin = ""
@@ -85,7 +93,7 @@ switch ($Target) {
             throw "Android artifact must be apk or appbundle."
         }
         $flutterArgs.Add($Artifact)
-        $flutterArgs.Add("--release")
+        $flutterArgs.Add($(if ($DebugBuild) { "--debug" } else { "--release" }))
     }
     "ios" {
         if ($Artifact -eq "") {
@@ -123,6 +131,8 @@ switch ($Target) {
 Add-DartDefine -Args $flutterArgs -Name "APP_ENV" -Value $EnvName
 Add-DartDefine -Args $flutterArgs -Name "OPEN_API_BASE" -Value $ApiBase
 Add-DartDefine -Args $flutterArgs -Name "OPEN_WS_URI" -Value $WsUri
+Add-DartDefine -Args $flutterArgs -Name "OPEN_MEDIA_BASE" -Value $MediaBase
+Add-DartDefine -Args $flutterArgs -Name "OPEN_SERVICE_BASE" -Value $ServiceBase
 Add-DartDefine -Args $flutterArgs -Name "OPEN_JPUSH_APPKEY" -Value $JPushAppKey
 Add-DartDefine -Args $flutterArgs -Name "OPEN_HYBRID_TEST_ORIGIN" -Value $HybridTestOrigin
 

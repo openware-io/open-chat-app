@@ -26,6 +26,11 @@ class AdminApiClient {
   String? storeName;
   String? contextId;
 
+  String get _referer {
+    final base = AppConfig.apiBase.replaceFirst(RegExp(r'/+$'), '');
+    return '$base/b/';
+  }
+
   bool get authenticated => _cookie != null && _cookie!.isNotEmpty;
 
   Future<void> login(String username, String password) async {
@@ -44,7 +49,7 @@ class AdminApiClient {
     final session = await _dio.post<Map<String, dynamic>>(
       '/auth/session',
       queryParameters: {'appId': _appId},
-      options: Options(headers: {'Authorization': 'Bearer $accessToken'}),
+      options: Options(headers: {'Authorization': 'Bearer $accessToken', 'Referer': _referer}),
     );
     _cookie = _readCookie(session.headers);
     if (_cookie == null) {
@@ -152,6 +157,7 @@ class AdminApiClient {
 
   Map<String, String> _headers() {
     return {
+      'Referer': _referer,
       if (_cookie != null) 'Cookie': _cookie!,
     };
   }
