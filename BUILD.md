@@ -18,6 +18,25 @@
 
 以下示例默认不写 `dart-define` 时，使用编译进工程的默认值（见 `lib/core/config.dart`）。
 
+### 本地 Kind / 真机联调
+
+Kind 入口默认是 `http://<主机IP>:30080`，不要使用手机自身的 `127.0.0.1`。使用仓库构建脚本可一次传入 API、WebSocket、媒体、服务台和 Hybrid OAuth 白名单：
+
+```powershell
+.\tools\build.ps1 android dev apk `
+  -ApiBase 'http://192.168.3.35:30080' `
+  -WsUri 'ws://192.168.3.35:30080/ws/im/v1' `
+  -MediaBase 'http://192.168.3.35:30080' `
+  -ServiceBase 'http://192.168.3.35:30080' `
+  -HybridTestOrigin 'http://192.168.3.35:30080' `
+  -DebugBuild
+```
+
+- `-DebugBuild` 使用仓库 debug keystore，可通过 `adb install -r` 覆盖本地调试安装。
+- `-MediaBase`/`-ServiceBase` 未传时仍使用 `EnvConfig` 默认值，局域网真机通常需要显式传入。
+- B 端原生登录会携带 `Referer: <ApiBase>/b/`，满足 identity 服务的来源校验。
+- 发布包仍必须使用 `flutter build apk --release` 和正式签名。
+
 ---
 
 ## Android
