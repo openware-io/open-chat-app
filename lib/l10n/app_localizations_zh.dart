@@ -218,6 +218,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get loginLoading => '登录中...';
 
   @override
+  String get loginWelcomeBack => '登录后继续使用';
+
+  @override
+  String get loginRememberUsername => '记住用户名';
+
+  @override
   String get loginNoAccount => '还没有账号？';
 
   @override

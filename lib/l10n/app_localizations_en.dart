@@ -223,6 +223,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginLoading => 'Signing in...';
 
   @override
+  String get loginWelcomeBack => 'Sign in to continue';
+
+  @override
+  String get loginRememberUsername => 'Remember username';
+
+  @override
   String get loginNoAccount => 'No account yet?';
 
   @override

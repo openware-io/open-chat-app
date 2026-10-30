@@ -500,6 +500,18 @@ abstract class AppLocalizations {
   /// **'Signing in...'**
   String get loginLoading;
 
+  /// No description provided for @loginWelcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to continue'**
+  String get loginWelcomeBack;
+
+  /// No description provided for @loginRememberUsername.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember username'**
+  String get loginRememberUsername;
+
   /// No description provided for @loginNoAccount.
   ///
   /// In en, this message translates to:
