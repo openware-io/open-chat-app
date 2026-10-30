@@ -470,6 +470,18 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get loginPasswordHint;
 
+  /// No description provided for @loginUsernameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Username is required'**
+  String get loginUsernameRequired;
+
+  /// No description provided for @loginPasswordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get loginPasswordRequired;
+
   /// No description provided for @loginUsernamePasswordRequired.
   ///
   /// In en, this message translates to:
@@ -529,6 +541,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please read and agree to the User Agreement and Privacy Policy'**
   String get authAgreementRequired;
+
+  /// No description provided for @loginServerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Server'**
+  String get loginServerLabel;
+
+  /// No description provided for @loginServerSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Server settings'**
+  String get loginServerSettings;
+
+  /// No description provided for @loginServerHint.
+  ///
+  /// In en, this message translates to:
+  /// **'http://host:port'**
+  String get loginServerHint;
+
+  /// No description provided for @loginServerInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an http(s) origin without a path.'**
+  String get loginServerInvalid;
+
+  /// No description provided for @loginServerSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved. Restart the app to apply.'**
+  String get loginServerSaved;
+
+  /// No description provided for @loginServerTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Test connection'**
+  String get loginServerTest;
+
+  /// No description provided for @loginServerReachable.
+  ///
+  /// In en, this message translates to:
+  /// **'Server reachable'**
+  String get loginServerReachable;
+
+  /// No description provided for @loginServerUnreachable.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot reach server'**
+  String get loginServerUnreachable;
+
+  /// No description provided for @loginServerReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get loginServerReset;
+
+  /// No description provided for @loginShowPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get loginShowPassword;
+
+  /// No description provided for @loginHidePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get loginHidePassword;
 
   /// No description provided for @updateChecking.
   ///
@@ -2297,7 +2375,7 @@ abstract class AppLocalizations {
   /// No description provided for @servicesWalletSaaSCoin.
   ///
   /// In en, this message translates to:
-  /// **'OpenChat Coin'**
+  /// **'SaaS Coin'**
   String get servicesWalletSaaSCoin;
 
   /// No description provided for @servicesWalletPoints.

@@ -34,7 +34,7 @@ class GvAuthAgreementCheckbox extends StatelessWidget {
 
   static const double _fontSize = 13;
   static const double _lineHeight = 1.3;
-  static const double _checkboxSize = 18;
+  static const double _checkboxSize = 24;
 
   static double get _textLineHeight => _fontSize * _lineHeight;
 
@@ -88,7 +88,7 @@ class GvAuthAgreementCheckbox extends StatelessWidget {
               key: checkboxKey,
               value: value,
               onChanged: onChanged,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              materialTapTargetSize: MaterialTapTargetSize.padded,
               visualDensity: VisualDensity.compact,
             ),
           ),

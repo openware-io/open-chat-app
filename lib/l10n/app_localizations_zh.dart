@@ -203,6 +203,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get loginPasswordHint => '请输入密码';
 
   @override
+  String get loginUsernameRequired => '请输入用户名';
+
+  @override
+  String get loginPasswordRequired => '请输入密码';
+
+  @override
   String get loginUsernamePasswordRequired => '请输入用户名和密码';
 
   @override
@@ -231,6 +237,39 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get authAgreementRequired => '请先阅读并同意用户协议和隐私政策';
+
+  @override
+  String get loginServerLabel => '服务器';
+
+  @override
+  String get loginServerSettings => '服务器设置';
+
+  @override
+  String get loginServerHint => 'http://主机:端口';
+
+  @override
+  String get loginServerInvalid => '请输入不带路径的 http(s) 地址。';
+
+  @override
+  String get loginServerSaved => '已保存，请重启 App 生效。';
+
+  @override
+  String get loginServerTest => '测试连接';
+
+  @override
+  String get loginServerReachable => '服务器可达';
+
+  @override
+  String get loginServerUnreachable => '无法连接服务器';
+
+  @override
+  String get loginServerReset => '恢复默认';
+
+  @override
+  String get loginShowPassword => '显示密码';
+
+  @override
+  String get loginHidePassword => '隐藏密码';
 
   @override
   String get updateChecking => '正在检查更新…';

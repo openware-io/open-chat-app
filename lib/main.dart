@@ -4,8 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app_dependencies.dart';
+import 'core/env_config.dart';
 import 'core/open_http_overrides.dart';
 import 'core/immersive_system_ui.dart';
 import 'open_app.dart';
@@ -22,6 +24,10 @@ Future<void> main() async {
     await WebRTC.initialize(options: webrtcOptions);
   }
 
+  if (kDebugMode) {
+    final prefs = await SharedPreferences.getInstance();
+    EnvConfig.applyRuntimeApiBase(prefs.getString(EnvConfig.runtimeApiBaseKey));
+  }
   gvSetupHttpOverrides();
   await ImmersiveSystemUi.enable();
   final dependencies = await AppDependencies.create();

@@ -33,7 +33,8 @@ class AdminApiClient {
 
   bool get authenticated => _cookie != null && _cookie!.isNotEmpty;
 
-  Future<void> login(String username, String password) async {
+  Future<List<Map<String, dynamic>>> login(
+      String username, String password) async {
     final login = await _dio.post<Map<String, dynamic>>(
       '/identity/login',
       data: {
@@ -49,16 +50,19 @@ class AdminApiClient {
     final session = await _dio.post<Map<String, dynamic>>(
       '/auth/session',
       queryParameters: {'appId': _appId},
-      options: Options(headers: {'Authorization': 'Bearer $accessToken', 'Referer': _referer}),
+      options: Options(headers: {
+        'Authorization': 'Bearer $accessToken',
+        'Referer': _referer,
+      }),
     );
     _cookie = _readCookie(session.headers);
     if (_cookie == null) {
       throw StateError('B端会话未返回 Cookie');
     }
-    await _selectStoreContext();
+    return _loadStoreContexts();
   }
 
-  Future<void> _selectStoreContext() async {
+  Future<List<Map<String, dynamic>>> _loadStoreContexts() async {
     final csrf = await _dio.get<Map<String, dynamic>>(
       '/auth/csrf',
       queryParameters: {'appId': _appId},
@@ -70,28 +74,35 @@ class AdminApiClient {
       queryParameters: {'appId': _appId},
       options: Options(headers: _headers()),
     );
-    final items = (contexts.data?['items'] as List?)?.cast<Map<String, dynamic>>() ?? const [];
-    final store = items.where((item) => (item['storeId'] as num?) != null).toList();
-    if (store.isEmpty) {
+    final items =
+        (contexts.data?['items'] as List?)?.cast<Map<String, dynamic>>() ??
+            const [];
+    final stores =
+        items.where((item) => (item['storeId'] as num?) != null).toList();
+    if (stores.isEmpty) {
       throw StateError('当前员工没有门店上下文');
     }
-    final selected = store.first;
-    contextId = selected['contextId'] as String?;
-    storeName = selected['storeName'] as String?;
-    final roles = (selected['roles'] as List?)?.cast<String>() ?? const [];
-    role = roles.contains('store.cashier') ? 'cashier' : 'manager';
-    if (contextId == null) {
+    return stores;
+  }
+
+  Future<void> selectContext(Map<String, dynamic> selected) async {
+    final selectedContextId = selected['contextId'] as String?;
+    if (selectedContextId == null || selectedContextId.isEmpty) {
       throw StateError('门店上下文缺少 contextId');
     }
+    final roles = (selected['roles'] as List?)?.cast<String>() ?? const [];
     await _dio.post<void>(
       '/auth/context/select',
       queryParameters: {'appId': _appId},
-      data: {'contextId': contextId},
+      data: {'contextId': selectedContextId},
       options: Options(headers: {
         ..._headers(),
         if (_csrfToken != null) 'X-CSRF-Token': _csrfToken!,
       }),
     );
+    contextId = selectedContextId;
+    storeName = selected['storeName'] as String?;
+    role = roles.contains('store.cashier') ? 'cashier' : 'manager';
   }
 
   Future<List<Map<String, dynamic>>> hotelTasks() async {
